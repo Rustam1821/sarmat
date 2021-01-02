@@ -313,7 +313,7 @@
             android:layout_marginTop="6dp"
 
             android:fontFamily="@font/roboto_black"
-            android:text="@string/third_actor_name"
+            android:text="@string/forth_actor_name"
             android:textColor="@color/whisper"
             android:textSize="12sp"
 
