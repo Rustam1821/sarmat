@@ -7,18 +7,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/movie_details"
+        android:id="@+id/movies_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black_russian"
-        tools:context=".MovieDetailsActivity">
-
+        android:background="@color/black_russian">
 
         <ImageView
-            android:id="@+id/posterImageView"
+            android:id="@+id/poster_color_image_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:src="@drawable/poster"
+            android:src="@drawable/avengers_poster"
             app:layout_constraintDimensionRatio="1.26"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,10 +37,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/mask"
-            app:layout_constraintBottom_toBottomOf="@id/posterImageView"
-            app:layout_constraintEnd_toEndOf="@id/posterImageView"
-            app:layout_constraintStart_toStartOf="@id/posterImageView"
-            app:layout_constraintTop_toTopOf="@id/posterImageView"
+            app:layout_constraintBottom_toBottomOf="@id/poster_color_image_view"
+            app:layout_constraintEnd_toEndOf="@id/poster_color_image_view"
+            app:layout_constraintStart_toStartOf="@id/poster_color_image_view"
+            app:layout_constraintTop_toTopOf="@id/poster_color_image_view"
             app:tintMode="screen" />
 
         <TextView
