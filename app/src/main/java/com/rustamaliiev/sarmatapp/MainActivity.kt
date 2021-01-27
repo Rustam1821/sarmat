@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.FrameLayout
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(), FragmentMoviesListClickListener {
 
@@ -27,4 +28,5 @@ class MainActivity : AppCompatActivity(), FragmentMoviesListClickListener {
             .addToBackStack(null)
             .commit()
     }
+
 }

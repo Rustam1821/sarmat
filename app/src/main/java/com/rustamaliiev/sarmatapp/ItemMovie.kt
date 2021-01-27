@@ -1,7 +1,6 @@
 package com.rustamaliiev.sarmatapp
 
-import android.widget.ImageView
-import android.widget.RatingBar
+import androidx.annotation.DrawableRes
 
 data class ItemMovie(
     val movieName: String,
@@ -10,6 +9,7 @@ data class ItemMovie(
     val audienceLimit: Int,
     val duration: Int,
 
-    val posterColor_image_view: ImageView,
+    @DrawableRes
+    val posterColorImageRes: Int,
     val starsNumber: Float
 )
