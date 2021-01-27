@@ -13,7 +13,7 @@
         android:background="@color/black_russian">
 
         <ImageView
-            android:id="@+id/poster_color_image_view"
+            android:id="@+id/poster_image_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:src="@drawable/avengers_poster"
@@ -37,10 +37,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/mask"
-            app:layout_constraintBottom_toBottomOf="@id/poster_color_image_view"
-            app:layout_constraintEnd_toEndOf="@id/poster_color_image_view"
-            app:layout_constraintStart_toStartOf="@id/poster_color_image_view"
-            app:layout_constraintTop_toTopOf="@id/poster_color_image_view"
+            app:layout_constraintBottom_toBottomOf="@id/poster_image_view"
+            app:layout_constraintEnd_toEndOf="@id/poster_image_view"
+            app:layout_constraintStart_toStartOf="@id/poster_image_view"
+            app:layout_constraintTop_toTopOf="@id/poster_image_view"
             app:tintMode="screen" />
 
         <TextView

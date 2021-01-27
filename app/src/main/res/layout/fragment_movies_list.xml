@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_movies_list"
+    android:id="@+id/fragment_movie"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_russian">
@@ -33,7 +33,7 @@
         android:textSize="14sp"
 
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/poster_color_image_view"
+        app:layout_constraintBottom_toTopOf="@id/poster_image_view"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -42,13 +42,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginTop="27dp"
+        android:paddingBottom="90dp"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/listTitle"
-        >
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-
+        app:layout_constraintTop_toBottomOf="@id/listTitle"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

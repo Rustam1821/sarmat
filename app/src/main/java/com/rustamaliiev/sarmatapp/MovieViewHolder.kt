@@ -12,8 +12,8 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val tvGenre: TextView = itemView.findViewById(R.id.genre)
     private val tvReviews: TextView = itemView.findViewById(R.id.reviews)
     private val tvAudienceLimit: TextView = itemView.findViewById(R.id.audience_limit)
-    private val tvDuration: TextView = itemView.findViewById(R.id.audience_limit)
-    private val ivPoster: ImageView = itemView.findViewById(R.id.poster_color_image_view)
+    private val tvDuration: TextView = itemView.findViewById(R.id.duration)
+    private val ivPoster: ImageView = itemView.findViewById(R.id.poster_image_view)
     private val rtRatingBar: RatingBar = itemView.findViewById(R.id.rating_bar)
 
 

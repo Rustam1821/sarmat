@@ -12,9 +12,11 @@ class MovieListAdapter() : RecyclerView.Adapter<MovieViewHolder>() {
             field = value
             notifyDataSetChanged()
         }
+    init {
+        movieListFilling(movies)
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        movieListFilling(movies)
         return MovieViewHolder(
             parent.inflate(R.layout.item_movie)
         )

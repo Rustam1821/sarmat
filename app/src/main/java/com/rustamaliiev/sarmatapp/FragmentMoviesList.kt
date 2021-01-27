@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class FragmentMoviesList : Fragment() {
@@ -23,12 +24,13 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<ImageView>(R.id.poster_color_image_view)?.apply {
+        view.findViewById<ImageView>(R.id.poster_image_view)?.apply {
             setOnClickListener {
                 (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked()
             }
         }
         movieRecyclerView = view.findViewById (R.id.moviesRecyclerView)
+        movieRecyclerView.layoutManager = GridLayoutManager(view.context, 2)
         movieRecyclerView.adapter = movieAdapter
     }
 
