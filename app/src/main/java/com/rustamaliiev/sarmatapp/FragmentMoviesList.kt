@@ -24,7 +24,7 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<ImageView>(R.id.poster_image_view)?.apply {
+        view.findViewById<ImageView>(R.id.poster_color_image_view)?.apply {
             setOnClickListener {
                 (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked()
             }
