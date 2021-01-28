@@ -92,8 +92,8 @@ fun actorListFilling(list: MutableList<ItemActor>) {
         )
         add(
             ItemActor(
-                "Dumb and Dumber",
-                R.drawable.dumb_and_dumber_poster_color
+                "Audrey Tautou",
+                R.drawable.photo_audrey_tautou
             )
         )
     }

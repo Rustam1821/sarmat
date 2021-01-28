@@ -17,6 +17,12 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     companion object {
-        fun newInstance() = FragmentMoviesDetails()
+        fun newInstance(movieName: String): FragmentMoviesDetails{
+            val args = Bundle()
+            args.putString("name of movie", movieName)
+            val fragment = FragmentMoviesDetails()
+            fragment.arguments = args
+            return fragment
+        }
     }
 }

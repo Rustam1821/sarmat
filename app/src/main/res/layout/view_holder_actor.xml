@@ -24,6 +24,7 @@
         android:id="@+id/actor_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
         android:layout_marginRight="8dp"
         android:layout_below="@id/actor_name"
         app:layout_constraintDimensionRatio="1.0"

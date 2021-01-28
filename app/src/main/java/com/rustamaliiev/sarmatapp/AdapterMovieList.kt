@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.utils.inflate
 import com.rustamaliiev.sarmatapp.utils.movieListFilling
 
-class MovieListAdapter : RecyclerView.Adapter<VhMovie>() {
+class AdapterMovieList : RecyclerView.Adapter<VhMovie>() {
 
     private var movies: MutableList<ItemMovie> = mutableListOf()
         set(value) {

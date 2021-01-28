@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class FragmentMoviesList : Fragment() {
 
-    private val movieAdapter: MovieListAdapter = MovieListAdapter()
+    private val movieAdapter: AdapterMovieList = AdapterMovieList()
     private lateinit var movieRecyclerView: RecyclerView
 
     override fun onCreateView(
@@ -34,6 +33,12 @@ class FragmentMoviesList : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() = FragmentMoviesList()
+        fun newInstance(movieName: String): FragmentMoviesList{
+            val args = Bundle()
+            args.putString("name of movie", movieName)
+            val fragment = FragmentMoviesList()
+            fragment.arguments = args
+            return fragment
+        }
     }
 }
