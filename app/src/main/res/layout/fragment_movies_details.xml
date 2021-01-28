@@ -207,16 +207,16 @@
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="cast" />
-
-
-
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_under_photos"
-            android:layout_width="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="first_actor_photo,second_actor_photo, third_actor_photo,forth_actor_photo" />
+            app:layout_constraintTop_toBottomOf="@id/barrier_for_photos"
+
+            />
+
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
