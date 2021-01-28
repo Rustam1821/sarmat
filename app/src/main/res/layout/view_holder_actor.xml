@@ -5,12 +5,12 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/first_actor_name"
-        android:layout_width="wrap_content"
+        android:id="@+id/actor_name"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:layout_alignLeft="@id/first_actor_photo"
-        android:layout_alignRight="@id/first_actor_photo"
+        android:layout_alignLeft="@id/actor_photo"
+        android:layout_alignRight="@id/actor_photo"
 
 
         android:fontFamily="@font/roboto_black"
@@ -21,11 +21,12 @@
        />
 
     <ImageView
-        android:id="@+id/first_actor_photo"
+        android:id="@+id/actor_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="8dp"
-        android:layout_below="@id/first_actor_name"
+        android:layout_below="@id/actor_name"
+        app:layout_constraintDimensionRatio="1.0"
         android:src="@drawable/photo_robert_downey"/>
 
 

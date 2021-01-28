@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class VhMovie(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val tvMovieName: TextView = itemView.findViewById(R.id.film_name)
     private val tvGenre: TextView = itemView.findViewById(R.id.genre)
     private val tvReviews: TextView = itemView.findViewById(R.id.reviews)

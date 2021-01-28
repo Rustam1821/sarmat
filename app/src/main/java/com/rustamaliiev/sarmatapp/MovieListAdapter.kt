@@ -1,12 +1,11 @@
 package com.rustamaliiev.sarmatapp
 
 import android.view.ViewGroup
-import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.utils.inflate
 import com.rustamaliiev.sarmatapp.utils.movieListFilling
 
-class MovieListAdapter : RecyclerView.Adapter<MovieViewHolder>() {
+class MovieListAdapter : RecyclerView.Adapter<VhMovie>() {
 
     private var movies: MutableList<ItemMovie> = mutableListOf()
         set(value) {
@@ -20,15 +19,15 @@ class MovieListAdapter : RecyclerView.Adapter<MovieViewHolder>() {
         movieListFilling(movies)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        return MovieViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VhMovie {
+        return VhMovie(
             parent.inflate(R.layout.item_movie)
         )
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holderVh: VhMovie, position: Int) {
         val movie = movies[position]
-        holder.bind(movie, itemClickListener)
+        holderVh.bind(movie, itemClickListener)
     }
 
     override fun getItemCount(): Int {
