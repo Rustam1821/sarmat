@@ -21,7 +21,7 @@ class MovieListAdapter : RecyclerView.Adapter<VhMovie>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VhMovie {
         return VhMovie(
-            parent.inflate(R.layout.item_movie)
+            parent.inflate(R.layout.view_holder_movie)
         )
     }
 

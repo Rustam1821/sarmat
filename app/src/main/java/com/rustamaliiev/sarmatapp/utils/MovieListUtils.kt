@@ -1,5 +1,6 @@
 package com.rustamaliiev.sarmatapp.utils
 
+import com.rustamaliiev.sarmatapp.ItemActor
 import com.rustamaliiev.sarmatapp.ItemMovie
 import com.rustamaliiev.sarmatapp.R
 
@@ -51,6 +52,48 @@ fun movieListFilling(list: MutableList<ItemMovie>) {
                 "Comedy",
                 92, 13, 106,
                 R.drawable.dumb_and_dumber_poster_color, 5f
+            )
+        )
+    }
+}
+
+
+fun actorListFilling(list: MutableList<ItemActor>) {
+    list.run {
+        add(
+            ItemActor(
+                "Chris Evans",
+                R.drawable.photo_chris_evans
+            )
+        )
+        add(
+            ItemActor(
+                "Chris Hemsworth",
+                R.drawable.photo_chris_hemsworth
+            )
+        )
+        add(
+            ItemActor(
+                "Mark Ruffalo",
+                R.drawable.photo_mark_ruffalo
+            )
+        )
+        add(
+            ItemActor(
+                "Robert Downey",
+                R.drawable.photo_robert_downey
+            )
+        )
+        add(
+            ItemActor(
+                "Jim Carrey",
+                R.drawable.photo_jim_carrey
+            )
+        )
+        add(
+            ItemActor(
+                "Dumb and Dumber",
+                R.drawable.dumb_and_dumber_poster_color
             )
         )
     }

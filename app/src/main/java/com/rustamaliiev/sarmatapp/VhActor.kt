@@ -10,10 +10,7 @@ class VhActor(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val tvActorName: TextView = itemView.findViewById(R.id.genre)
     private val ivActorPhoto: ImageView = itemView.findViewById(R.id.poster_color_image_view)
 
-    fun bind(itemMovie: ItemMovie, itemClickListener: (ItemMovie) -> Unit) {
-        itemView.setOnClickListener {
-            itemClickListener(itemMovie)
-        }
+    fun bind(itemMovie: ItemMovie) {
         tvActorName.text = itemMovie.genre
         ivActorPhoto.setImageResource(itemMovie.posterColorImageRes)
     }
