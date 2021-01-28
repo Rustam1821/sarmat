@@ -24,7 +24,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="27dp"
         android:padding="3dp"
-        android:src="@drawable/avengers_poster_color"
+        tools:src="@drawable/avengers_poster_color"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/listTitle" />
@@ -48,7 +48,7 @@
         android:layout_height="24dp"
         android:layout_marginLeft="6dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/age_limit_rectangle"
+        tools:src="@drawable/age_limit_rectangle"
 
         app:layout_constraintStart_toStartOf="@id/poster_color_image_view"
         app:layout_constraintTop_toTopOf="@id/poster_color_image_view" />
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_black"
-        android:text="@string/avengers_audience"
+        tools:text="@string/avengers_audience"
         android:textColor="@color/whisper"
         android:textSize="12sp"
 
@@ -87,7 +87,7 @@
 
         android:fontFamily="@font/roboto_light"
         android:gravity="start"
-        android:text="@string/avengers_genre"
+        tools:text="@string/avengers_genre"
         android:textColor="@color/radical_red"
         android:textSize="8sp"
 
@@ -105,7 +105,7 @@
         android:progressBackgroundTint="@color/white"
         android:progressTint="@color/radical_red"
 
-        android:rating="@string/avengers_rating"
+        tools:rating="@string/avengers_rating"
         android:scaleX=".7"
         android:scaleY=".7"
         android:secondaryProgressTint="@android:color/transparent"
@@ -127,7 +127,7 @@
         android:fontFamily="@font/roboto_black"
         android:gravity="top"
         android:textAllCaps="true"
-        android:text="@string/avengers_reviews"
+        tools:text="@string/avengers_reviews"
         android:textColor="@color/light_grayish_navy"
         android:textSize="8sp"
 
@@ -143,7 +143,7 @@
         android:layout_centerHorizontal="true"
 
         android:fontFamily="@font/roboto_black"
-        android:text="@string/avengers_end_game_in_one_line"
+        tools:text="@string/avengers_end_game_in_one_line"
         android:textColor="@color/whisper"
         android:textSize="14sp"
 
@@ -157,7 +157,7 @@
 
         android:fontFamily="@font/roboto_black"
         android:textAllCaps="true"
-        android:text="@string/avengers_duration"
+        tools:text="@string/avengers_duration"
         android:textColor="@color/smoky"
         android:textSize="8sp"
 
