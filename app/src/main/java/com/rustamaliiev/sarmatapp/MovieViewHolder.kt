@@ -1,6 +1,7 @@
 package com.rustamaliiev.sarmatapp
 
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
@@ -16,8 +17,10 @@ class MovieViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val ivPoster: ImageView = itemView.findViewById(R.id.poster_color_image_view)
     private val rtRatingBar: RatingBar = itemView.findViewById(R.id.rating_bar)
 
-
-    fun bind(itemMovie: ItemMovie) {
+    fun bind(itemMovie: ItemMovie, itemClickListener: (ItemMovie) -> Unit) {
+        itemView.setOnClickListener {
+            itemClickListener(itemMovie)
+        }
         tvMovieName.text = itemMovie.movieName
         tvGenre.text = itemMovie.genre
         tvReviews.text = "${itemMovie.reviewsNumber} reviews"

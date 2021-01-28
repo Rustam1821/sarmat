@@ -24,12 +24,10 @@ class FragmentMoviesList : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.findViewById<ImageView>(R.id.poster_color_image_view)?.apply {
-            setOnClickListener {
-                (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked()
-            }
+        movieAdapter.itemClickListener = {
+            (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked()
         }
-        movieRecyclerView = view.findViewById (R.id.moviesRecyclerView)
+        movieRecyclerView = view.findViewById(R.id.moviesRecyclerView)
         movieRecyclerView.layoutManager = GridLayoutManager(view.context, 2)
         movieRecyclerView.adapter = movieAdapter
     }
