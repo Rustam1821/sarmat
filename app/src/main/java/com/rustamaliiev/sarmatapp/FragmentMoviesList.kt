@@ -33,12 +33,6 @@ class FragmentMoviesList : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(movieName: String): FragmentMoviesList{
-            val args = Bundle()
-            args.putString("name of movie", movieName)
-            val fragment = FragmentMoviesList()
-            fragment.arguments = args
-            return fragment
-        }
+        fun newInstance() = FragmentMoviesList()
     }
 }

@@ -24,9 +24,8 @@ class MainActivity : AppCompatActivity(), FragmentMoviesListClickListener {
 
     override fun onMovieCardClicked() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, FragmentMoviesDetails.newInstance("movieName"))
+            .add(R.id.main_container, FragmentMoviesDetails.newInstance())
             .addToBackStack(null)
             .commit()
     }
-
 }

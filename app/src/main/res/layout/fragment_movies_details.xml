@@ -209,7 +209,7 @@
             app:constraint_referenced_ids="cast" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_actors"
+            android:id="@+id/actors_RecyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/story_text"
@@ -224,7 +224,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="rv_actors" />
+            app:constraint_referenced_ids="actors_RecyclerView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

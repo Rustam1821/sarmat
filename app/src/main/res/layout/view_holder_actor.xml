@@ -2,33 +2,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
         android:id="@+id/actor_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
         android:layout_alignLeft="@id/actor_photo"
         android:layout_alignRight="@id/actor_photo"
-
+        android:layout_alignParentTop="true"
 
         android:fontFamily="@font/roboto_black"
-        android:text="@string/first_actor_name"
+        tools:text="@string/first_actor_name"
         android:textColor="@color/whisper"
-        android:textSize="12sp"
-
-       />
+        android:textSize="12sp" />
 
     <ImageView
         android:id="@+id/actor_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
         android:layout_marginRight="8dp"
-        android:layout_below="@id/actor_name"
-        app:layout_constraintDimensionRatio="1.0"
-        android:src="@drawable/photo_robert_downey"/>
+
+        tools:src="@drawable/photo_robert_downey"
+        app:layout_constraintDimensionRatio="1.0" />
 
 
 </RelativeLayout>

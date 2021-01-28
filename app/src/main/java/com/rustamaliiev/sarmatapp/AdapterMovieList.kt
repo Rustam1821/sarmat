@@ -25,9 +25,9 @@ class AdapterMovieList : RecyclerView.Adapter<VhMovie>() {
         )
     }
 
-    override fun onBindViewHolder(holderVh: VhMovie, position: Int) {
+    override fun onBindViewHolder(holder: VhMovie, position: Int) {
         val movie = movies[position]
-        holderVh.bind(movie, itemClickListener)
+        holder.bind(movie, itemClickListener)
     }
 
     override fun getItemCount(): Int {
