@@ -4,7 +4,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.utils.actorListFilling
 import com.rustamaliiev.sarmatapp.utils.inflate
-import com.rustamaliiev.sarmatapp.utils.movieListFilling
 
 class AdapterActorList : RecyclerView.Adapter<VhActor>() {
 

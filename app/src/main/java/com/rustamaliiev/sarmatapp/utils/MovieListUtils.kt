@@ -4,8 +4,10 @@ import com.rustamaliiev.sarmatapp.ItemActor
 import com.rustamaliiev.sarmatapp.ItemMovie
 import com.rustamaliiev.sarmatapp.R
 
-fun movieListFilling(list: MutableList<ItemMovie>) {
-    list.run {
+@ExperimentalStdlibApi
+@Deprecated("Replace with proper data source")
+fun generateMoviesList(): List<ItemMovie> {
+    return buildList {
         add(
             ItemMovie(
                 "Avengers: End Game",

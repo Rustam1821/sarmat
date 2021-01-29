@@ -3,21 +3,16 @@ package com.rustamaliiev.sarmatapp
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.utils.inflate
-import com.rustamaliiev.sarmatapp.utils.movieListFilling
 
 class AdapterMovieList : RecyclerView.Adapter<VhMovie>() {
 
-    private var movies: MutableList<ItemMovie> = mutableListOf()
+    var movies: List<ItemMovie> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
     var itemClickListener: (ItemMovie) -> Unit = {}
-
-    init {
-        movieListFilling(movies)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VhMovie {
         return VhMovie(
