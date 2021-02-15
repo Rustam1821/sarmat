@@ -1,15 +1,15 @@
 package com.rustamaliiev.sarmatapp.utils
 
-import com.rustamaliiev.sarmatapp.ItemActor
-import com.rustamaliiev.sarmatapp.ItemMovie
+import com.rustamaliiev.sarmatapp.model.Actor
+import com.rustamaliiev.sarmatapp.model.Movie
 import com.rustamaliiev.sarmatapp.R
 
 @ExperimentalStdlibApi
 @Deprecated("Replace with proper data source")
-fun generateMoviesList(): List<ItemMovie> {
+fun generateMoviesList(): List<Movie> {
     return buildList {
         add(
-            ItemMovie(
+            Movie(
                 "Avengers: End Game",
                 "Action, Adventure, Drama",
                 125, 13, 137,
@@ -17,7 +17,7 @@ fun generateMoviesList(): List<ItemMovie> {
             )
         )
         add(
-            ItemMovie(
+            Movie(
                 "Tenet",
                 "Action, Sci-Fi, Thriller",
                 98, 16, 97,
@@ -25,7 +25,7 @@ fun generateMoviesList(): List<ItemMovie> {
             )
         )
         add(
-            ItemMovie(
+            Movie(
                 "Black Widow",
                 "Action, Adventure, Sci-Fi",
                 38, 13, 102,
@@ -33,7 +33,7 @@ fun generateMoviesList(): List<ItemMovie> {
             )
         )
         add(
-            ItemMovie(
+            Movie(
                 "Wonder Woman 1984",
                 "Action, Adventure, Fantasy",
                 74, 13, 120,
@@ -41,7 +41,7 @@ fun generateMoviesList(): List<ItemMovie> {
             )
         )
         add(
-            ItemMovie(
+            Movie(
                 "Amelie",
                 "Magical realism",
                 92, 13, 129,
@@ -49,7 +49,7 @@ fun generateMoviesList(): List<ItemMovie> {
             )
         )
         add(
-            ItemMovie(
+            Movie(
                 "Dumb and Dumber",
                 "Comedy",
                 92, 13, 106,
@@ -60,40 +60,40 @@ fun generateMoviesList(): List<ItemMovie> {
 }
 
 
-fun actorListFilling(list: MutableList<ItemActor>) {
+fun actorListFilling(list: MutableList<Actor>) {
     list.run {
         add(
-            ItemActor(
+            Actor(
                 "Chris Evans",
                 R.drawable.photo_chris_evans
             )
         )
         add(
-            ItemActor(
+            Actor(
                 "Chris Hemsworth",
                 R.drawable.photo_chris_hemsworth
             )
         )
         add(
-            ItemActor(
+            Actor(
                 "Mark Ruffalo",
                 R.drawable.photo_mark_ruffalo
             )
         )
         add(
-            ItemActor(
+            Actor(
                 "Robert Downey",
                 R.drawable.photo_robert_downey
             )
         )
         add(
-            ItemActor(
+            Actor(
                 "Jim Carrey",
                 R.drawable.photo_jim_carrey
             )
         )
         add(
-            ItemActor(
+            Actor(
                 "Audrey Tautou",
                 R.drawable.photo_audrey_tautou
             )

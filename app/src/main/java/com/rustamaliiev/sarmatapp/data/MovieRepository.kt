@@ -1,9 +1,9 @@
-package com.android.academy.fundamentals.homework.data
+package com.rustamaliiev.sarmatapp.data
 
 import android.content.Context
-import com.android.academy.fundamentals.homework.model.Actor
-import com.android.academy.fundamentals.homework.model.Genre
-import com.android.academy.fundamentals.homework.model.Movie
+import com.rustamaliiev.sarmatapp.model.Actor
+import com.rustamaliiev.sarmatapp.model.Genre
+import com.rustamaliiev.sarmatapp.model.Movie
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString

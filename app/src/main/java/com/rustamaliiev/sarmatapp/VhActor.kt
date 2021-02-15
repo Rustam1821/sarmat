@@ -4,14 +4,15 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.rustamaliiev.sarmatapp.model.Actor
 
 
 class VhActor(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val tvActorName: TextView = itemView.findViewById(R.id.actor_name)
     private val ivActorPhoto: ImageView = itemView.findViewById(R.id.actor_photo)
 
-    fun bind(itemActor: ItemActor) {
-        tvActorName.text = itemActor.actorName
-        ivActorPhoto.setImageResource(itemActor.actorPhoto)
+    fun bind(actor: Actor) {
+        tvActorName.text = actor.actorName
+        ivActorPhoto.setImageResource(actor.actorPhoto)
     }
 }

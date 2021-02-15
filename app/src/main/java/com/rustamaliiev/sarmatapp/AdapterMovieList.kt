@@ -2,17 +2,18 @@ package com.rustamaliiev.sarmatapp
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.rustamaliiev.sarmatapp.model.Movie
 import com.rustamaliiev.sarmatapp.utils.inflate
 
 class AdapterMovieList : RecyclerView.Adapter<VhMovie>() {
 
-    var movies: List<ItemMovie> = emptyList()
+    var movies: List<Movie> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
-    var itemClickListener: (ItemMovie) -> Unit = {}
+    var itemClickListener: (Movie) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VhMovie {
         return VhMovie(

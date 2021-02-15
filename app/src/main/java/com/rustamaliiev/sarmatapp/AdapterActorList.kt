@@ -2,12 +2,13 @@ package com.rustamaliiev.sarmatapp
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.rustamaliiev.sarmatapp.model.Actor
 import com.rustamaliiev.sarmatapp.utils.actorListFilling
 import com.rustamaliiev.sarmatapp.utils.inflate
 
 class AdapterActorList : RecyclerView.Adapter<VhActor>() {
 
-    private var actors: MutableList<ItemActor> = mutableListOf()
+    private var actors: MutableList<Actor> = mutableListOf()
         set(value) {
             field = value
             notifyDataSetChanged()
