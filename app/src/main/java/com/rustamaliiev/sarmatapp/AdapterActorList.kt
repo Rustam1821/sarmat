@@ -3,20 +3,15 @@ package com.rustamaliiev.sarmatapp
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.model.Actor
-import com.rustamaliiev.sarmatapp.utils.actorListFilling
 import com.rustamaliiev.sarmatapp.utils.inflate
 
 class AdapterActorList : RecyclerView.Adapter<VhActor>() {
 
-    private var actors: MutableList<Actor> = mutableListOf()
+    var actors: List<Actor> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
-
-    init {
-        actorListFilling(actors)
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VhActor {
         return VhActor(

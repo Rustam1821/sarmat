@@ -1,14 +1,9 @@
 package com.rustamaliiev.sarmatapp.model
 
-import androidx.annotation.DrawableRes
+import java.io.Serializable
 
 data class Actor(
     val id: Int,
     val name: String,
     val imageUrl: String,
-
-
-//    @DrawableRes
-//    val actorPhoto: Int,
-
-)
+) : Serializable

@@ -4,9 +4,9 @@ import com.rustamaliiev.sarmatapp.model.Actor
 import com.rustamaliiev.sarmatapp.model.Movie
 import com.rustamaliiev.sarmatapp.R
 
-@ExperimentalStdlibApi
-@Deprecated("Replace with proper data source")
-fun generateMoviesList(): List<Movie> {
+//@ExperimentalStdlibApi
+//@Deprecated("Replace with proper data source")
+/*fun generateMoviesList(): List<Movie> {
     return buildList {
         add(
             Movie(
@@ -57,9 +57,10 @@ fun generateMoviesList(): List<Movie> {
             )
         )
     }
-}
+}*/
 
 
+/*
 fun actorListFilling(list: MutableList<Actor>) {
     list.run {
         add(
@@ -99,4 +100,4 @@ fun actorListFilling(list: MutableList<Actor>) {
             )
         )
     }
-}
+}*/

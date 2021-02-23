@@ -7,10 +7,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.rustamaliiev.sarmatapp.utils.generateMoviesList
+import com.rustamaliiev.sarmatapp.data.JsonMovieRepository
+import com.rustamaliiev.sarmatapp.data.MovieRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
-class FragmentMoviesList : Fragment() {
-
+class FragmentMoviesList : Fragment(), CoroutineScope {
+    private lateinit var repository: MovieRepository
     private val movieAdapter: AdapterMovieList = AdapterMovieList()
 
     override fun onCreateView(
@@ -24,18 +30,22 @@ class FragmentMoviesList : Fragment() {
     @ExperimentalStdlibApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        repository = JsonMovieRepository(requireContext())
         movieAdapter.itemClickListener = {
             (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked()
         }
-        view.findViewById<RecyclerView>(R.id.moviesRecyclerView).apply{
+        view.findViewById<RecyclerView>(R.id.moviesRecyclerView).apply {
             layoutManager = GridLayoutManager(view.context, 2)
             adapter = movieAdapter
         }
-        movieAdapter.movies = generateMoviesList()
+        launch { movieAdapter.movies = repository.loadMovies() }
     }
 
     companion object {
         @JvmStatic
         fun newInstance() = FragmentMoviesList()
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main.immediate + SupervisorJob()
 }

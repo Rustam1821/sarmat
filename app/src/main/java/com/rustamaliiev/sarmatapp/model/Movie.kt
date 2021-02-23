@@ -15,8 +15,4 @@ data class Movie(
     val genres: List<Genre>,
     val actors: List<Actor>,
     val isLiked: Boolean
-
-
-//    @DrawableRes
-//    val posterColorImageRes: Int,
 )
