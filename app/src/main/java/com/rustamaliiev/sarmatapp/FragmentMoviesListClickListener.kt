@@ -1,5 +1,5 @@
 package com.rustamaliiev.sarmatapp
 
 interface FragmentMoviesListClickListener {
-    fun onMovieCardClicked()
+    fun onMovieCardClicked(movieID: Int)
 }

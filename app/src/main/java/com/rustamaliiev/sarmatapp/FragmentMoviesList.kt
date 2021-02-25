@@ -32,7 +32,8 @@ class FragmentMoviesList : Fragment(), CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
         repository = JsonMovieRepository(requireContext())
         movieAdapter.itemClickListener = {
-            (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked()
+            var thisMovieId = it.id
+            (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked(thisMovieId)
         }
         view.findViewById<RecyclerView>(R.id.moviesRecyclerView).apply {
             layoutManager = GridLayoutManager(view.context, 2)
@@ -42,7 +43,7 @@ class FragmentMoviesList : Fragment(), CoroutineScope {
     }
 
     companion object {
-        @JvmStatic
+                @JvmStatic
         fun newInstance() = FragmentMoviesList()
     }
 

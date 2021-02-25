@@ -23,7 +23,7 @@ class VhMovie(itemView: View) : RecyclerView.ViewHolder(itemView) {
             itemClickListener(movie)
         }
         tvMovieName.text = movie.title
-        tvGenre.text = movie.genres.joinToString(" ,") { it.name }
+        tvGenre.text = movie.genres.joinToString(", ") { it.name }
         tvReviews.text = "${movie.reviewCount} reviews"
         tvAudienceLimit.text = "+${movie.pgAge}"
         tvDuration.text = "${movie.runningTime} min"

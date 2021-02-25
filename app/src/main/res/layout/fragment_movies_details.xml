@@ -92,7 +92,7 @@
             app:layout_constraintTop_toBottomOf="@+id/guideline_under_poster" />
 
         <TextView
-            android:id="@+id/audience_limit"
+            android:id="@+id/age_limit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
@@ -107,7 +107,7 @@
 
         <TextView
             android:id="@+id/genre"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="4dp"
@@ -118,6 +118,8 @@
             android:textColor="@color/radical_red"
             android:textSize="14sp"
 
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/film_name" />
 
         <RatingBar
@@ -212,10 +214,10 @@
             android:id="@+id/actors_RecyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/story_text"
             app:layout_constraintStart_toStartOf="@id/story_text"
             app:layout_constraintTop_toBottomOf="@id/barrier_for_photos"
-            app:layout_constraintBottom_toBottomOf="parent"
 
             />
 

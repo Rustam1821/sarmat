@@ -1,7 +1,5 @@
 package com.rustamaliiev.sarmatapp.model
 
-import androidx.annotation.DrawableRes
-
 data class Movie(
     val id: Int,
     val title: String,
