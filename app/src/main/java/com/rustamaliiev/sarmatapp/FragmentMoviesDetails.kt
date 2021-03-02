@@ -44,18 +44,13 @@ class FragmentMoviesDetails : Fragment(), CoroutineScope {
     }
 
 
-    private fun pullMovie() {
+    private fun pullMovie() = launch {
         repository = JsonMovieRepository(requireContext())
-        val movieID = arguments?.getInt(MOVIE_ID)
+        val movieID = arguments?.getInt(MOVIE_ID) ?: return@launch
+        val movie = repository.loadMovie(movieID) ?: return@launch
+        actorAdapter.actors = movie.actors
+        fillInfo(movie)
 
-        launch {
-            movieID?.let { id ->
-                repository.loadMovie(id)?.let { movie ->
-                    actorAdapter.actors = movie.actors
-                    fillInfo(movie)
-                }
-            }
-        }
     }
 
     private fun fillInfo(movie: Movie) {
