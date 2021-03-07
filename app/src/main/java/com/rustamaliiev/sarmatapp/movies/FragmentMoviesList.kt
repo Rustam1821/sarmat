@@ -1,4 +1,4 @@
-package com.rustamaliiev.sarmatapp
+package com.rustamaliiev.sarmatapp.movies
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.data.JsonMovieRepository
 import com.rustamaliiev.sarmatapp.data.MovieRepository
 import kotlinx.coroutines.CoroutineScope
@@ -17,7 +18,7 @@ import kotlin.coroutines.CoroutineContext
 
 class FragmentMoviesList : Fragment(), CoroutineScope {
     private lateinit var repository: MovieRepository
-    private val movieAdapter: AdapterMovieList = AdapterMovieList()
+    private val movieAdapter: MovieListAdapter = MovieListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,

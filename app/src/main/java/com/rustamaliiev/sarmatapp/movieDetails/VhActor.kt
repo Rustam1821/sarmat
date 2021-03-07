@@ -1,10 +1,11 @@
-package com.rustamaliiev.sarmatapp
+package com.rustamaliiev.sarmatapp.movieDetails
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.model.Actor
 
 

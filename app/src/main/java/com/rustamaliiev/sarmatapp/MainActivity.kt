@@ -2,6 +2,9 @@ package com.rustamaliiev.sarmatapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.rustamaliiev.sarmatapp.movieDetails.FragmentMoviesDetails
+import com.rustamaliiev.sarmatapp.movies.FragmentMoviesList
+import com.rustamaliiev.sarmatapp.movies.FragmentMoviesListClickListener
 
 class MainActivity : AppCompatActivity(), FragmentMoviesListClickListener {
 

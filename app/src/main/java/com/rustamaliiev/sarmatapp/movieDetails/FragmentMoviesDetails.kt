@@ -1,17 +1,14 @@
-package com.rustamaliiev.sarmatapp
+package com.rustamaliiev.sarmatapp.movieDetails
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.data.JsonMovieRepository
 import com.rustamaliiev.sarmatapp.data.MovieRepository
 import com.rustamaliiev.sarmatapp.databinding.FragmentMoviesDetailsBinding
@@ -21,7 +18,7 @@ import kotlin.coroutines.CoroutineContext
 
 class FragmentMoviesDetails : Fragment(), CoroutineScope {
     private lateinit var repository: MovieRepository
-    private val actorAdapter: AdapterActorList = AdapterActorList()
+    private val actorAdapter: ActorListAdapter = ActorListAdapter()
     private lateinit var actorRecyclerView: RecyclerView
 
     override fun onCreateView(

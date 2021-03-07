@@ -1,11 +1,12 @@
-package com.rustamaliiev.sarmatapp
+package com.rustamaliiev.sarmatapp.movies
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.model.Movie
 import com.rustamaliiev.sarmatapp.utils.inflate
 
-class AdapterMovieList : RecyclerView.Adapter<VhMovie>() {
+class MovieListAdapter : RecyclerView.Adapter<VhMovie>() {
 
     var movies: List<Movie> = emptyList()
         set(value) {
