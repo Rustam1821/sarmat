@@ -40,7 +40,7 @@ class FragmentMoviesDetails : Fragment(), CoroutineScope {
 
     }
 
-
+//into viewModel
     private fun pullMovie() = launch {
         repository = JsonMovieRepository(requireContext())
         val movieID = arguments?.getInt(MOVIE_ID) ?: return@launch
@@ -67,6 +67,7 @@ class FragmentMoviesDetails : Fragment(), CoroutineScope {
         binding.storyText.text = movie.storyLine
     }
 
+//    delete It
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main.immediate + SupervisorJob()
 

@@ -1,6 +1,8 @@
 package com.rustamaliiev.sarmatapp.movies
 
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.model.Movie
