@@ -5,21 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rustamaliiev.sarmatapp.R
-import com.rustamaliiev.sarmatapp.data.JsonMovieRepository
-import com.rustamaliiev.sarmatapp.data.MovieRepository
 import com.rustamaliiev.sarmatapp.databinding.FragmentMoviesDetailsBinding
 import com.rustamaliiev.sarmatapp.model.Movie
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
-class FragmentMoviesDetails : Fragment(), CoroutineScope {
-    private lateinit var repository: MovieRepository
+class FragmentMoviesDetails : Fragment() {
     private val actorAdapter: ActorListAdapter = ActorListAdapter()
     private lateinit var actorRecyclerView: RecyclerView
+
+    private val viewModel: MoviesDetailsViewModel by viewModels {
+        MoviesDetailsViewModelFactory(arguments?.getInt(MOVIE_ID))
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,22 +31,15 @@ class FragmentMoviesDetails : Fragment(), CoroutineScope {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pullMovie()
+        viewModel.detailsLiveData.observe(viewLifecycleOwner) { movie ->
+            actorAdapter.actors = movie.actors
+            fillInfo(movie)
+        }
 
         actorRecyclerView = view.findViewById(R.id.actors_RecyclerView)
         actorRecyclerView.layoutManager =
             LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
         actorRecyclerView.adapter = actorAdapter
-
-    }
-
-//into viewModel
-    private fun pullMovie() = launch {
-        repository = JsonMovieRepository(requireContext())
-        val movieID = arguments?.getInt(MOVIE_ID) ?: return@launch
-        val movie = repository.loadMovie(movieID) ?: return@launch
-        actorAdapter.actors = movie.actors
-        fillInfo(movie)
 
     }
 
@@ -66,10 +59,6 @@ class FragmentMoviesDetails : Fragment(), CoroutineScope {
         binding.reviews.text = "${movie.reviewCount} Reviews"
         binding.storyText.text = movie.storyLine
     }
-
-//    delete It
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main.immediate + SupervisorJob()
 
     companion object {
 
