@@ -31,10 +31,7 @@ class FragmentMoviesDetails : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.detailsLiveData.observe(viewLifecycleOwner) { movie ->
-            actorAdapter.actors = movie.actors
-            fillInfo(movie)
-        }
+        viewModel.detailsLiveData.observe(viewLifecycleOwner, ::fillInfo)
 
         actorRecyclerView = view.findViewById(R.id.actors_RecyclerView)
         actorRecyclerView.layoutManager =
@@ -44,20 +41,22 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     private fun fillInfo(movie: Movie) {
-        val binding = FragmentMoviesDetailsBinding.bind(requireView())
+        actorAdapter.actors = movie.actors
+        with(FragmentMoviesDetailsBinding.bind(requireView())){
+            Glide
+                .with(posterImageView)
+                .load(movie.detailImageUrl)
+                .centerCrop()
+                .into(posterImageView)
 
-        Glide
-            .with(this)
-            .load(movie.detailImageUrl)
-            .centerCrop()
-            .into(binding.posterImageView)
+            filmName.text = movie.title
+            ageLimit.text = "${movie.pgAge}+"
+            genre.text = movie.genres.joinToString(", ") { it.name }
+            ratingBar.rating = movie.rating.toFloat()
+            reviews.text = "${movie.reviewCount} Reviews"
+            storyText.text = movie.storyLine
+        }
 
-        binding.filmName.text = movie.title
-        binding.ageLimit.text = "${movie.pgAge}+"
-        binding.genre.text = movie.genres.joinToString(", ") { it.name }
-        binding.ratingBar.rating = movie.rating.toFloat()
-        binding.reviews.text = "${movie.reviewCount} Reviews"
-        binding.storyText.text = movie.storyLine
     }
 
     companion object {
