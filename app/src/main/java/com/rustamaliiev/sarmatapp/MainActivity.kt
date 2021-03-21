@@ -27,3 +27,5 @@ class MainActivity : AppCompatActivity(), FragmentMoviesListClickListener {
             .commit()
     }
 }
+
+//dce382024c4e6c8dd91b68a4bcd6ff3e

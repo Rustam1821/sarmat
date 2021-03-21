@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rustamaliiev.sarmatapp.data.JsonMovieRepository
 import com.rustamaliiev.sarmatapp.data.MovieRepository
+import com.rustamaliiev.sarmatapp.data.NetworkModule
 import com.rustamaliiev.sarmatapp.model.Movie
 import com.rustamaliiev.sarmatapp.ui.SarmatApp
 import kotlinx.coroutines.launch
@@ -21,7 +22,11 @@ class MoviesDetailsViewModel(private val movieID: Int): ViewModel() {
     }
 
     private fun pullMovie() = viewModelScope.launch {
-        val movie = repository.loadMovie(movieID) ?: return@launch
-        _detailsLiveData.postValue(movie)
+        val string = NetworkModule.movieApi.getTopRatedMovies().results.joinToString()
+        Log.e("MovieString", string)
+
+
+//        val movie = repository.loadMovie(movieID) ?: return@launch
+//        _detailsLiveData.postValue(movie)
     }
 }
