@@ -17,9 +17,6 @@ object NetworkModule {
 
     private var imageResponse: ImageResponse? = null
     private var baseUrl: String? = null
-    private var posterSize: String? = null
-    private var backDropSize: String? = null
-    private var profileSize: String? = null
 
     private val client = OkHttpClient().newBuilder()
         .addInterceptor(ApiKeyInterceptor())
@@ -87,9 +84,6 @@ object NetworkModule {
         if (imageResponse == null) {
             imageResponse = movieApi.getConfiguration().images
             baseUrl = imageResponse?.baseUrl
-//            posterSize = DEFAULT_SIZE
-//            backDropSize = DEFAULT_SIZE
-//            profileSize = DEFAULT_SIZE
         }
     }
 
