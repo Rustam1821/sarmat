@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.databinding.FragmentMoviesDetailsBinding
 import com.rustamaliiev.sarmatapp.model.Movie
+import com.rustamaliiev.sarmatapp.model.MovieDetails
 
 class FragmentMoviesDetails : Fragment() {
     private val actorAdapter: ActorListAdapter = ActorListAdapter()
@@ -40,7 +40,7 @@ class FragmentMoviesDetails : Fragment() {
 
     }
 
-    private fun fillInfo(movie: Movie) {
+    private fun fillInfo(movie: MovieDetails) {
         actorAdapter.actors = movie.actors
         with(FragmentMoviesDetailsBinding.bind(requireView())){
             Glide
@@ -50,7 +50,7 @@ class FragmentMoviesDetails : Fragment() {
                 .into(posterImageView)
 
             filmName.text = movie.title
-            ageLimit.text = "${movie.pgAge}+"
+            ageLimit.text = "${movie.ageLimit}+"
             genre.text = movie.genres.joinToString(", ") { it.name }
             ratingBar.rating = movie.rating.toFloat()
             reviews.text = "${movie.reviewCount} Reviews"

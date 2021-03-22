@@ -18,18 +18,18 @@ data class MovieResponse(
 
 //    there's no runtime field in Json: https://developers.themoviedb.org/3/movies/get-top-rated-movies
 //    but here is we have this field: https://developers.themoviedb.org/3/movies/get-movie-details
-    @SerializedName("runtime")
-    val runtime: Int,
+//    @SerializedName("runtime")
+//    val runtime: Int,
 
     @SerializedName("genre_ids")
     val genreIds: List<Int>,
 
     //  haven't found this list
-    @SerializedName("actors")
-    val actors: List<Int>,
+//    @SerializedName("actors")
+//    val actors: List<Int>,
 
     @SerializedName("vote_average")
-    val ratings: Float,
+    val voteAverage: Double,
 
     @SerializedName("vote_count")
     val votesCount: Int,
