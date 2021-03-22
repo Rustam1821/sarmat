@@ -3,7 +3,7 @@ package com.rustamaliiev.sarmatapp.model
 data class Movie(
     val id: Int,
     val title: String,
-    val imageUrl: String,
+    val imageUrl: String?,
     val rating: Double,
     val reviewCount: Int,
     val ageLimit: Int,

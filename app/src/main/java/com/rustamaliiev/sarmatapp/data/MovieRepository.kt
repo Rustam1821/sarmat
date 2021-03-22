@@ -76,19 +76,19 @@ internal class JsonMovieRepository(private val context: Context) : MovieReposito
             Movie(
                 id = jsonMovie.id,
                 title = jsonMovie.title,
-                storyLine = jsonMovie.overview,
+//                storyLine = jsonMovie.overview,
                 imageUrl = jsonMovie.posterPicture,
-                detailImageUrl = jsonMovie.backdropPicture,
-                rating = (jsonMovie.ratings / 2).toInt(),
+//                detailImageUrl = jsonMovie.backdropPicture,
+                rating = (jsonMovie.ratings / 2).toDouble(),
                 reviewCount = jsonMovie.votesCount,
                 ageLimit = if (jsonMovie.adult) 16 else 13,
                 runningTime = jsonMovie.runtime,
                 genres = jsonMovie.genreIds.map { id ->
                     genresMap[id].orThrow { IllegalArgumentException("Genre not found") }
                 },
-                actors = jsonMovie.actors.map { id ->
-                    actorsMap[id].orThrow { IllegalArgumentException("Actor not found") }
-                },
+//                actors = jsonMovie.actors.map { id ->
+//                    actorsMap[id].orThrow { IllegalArgumentException("Actor not found") }
+//                },
                 isLiked = false
             )
         }

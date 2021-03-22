@@ -24,10 +24,6 @@ data class MovieResponse(
     @SerializedName("genre_ids")
     val genreIds: List<Int>,
 
-    //  haven't found this list
-//    @SerializedName("actors")
-//    val actors: List<Int>,
-
     @SerializedName("vote_average")
     val voteAverage: Double,
 

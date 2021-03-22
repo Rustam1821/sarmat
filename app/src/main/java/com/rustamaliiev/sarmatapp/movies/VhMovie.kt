@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rustamaliiev.sarmatapp.R
@@ -28,6 +29,7 @@ class VhMovie(itemView: View) : RecyclerView.ViewHolder(itemView) {
         tvReviews.text = "${movie.reviewCount} reviews"
         tvAudienceLimit.text = "+${movie.ageLimit}"
         tvDuration.text = "${movie.runningTime} min"
+        tvDuration.isVisible = false
 
         Glide
             .with(ivPoster)

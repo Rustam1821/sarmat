@@ -25,7 +25,8 @@ class MoviesListViewModel : ViewModel() {
 
     private fun loadMovies() {
         viewModelScope.launch {
-            _moviesLiveData.postValue(repository.loadMovies())
+//            _moviesLiveData.postValue(repository.loadMovies())
+            _moviesLiveData.postValue(NetworkModule.loadMovies())
         }
     }
 

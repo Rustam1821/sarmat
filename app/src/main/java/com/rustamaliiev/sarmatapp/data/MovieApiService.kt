@@ -10,21 +10,15 @@ interface MovieApiService {
     //we need it to receive base_url for images
     @GET("configuration")
     suspend fun getConfiguration(
-        @Query("api_key")
-        key: String = API_KEY
     ): ConfigurationResponse
 
     //to get list of genres with its' IDs
     @GET("genre/movie/list")
     suspend fun getGenres(
-        @Query("api_key")
-        key: String = API_KEY
     ): GenresResponse
 
     @GET("movie/top_rated")
     suspend fun getTopRatedMovies(
-        @Query("api_key")
-        key: String = API_KEY
     ): TopRatedResponse
 
     @GET("movie/{movie_id}")
@@ -32,8 +26,6 @@ interface MovieApiService {
         @Path("movie_id")
         movieId: Int,
 
-        @Query("api_key")
-        key: String = API_KEY
     ): MovieDetailsResponse
 
     // to get actors for the movie
@@ -41,12 +33,5 @@ interface MovieApiService {
     suspend fun getCast(
         @Path("movie_id")
         movieId: Int,
-
-        @Query("api_key")
-        key: String = API_KEY
     ): MovieCastResponse
-
-
 }
-
-val API_KEY = "dce382024c4e6c8dd91b68a4bcd6ff3e"
