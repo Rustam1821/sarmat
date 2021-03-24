@@ -31,10 +31,10 @@ object NetworkModule {
 
     private val movieApi: MovieApiService = retrofit.create()
 
-    suspend fun loadMovies(): List<Movie> {
+    suspend fun loadMovies(selector: String): List<Movie> {
         getConfigurations()
         val genres = movieApi.getGenres().genres
-        return movieApi.getTopRatedMovies().results.map { movieResponse ->
+        return movieApi.getMoviesList(selector).results.map { movieResponse ->
             Movie(
                 id = movieResponse.id,
                 title = movieResponse.title,

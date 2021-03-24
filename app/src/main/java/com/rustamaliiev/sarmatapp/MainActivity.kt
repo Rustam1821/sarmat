@@ -1,6 +1,7 @@
 package com.rustamaliiev.sarmatapp
 
 import android.os.Bundle
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import com.rustamaliiev.sarmatapp.movieDetails.FragmentMoviesDetails
 import com.rustamaliiev.sarmatapp.movies.FragmentMoviesList
@@ -27,5 +28,3 @@ class MainActivity : AppCompatActivity(), FragmentMoviesListClickListener {
             .commit()
     }
 }
-
-//dce382024c4e6c8dd91b68a4bcd6ff3e

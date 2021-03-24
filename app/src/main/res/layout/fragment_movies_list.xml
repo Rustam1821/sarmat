@@ -20,8 +20,15 @@
         android:textColor="@color/white"
         android:textSize="14sp" />
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="14dp"
+        android:background="@color/light_grayish_navy"
+        />
 
-    <androidx.recyclerview.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/moviesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

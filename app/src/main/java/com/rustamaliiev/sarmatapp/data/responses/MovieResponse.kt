@@ -35,6 +35,5 @@ data class MovieResponse(
 
     @SerializedName("adult")
     val adult: Boolean
-
 )
 

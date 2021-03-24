@@ -3,7 +3,6 @@ package com.rustamaliiev.sarmatapp.data
 import com.rustamaliiev.sarmatapp.data.responses.*
 import retrofit2.http.GET
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface MovieApiService {
 
@@ -17,9 +16,11 @@ interface MovieApiService {
     suspend fun getGenres(
     ): GenresResponse
 
-    @GET("movie/top_rated")
-    suspend fun getTopRatedMovies(
-    ): TopRatedResponse
+    @GET("movie/{selector}")
+    suspend fun getMoviesList(
+        @Path("selector")
+        selector: String
+    ): MovieListResponse
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetails(

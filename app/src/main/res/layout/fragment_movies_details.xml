@@ -17,7 +17,7 @@
             android:id="@+id/poster_image_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:src="@drawable/avengers_poster"
+            tools:src="@drawable/avengers_poster"
             app:layout_constraintDimensionRatio="1.26"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +83,7 @@
             android:layout_marginHorizontal="16dp"
 
             android:fontFamily="@font/roboto_black"
-            android:text="@string/avengers_end_game"
+            tools:text="@tools:sample/last_names"
             android:textColor="@color/whisper"
             android:textSize="40sp"
 
