@@ -1,15 +1,19 @@
 package com.rustamaliiev.sarmatapp.movies
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.R
+import com.rustamaliiev.sarmatapp.data.FilmGroups
+import com.rustamaliiev.sarmatapp.data.SystemConfig
 
 class FragmentMoviesList : Fragment() {
 
@@ -30,7 +34,7 @@ class FragmentMoviesList : Fragment() {
 
         val movieAdapter = MovieListAdapter()
 
-        viewModel.loadSpinner(view)
+        initSpinner()
 
         view.findViewById<RecyclerView>(R.id.moviesRecyclerView).apply {
             layoutManager = GridLayoutManager(view.context, 2)
@@ -45,6 +49,32 @@ class FragmentMoviesList : Fragment() {
         }
         viewModel.movieIdLiveData.observe(viewLifecycleOwner) { id ->
             (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked(id)
+        }
+    }
+
+    private fun initSpinner() {
+        var spinner: Spinner? = view?.findViewById(com.rustamaliiev.sarmatapp.R.id.spinner)
+        ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            FilmGroups.values().map { it.description }
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner?.adapter = adapter
+            spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedItem = FilmGroups.values()[position].path
+                    viewModel.loadMovies(selectedItem)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) = Unit
+            }
         }
     }
 
