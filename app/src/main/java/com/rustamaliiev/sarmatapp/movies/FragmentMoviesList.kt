@@ -57,7 +57,7 @@ class FragmentMoviesList : Fragment() {
         ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,
-            FilmGroups.values().map { it.description }
+            FilmGroups.values().map { getString(it.description) }
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner?.adapter = adapter

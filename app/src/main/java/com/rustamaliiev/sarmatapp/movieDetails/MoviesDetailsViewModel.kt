@@ -6,10 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 //import com.rustamaliiev.sarmatapp.data.JsonMovieRepository
 import com.rustamaliiev.sarmatapp.data.MovieRepository
-import com.rustamaliiev.sarmatapp.data.NetworkModule
-import com.rustamaliiev.sarmatapp.data.responses.MoviesNetworkRepository
+import com.rustamaliiev.sarmatapp.data.MoviesNetworkRepository
 import com.rustamaliiev.sarmatapp.model.MovieDetails
-import com.rustamaliiev.sarmatapp.ui.SarmatApp
 import kotlinx.coroutines.launch
 
 class MoviesDetailsViewModel(private val movieID: Int): ViewModel() {

@@ -1,8 +1,5 @@
-package com.rustamaliiev.sarmatapp.data.responses
+package com.rustamaliiev.sarmatapp.data
 
-import com.rustamaliiev.sarmatapp.data.MovieRepository
-import com.rustamaliiev.sarmatapp.data.NetworkModule
-import com.rustamaliiev.sarmatapp.data.SystemConfig
 import com.rustamaliiev.sarmatapp.model.Actor
 import com.rustamaliiev.sarmatapp.model.Genre
 import com.rustamaliiev.sarmatapp.model.Movie
@@ -25,7 +22,7 @@ class MoviesNetworkRepository: MovieRepository {
                 ),
                 rating = movieResponse.voteAverage / 2,
                 reviewCount = movieResponse.votesCount,
-                ageLimit = if (movieResponse.adult) 16 else 13,
+                ageLimit = if (movieResponse.adult) SystemConfig.ADULT_AGE else SystemConfig.CHILD_AGE,
 
                 // where can I get running time? only in movie details
                 runningTime = 999,
@@ -54,7 +51,7 @@ class MoviesNetworkRepository: MovieRepository {
             ),
             rating = movieDetails.voteAverage / 2,
             reviewCount = movieDetails.voteCount ?: 0,
-            ageLimit = if (movieDetails.isAdult) 16 else 13,
+            ageLimit = if (movieDetails.isAdult) SystemConfig.ADULT_AGE else SystemConfig.CHILD_AGE,
             runtime = movieDetails.runtime ?: 0,
             genres = movieDetails.genres.map { Genre(it.id, it.name) },
             actors = NetworkModule.movieApi.getCast(movieId).casts.map { castResponse ->

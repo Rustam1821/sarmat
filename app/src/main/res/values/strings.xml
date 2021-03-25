@@ -28,4 +28,8 @@
 
     <string name="movies_list">Movies list</string>
 
+    <string name="top_rated">Top rated</string>
+    <string name="popular">Popular</string>
+    <string name="upcoming">Upcoming</string>
+
 </resources>

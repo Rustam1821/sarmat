@@ -1,19 +1,11 @@
 package com.rustamaliiev.sarmatapp.movies
 
-import android.R
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rustamaliiev.sarmatapp.data.MovieRepository
-import com.rustamaliiev.sarmatapp.data.NetworkModule
-import com.rustamaliiev.sarmatapp.data.SystemConfig
-import com.rustamaliiev.sarmatapp.data.responses.MoviesNetworkRepository
+import com.rustamaliiev.sarmatapp.data.MoviesNetworkRepository
 import com.rustamaliiev.sarmatapp.model.Movie
 import kotlinx.coroutines.launch
 
