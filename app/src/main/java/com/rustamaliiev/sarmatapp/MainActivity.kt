@@ -1,11 +1,10 @@
 package com.rustamaliiev.sarmatapp
 
 import android.os.Bundle
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
-import com.rustamaliiev.sarmatapp.movieDetails.FragmentMoviesDetails
-import com.rustamaliiev.sarmatapp.movies.FragmentMoviesList
-import com.rustamaliiev.sarmatapp.movies.FragmentMoviesListClickListener
+import com.rustamaliiev.sarmatapp.ui.movieDetails.FragmentMoviesDetails
+import com.rustamaliiev.sarmatapp.ui.movies.FragmentMoviesList
+import com.rustamaliiev.sarmatapp.ui.movies.FragmentMoviesListClickListener
 
 class MainActivity : AppCompatActivity(), FragmentMoviesListClickListener {
 
