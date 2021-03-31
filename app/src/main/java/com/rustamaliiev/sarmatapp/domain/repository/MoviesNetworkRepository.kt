@@ -4,8 +4,8 @@ import com.rustamaliiev.sarmatapp.domain.entity.Actor
 import com.rustamaliiev.sarmatapp.domain.entity.Genre
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
 import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
-import com.rustamaliiev.sarmatapp.network.config.NetworkModule
-import com.rustamaliiev.sarmatapp.network.config.SystemConfig
+import com.rustamaliiev.sarmatapp.data.network.config.NetworkModule
+import com.rustamaliiev.sarmatapp.data.network.config.SystemConfig
 
 class MoviesNetworkRepository: MovieRepository {
     private lateinit var imagesBaseUrl: String

@@ -1,6 +1,6 @@
-package com.rustamaliiev.sarmatapp.network.config
+package com.rustamaliiev.sarmatapp.data.network.config
 
-import com.rustamaliiev.sarmatapp.network.api.MovieApiService
+import com.rustamaliiev.sarmatapp.data.network.api.MovieApiService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

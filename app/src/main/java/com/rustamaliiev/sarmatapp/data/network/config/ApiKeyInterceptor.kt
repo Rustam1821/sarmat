@@ -1,6 +1,6 @@
-package com.rustamaliiev.sarmatapp.network.config
+package com.rustamaliiev.sarmatapp.data.network.config
 
-import com.rustamaliiev.sarmatapp.network.config.SystemConfig.API_KEY
+import com.rustamaliiev.sarmatapp.data.network.config.SystemConfig.API_KEY
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
