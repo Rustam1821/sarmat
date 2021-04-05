@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black_russian">#24252b</color>
+    <color name="whisper">#ECECEC</color>
+    <color name="radical_red">#ff355e</color>
+    <color name="light_grayish_navy">#6D6D80</color>
+    <color name="smoky">#565665</color>
 </resources>

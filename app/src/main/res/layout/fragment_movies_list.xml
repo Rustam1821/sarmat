@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?><!--change to Relative Layout-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/holder_movie"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_russian"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/listTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="35dp"
+        android:drawableStart="@drawable/ic_precision"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/roboto_black"
+        android:text="@string/movies_list"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="14dp"
+        android:background="@color/light_grayish_navy"
+        />
+
+        <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/moviesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="14dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
