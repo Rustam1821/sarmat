@@ -13,7 +13,6 @@ data class MovieDB(
     @PrimaryKey(autoGenerate = false)
     val id: Int,
 
-    @Relation(parentColumn = "sd", entityColumn = "sdfsd")
     val title: String,
     val imageUrl: String?,
     val rating: Double,
