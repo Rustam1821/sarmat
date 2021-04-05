@@ -1,5 +1,6 @@
 package com.rustamaliiev.sarmatapp.data.local.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,6 +10,7 @@ import androidx.room.PrimaryKey
 
 data class MovieDB(
     @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "movieId")
     val id: Int,
 
     val title: String,

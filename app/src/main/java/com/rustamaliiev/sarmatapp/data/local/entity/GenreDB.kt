@@ -3,22 +3,22 @@ package com.rustamaliiev.sarmatapp.data.local.entity
 import androidx.room.*
 
 @Entity(
-    tableName = "genres",
+    tableName = "Genre",
     foreignKeys = [
         ForeignKey(
             entity = MovieDB::class,
-            parentColumns = arrayOf("movieId"),
-            childColumns = arrayOf("parentId"),
+            parentColumns = ["movieId"],
+            childColumns = ["parentId"],
             onDelete = ForeignKey.NO_ACTION
         )
     ]
 )
-data class Genre(
+data class GenreDB(
     @PrimaryKey
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "genreId")
     val id: Int,
 
-    @ColumnInfo(name = "name")
+    @ColumnInfo(name = "genreName")
     val name: String,
 
     val parentId: Int
