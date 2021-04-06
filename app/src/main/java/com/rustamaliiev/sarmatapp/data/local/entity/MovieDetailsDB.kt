@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey
     )]
 )
 
-data class MovieDetailsBD(
+data class MovieDetailsDB(
     @PrimaryKey
     @ColumnInfo(name = "parent_id")
     val parentId: Int,
