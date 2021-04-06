@@ -35,6 +35,7 @@ class FragmentMoviesList : Fragment() {
 
         initSpinner()
 
+
         view.findViewById<RecyclerView>(R.id.moviesRecyclerView).apply {
             layoutManager = GridLayoutManager(view.context, 2)
             adapter = movieAdapter
@@ -49,6 +50,7 @@ class FragmentMoviesList : Fragment() {
         viewModel.movieIdLiveData.observe(viewLifecycleOwner) { id ->
             (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked(id)
         }
+
     }
 
     private fun initSpinner() {

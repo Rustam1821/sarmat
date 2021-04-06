@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rustamaliiev.sarmatapp.data.AppDatabase
+import com.rustamaliiev.sarmatapp.domain.entity.Movie
 import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
-import com.rustamaliiev.sarmatapp.domain.entity.Movie
 import kotlinx.coroutines.launch
 
 class MoviesListViewModel : ViewModel() {
@@ -15,15 +16,19 @@ class MoviesListViewModel : ViewModel() {
     private val _movieIdLiveData = MutableLiveData<Int>()
     val movieIdLiveData = _movieIdLiveData
     private val repository: MovieRepository = MoviesNetworkRepository()
+    private val movies by lazy { emptyList<Movie>() }
 
     init {
         loadMovies()
     }
 
     fun loadMovies(selector: String = "top_rated") {
-
+    //TODO: implement movies checking
         viewModelScope.launch {
-            _moviesLiveData.postValue(repository.loadMovies(selector))
+            if(movies.isEmpty()){
+                var loadedMovies = repository.loadMovies(selector)
+                _moviesLiveData.postValue(loadedMovies)
+            }
         }
     }
 
