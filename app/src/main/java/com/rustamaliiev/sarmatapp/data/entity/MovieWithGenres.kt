@@ -1,4 +1,4 @@
-package com.rustamaliiev.sarmatapp.data.local.entity
+package com.rustamaliiev.sarmatapp.data.entity
 
 import androidx.room.Embedded
 import androidx.room.Relation

@@ -1,4 +1,4 @@
-package com.rustamaliiev.sarmatapp.data.local.entity
+package com.rustamaliiev.sarmatapp.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
     foreignKeys = [ForeignKey(
         entity = MovieDB::class,
         parentColumns = ["movie_id"],
-        childColumns = ["parent_id"],
+        childColumns = ["id"],
         onDelete = ForeignKey.NO_ACTION
     )]
 )

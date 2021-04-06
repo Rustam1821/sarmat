@@ -1,4 +1,4 @@
-package com.rustamaliiev.sarmatapp.data.network.entity
+package com.rustamaliiev.sarmatapp.network.entity
 
 import com.google.gson.annotations.SerializedName
 

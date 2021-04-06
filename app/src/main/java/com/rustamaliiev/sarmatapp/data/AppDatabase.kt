@@ -1,15 +1,15 @@
-package com.rustamaliiev.sarmatapp.data.local
+package com.rustamaliiev.sarmatapp.data
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.rustamaliiev.sarmatapp.data.local.dao.MovieDao
-import com.rustamaliiev.sarmatapp.data.local.dao.MovieDetailsDao
-import com.rustamaliiev.sarmatapp.data.local.entity.ActorDB
-import com.rustamaliiev.sarmatapp.data.local.entity.GenreDB
-import com.rustamaliiev.sarmatapp.data.local.entity.MovieDB
-import com.rustamaliiev.sarmatapp.data.local.entity.MovieDetailsDB
+import com.rustamaliiev.sarmatapp.data.dao.MovieDao
+import com.rustamaliiev.sarmatapp.data.dao.MovieDetailsDao
+import com.rustamaliiev.sarmatapp.data.entity.ActorDB
+import com.rustamaliiev.sarmatapp.data.entity.GenreDB
+import com.rustamaliiev.sarmatapp.data.entity.MovieDB
+import com.rustamaliiev.sarmatapp.data.entity.MovieDetailsDB
 
 @Database(
     entities = [ActorDB::class, GenreDB::class, MovieDB::class, MovieDetailsDB::class], version = 1

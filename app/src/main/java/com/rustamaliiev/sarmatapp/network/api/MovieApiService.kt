@@ -1,6 +1,6 @@
-package com.rustamaliiev.sarmatapp.data.network.api
+package com.rustamaliiev.sarmatapp.network.api
 
-import com.rustamaliiev.sarmatapp.data.network.entity.*
+import com.rustamaliiev.sarmatapp.network.entity.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 

@@ -1,4 +1,4 @@
-package com.rustamaliiev.sarmatapp.data.network.config
+package com.rustamaliiev.sarmatapp.network.config
 
 object SystemConfig {
     const val API_KEY = "dce382024c4e6c8dd91b68a4bcd6ff3e"
