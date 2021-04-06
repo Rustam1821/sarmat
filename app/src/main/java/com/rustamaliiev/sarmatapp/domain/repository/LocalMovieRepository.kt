@@ -2,6 +2,7 @@ package com.rustamaliiev.sarmatapp.domain.repository
 
 import com.rustamaliiev.sarmatapp.data.local.AppDatabase
 import com.rustamaliiev.sarmatapp.data.local.entity.MovieDB
+import com.rustamaliiev.sarmatapp.data.local.entity.MovieDetailsDB
 import com.rustamaliiev.sarmatapp.domain.entity.Actor
 import com.rustamaliiev.sarmatapp.domain.entity.Genre
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
@@ -47,8 +48,8 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
             )
         }
 
-    fun saveMovies(moviesFromNet: List<Movie>){
-        val movies = moviesFromNet.map {movie ->
+    fun saveMovies(moviesFromNet: List<Movie>) {
+        val movies = moviesFromNet.map { movie ->
             MovieDB(
                 id = movie.id,
                 title = movie.title,
@@ -61,5 +62,20 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
             )
         }
         db.getMovieDao().insertMovies(movies)
+    }
+
+    fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
+
+        val detailsDB = MovieDetailsDB(
+            parentId = movieDetailsFromNet.id,
+            title = movieDetailsFromNet.title,
+            backdropPath = movieDetailsFromNet.detailImageUrl,
+            rating = movieDetailsFromNet.rating,
+            reviewCount = movieDetailsFromNet.reviewCount,
+            ageLimit = movieDetailsFromNet.ageLimit,
+            runTime = movieDetailsFromNet.runtime,
+            overview = movieDetailsFromNet.storyLine
+        )
+        db.getMovieDetailsDao().insertMovieDetails(detailsDB)
     }
 }

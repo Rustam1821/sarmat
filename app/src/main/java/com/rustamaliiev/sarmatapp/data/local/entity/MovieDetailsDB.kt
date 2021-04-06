@@ -26,6 +26,5 @@ data class MovieDetailsDB(
     val reviewCount: Int,
     val ageLimit: Int,
     val runTime: Int?,
-    val isLiked: Boolean,
     val overview: String?,
 )

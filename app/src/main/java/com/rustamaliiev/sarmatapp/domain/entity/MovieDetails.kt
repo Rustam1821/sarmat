@@ -11,5 +11,4 @@ data class MovieDetails(
     val runtime: Int,
     val genres: List<Genre>,
     val actors: List<Actor>,
-//    val isLiked: Boolean
 )
