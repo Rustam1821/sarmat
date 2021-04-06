@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
 
 data class MovieDB(
     @PrimaryKey(autoGenerate = false)
-    @ColumnInfo(name = "movieId")
+    @ColumnInfo(name = "movie_id")
     val id: Int,
 
     val title: String,

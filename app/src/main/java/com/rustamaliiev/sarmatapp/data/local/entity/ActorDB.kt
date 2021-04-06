@@ -1,5 +1,6 @@
 package com.rustamaliiev.sarmatapp.data.local.entity
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
@@ -8,8 +9,8 @@ import androidx.room.PrimaryKey
     tableName = "Actor",
     foreignKeys = [ForeignKey(
         entity = MovieDB::class,
-        parentColumns = ["movieId"],
-        childColumns = ["parentId"],
+        parentColumns = ["movie_id"],
+        childColumns = ["parent_id"],
         onDelete = ForeignKey.NO_ACTION
     )]
 )
@@ -20,8 +21,6 @@ data class ActorDB(
     val name: String,
     val imageUrl: String?,
 
-
+    @ColumnInfo(name = "parent_id")
     val parentId: Int
-
-
 )
