@@ -1,5 +1,6 @@
 package com.rustamaliiev.sarmatapp.domain.repository
 
+import android.util.Log
 import com.rustamaliiev.sarmatapp.data.AppDatabase
 import com.rustamaliiev.sarmatapp.data.entity.MovieDB
 import com.rustamaliiev.sarmatapp.data.entity.MovieDetailsDB
@@ -30,6 +31,7 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
 
     override suspend fun loadMovie(movieId: Int): MovieDetails =
         with(db.getMovieDetailsDao().getMovieDetails()) {
+            Log.e("QQQ", "LocalMovieRepository, loadMovie")
             MovieDetails(
                 id = details.parentId,
                 title = details.title,
@@ -45,6 +47,7 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
                 actors = actors.map { actorDB ->
                     Actor(actorDB.id, actorDB.name, actorDB.imageUrl)
                 }
+
             )
         }
 

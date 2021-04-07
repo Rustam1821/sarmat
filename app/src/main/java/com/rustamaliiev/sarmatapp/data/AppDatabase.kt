@@ -21,11 +21,11 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         private const val DATABASE_NAME = "Movies.db"
-        private lateinit var db_instance: AppDatabase //TODO: maybe initialize it with null?
+        private var db_instance: AppDatabase? = null
 
         fun getDbInstance(context: Context): AppDatabase {
-            if (db_instance == null) {
-                db_instance = Room.databaseBuilder(
+            return db_instance ?: let {
+                Room.databaseBuilder(
                     context,
                     AppDatabase::class.java,
                     DATABASE_NAME
@@ -33,7 +33,6 @@ abstract class AppDatabase : RoomDatabase() {
                     .fallbackToDestructiveMigration()
                     .build()
             }
-            return db_instance
         }
     }
 }

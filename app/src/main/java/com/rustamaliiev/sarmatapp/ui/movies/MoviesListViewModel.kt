@@ -17,7 +17,7 @@ class MoviesListViewModel : ViewModel() {
     val moviesLiveData: LiveData<List<Movie>> = _moviesLiveData
     private val _movieIdLiveData = MutableLiveData<Int>()
     val movieIdLiveData = _movieIdLiveData
-    private val localRepository = LocalMovieRepository(SarmatApp.db)
+    private var localRepository: LocalMovieRepository = LocalMovieRepository(AppDatabase.getDbInstance(SarmatApp.context))
     private val repository: MovieRepository = MoviesNetworkRepository()
 
     init {
@@ -25,7 +25,6 @@ class MoviesListViewModel : ViewModel() {
     }
 
     fun loadMovies(selector: String = "top_rated") {
-    //TODO: implement movies checking
         viewModelScope.launch {
             val movies = localRepository.loadMovies(selector)
             if(movies.isEmpty()){
