@@ -1,5 +1,6 @@
 package com.rustamaliiev.sarmatapp.domain.repository
 
+import android.util.Log
 import com.rustamaliiev.sarmatapp.domain.entity.Actor
 import com.rustamaliiev.sarmatapp.domain.entity.Genre
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
@@ -15,6 +16,7 @@ class MoviesNetworkRepository: MovieRepository {
         getConfigurations()
         val genres = NetworkModule.movieApi.getGenres().apiGenres
         return NetworkModule.movieApi.getMoviesList(selector).results.map { movieResponse ->
+            Log.e("QQQ", "NetworkMovieRepository, loadMovies")
             Movie(
                 id = movieResponse.id,
                 title = movieResponse.title,

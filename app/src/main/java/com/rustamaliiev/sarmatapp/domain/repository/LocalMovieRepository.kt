@@ -13,6 +13,7 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
 
     override suspend fun loadMovies(selector: String): List<Movie> =
         db.getMovieDao().getMovies().map { movieDB ->
+            Log.e("QQQ", "LocalMovieRepository, loadMovies")
             Movie(
                 id = movieDB.movie.id,
                 title = movieDB.movie.title,
@@ -26,12 +27,14 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
                 },
                 isLiked = movieDB.movie.isLiked
             )
-
         }
+
+    suspend fun clean(){
+        db.getMovieDao().clearLocalTable()
+    }
 
     override suspend fun loadMovie(movieId: Int): MovieDetails =
         with(db.getMovieDetailsDao().getMovieDetails()) {
-            Log.e("QQQ", "LocalMovieRepository, loadMovie")
             MovieDetails(
                 id = details.parentId,
                 title = details.title,
