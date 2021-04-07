@@ -6,13 +6,14 @@ import android.util.Log
 import com.rustamaliiev.sarmatapp.data.AppDatabase
 
 class SarmatApp : Application() {
+
     companion object {
-        lateinit var context: Context
-            private set
+        lateinit var db: AppDatabase
     }
 
     override fun onCreate() {
         super.onCreate()
-        context = this
+        db = AppDatabase.getDbInstance(this)
+
     }
 }
