@@ -20,5 +20,6 @@ data class MovieDB(
     val ageLimit: Int,
     val runningTime: Int,
     val isLiked: Boolean,
+    @ColumnInfo(name = "movie_group")
     val filmGroups: String
 )

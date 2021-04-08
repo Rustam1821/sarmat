@@ -11,9 +11,11 @@ import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
 
 class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
 
-    override suspend fun loadMovies(selector: String): List<Movie> =
-        db.getMovieDao().getMovies(selector).map { movieDB ->
-            Log.e("QQQ", "LocalMovieRepository, loadMovies")
+    override suspend fun loadMovies(selector: String): List<Movie> {
+        //TODO simplify it
+        Log.e("QQQ", "LocalMovieRepository, load list of movies")
+        return db.getMovieDao().getMovies(selector).map { movieDB ->
+
             Movie(
                 id = movieDB.movie.id,
                 title = movieDB.movie.title,
@@ -28,9 +30,6 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
                 isLiked = movieDB.movie.isLiked
             )
         }
-
-    suspend fun clean(){
-        db.getMovieDao().clearLocalTable()
     }
 
     override suspend fun loadMovie(movieId: Int): MovieDetails =
@@ -54,7 +53,7 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
             )
         }
 
-    suspend fun saveMovies(moviesFromNet: List<Movie>, filmGroups: String) {
+    override suspend fun saveMovies(moviesFromNet: List<Movie>, filmGroups: String) {
         val movies = moviesFromNet.map { movie ->
             MovieDB(
                 id = movie.id,
@@ -71,7 +70,7 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
         db.getMovieDao().insertMovies(movies)
     }
 
-    suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
+    override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
 
         val detailsDB = MovieDetailsDB(
             parentId = movieDetailsFromNet.id,

@@ -13,5 +13,8 @@ interface MovieDetailsDao {
     suspend fun getMovieDetails(): MovieDetailsWithGenresAndActors
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovieDetails(ite: MovieDetailsDB)
+    suspend fun insertMovieDetails(db: MovieDetailsDB)
+
+    @Query("SELECT EXISTS (SELECT 1 FROM movie_details WHERE parent_id = :id)")
+    fun exists (id: Int): Boolean
 }

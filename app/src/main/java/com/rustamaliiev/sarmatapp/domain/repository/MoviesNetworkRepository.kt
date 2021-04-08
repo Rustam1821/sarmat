@@ -41,6 +41,13 @@ class MoviesNetworkRepository: MovieRepository {
         }
     }
 
+    override suspend fun saveMovies(movies: List<Movie>, movieGroup: String) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
+        TODO("Not yet implemented")
+    }
 
     override suspend fun loadMovie(movieId: Int): MovieDetails {
         getConfigurations()
@@ -67,6 +74,8 @@ class MoviesNetworkRepository: MovieRepository {
             }
         )
     }
+
+
 
     private suspend fun getConfigurations() {
         if (!isConfigReceived) {

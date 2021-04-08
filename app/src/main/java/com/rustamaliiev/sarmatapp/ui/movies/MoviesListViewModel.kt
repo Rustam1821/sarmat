@@ -18,26 +18,21 @@ class MoviesListViewModel : ViewModel() {
     val moviesLiveData: LiveData<List<Movie>> = _moviesLiveData
     private val _movieIdLiveData = MutableLiveData<Int>()
     val movieIdLiveData = _movieIdLiveData
-    private var savedSelector = ""
 
-    private val localRepository = LocalMovieRepository(SarmatApp.db)
+    private val localRepository: MovieRepository = LocalMovieRepository(SarmatApp.db)
     private val remoteRepository: MovieRepository = MoviesNetworkRepository()
 
-    init {
-        loadMovies()
-    }
-
-    fun loadMovies(selector: String = "top_rated") {
+    fun pullMovies(selector: String = "top_rated") {
         viewModelScope.launch(Dispatchers.IO) {
-            if (savedSelector != selector) {
-                localRepository.clean()
-                val loadedMovies = remoteRepository.loadMovies(selector)
-                _moviesLiveData.postValue(loadedMovies)
-                launch(Dispatchers.IO) { localRepository.saveMovies(loadedMovies, selector) }
-                savedSelector = selector
-            } else {
-                val movies = localRepository.loadMovies(selector)
-                _moviesLiveData.postValue(movies)
+            val localMovies = localRepository.loadMovies(selector)
+            Log.e("QQQ", "The number of $selector is ${localMovies.size}")
+
+            if (localMovies.isEmpty()){
+                val fromWebMovies = remoteRepository.loadMovies(selector)
+                _moviesLiveData.postValue(fromWebMovies)
+                launch(Dispatchers.IO) { localRepository.saveMovies(fromWebMovies, selector) }
+            } else{
+                _moviesLiveData.postValue(localMovies)
             }
         }
     }

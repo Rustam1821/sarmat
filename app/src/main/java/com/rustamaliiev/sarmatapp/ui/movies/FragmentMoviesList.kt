@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.ui.entity.FilmGroups
+import com.rustamaliiev.sarmatapp.ui.movies.adapter.MovieListAdapter
 
 class FragmentMoviesList : Fragment() {
 
@@ -71,7 +72,7 @@ class FragmentMoviesList : Fragment() {
                     id: Long
                 ) {
                     val selectedItem = FilmGroups.values()[position].path
-                    viewModel.loadMovies(selectedItem)
+                    viewModel.pullMovies(selectedItem)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) = Unit

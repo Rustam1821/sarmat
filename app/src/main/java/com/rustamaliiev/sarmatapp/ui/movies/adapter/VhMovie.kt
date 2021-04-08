@@ -1,4 +1,4 @@
-package com.rustamaliiev.sarmatapp.ui.movies
+package com.rustamaliiev.sarmatapp.ui.movies.adapter
 
 import android.view.View
 import android.widget.ImageView
