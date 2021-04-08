@@ -12,7 +12,7 @@ import com.rustamaliiev.sarmatapp.data.entity.MovieDB
 import com.rustamaliiev.sarmatapp.data.entity.MovieDetailsDB
 
 @Database(
-    entities = [ActorDB::class, GenreDB::class, MovieDB::class, MovieDetailsDB::class], version = 1
+    entities = [ActorDB::class, GenreDB::class, MovieDB::class, MovieDetailsDB::class], version = 2
 )
 
 abstract class AppDatabase : RoomDatabase() {

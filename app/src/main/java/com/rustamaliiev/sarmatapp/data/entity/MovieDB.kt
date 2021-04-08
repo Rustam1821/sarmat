@@ -19,5 +19,6 @@ data class MovieDB(
     val reviewCount: Int,
     val ageLimit: Int,
     val runningTime: Int,
-    val isLiked: Boolean
+    val isLiked: Boolean,
+    val filmGroups: String
 )

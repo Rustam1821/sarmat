@@ -33,7 +33,7 @@ class MoviesListViewModel : ViewModel() {
                 localRepository.clean()
                 val loadedMovies = remoteRepository.loadMovies(selector)
                 _moviesLiveData.postValue(loadedMovies)
-                launch(Dispatchers.IO) { localRepository.saveMovies(loadedMovies) }
+                launch(Dispatchers.IO) { localRepository.saveMovies(loadedMovies, selector) }
                 savedSelector = selector
             } else {
                 val movies = localRepository.loadMovies(selector)

@@ -12,7 +12,7 @@ import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
 class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
 
     override suspend fun loadMovies(selector: String): List<Movie> =
-        db.getMovieDao().getMovies().map { movieDB ->
+        db.getMovieDao().getMovies(selector).map { movieDB ->
             Log.e("QQQ", "LocalMovieRepository, loadMovies")
             Movie(
                 id = movieDB.movie.id,
@@ -54,7 +54,7 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
             )
         }
 
-    suspend fun saveMovies(moviesFromNet: List<Movie>) {
+    suspend fun saveMovies(moviesFromNet: List<Movie>, filmGroups: String) {
         val movies = moviesFromNet.map { movie ->
             MovieDB(
                 id = movie.id,
@@ -64,7 +64,8 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
                 reviewCount = movie.reviewCount,
                 ageLimit = movie.ageLimit,
                 runningTime = movie.runningTime,
-                isLiked = movie.isLiked
+                isLiked = movie.isLiked,
+                filmGroups = filmGroups
             )
         }
         db.getMovieDao().insertMovies(movies)
