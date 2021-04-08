@@ -6,13 +6,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.rustamaliiev.sarmatapp.data.dao.MovieDao
 import com.rustamaliiev.sarmatapp.data.dao.MovieDetailsDao
-import com.rustamaliiev.sarmatapp.data.entity.ActorDB
-import com.rustamaliiev.sarmatapp.data.entity.GenreDB
-import com.rustamaliiev.sarmatapp.data.entity.MovieDB
-import com.rustamaliiev.sarmatapp.data.entity.MovieDetailsDB
+import com.rustamaliiev.sarmatapp.data.entity.*
 
 @Database(
-    entities = [ActorDB::class, GenreDB::class, MovieDB::class, MovieDetailsDB::class], version = 3
+    entities = [ActorDB::class, GenreDB::class,
+        MovieDB::class, MovieDetailsDB::class,
+        MovieGenreCrossRef::class], version = 8
 )
 
 abstract class AppDatabase : RoomDatabase() {

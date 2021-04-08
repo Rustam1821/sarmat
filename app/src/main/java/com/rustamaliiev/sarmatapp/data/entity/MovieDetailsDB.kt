@@ -7,12 +7,12 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "movie_details",
-    foreignKeys = [ForeignKey(
-        entity = MovieDB::class,
-        parentColumns = ["movie_id"],
-        childColumns = ["parent_id"],
-        onDelete = ForeignKey.CASCADE
-    )]
+//    foreignKeys = [ForeignKey(
+//        entity = MovieDB::class,
+//        parentColumns = ["movie_id"],
+//        childColumns = ["parent_id"],
+//        onDelete = ForeignKey.CASCADE
+//    )]
 )
 
 data class MovieDetailsDB(

@@ -7,9 +7,9 @@ class MovieDetailsWithGenresAndActors (
     @Embedded
     val details: MovieDetailsDB,
 
-    @Relation(entity = GenreDB::class ,parentColumn = "parent_id", entityColumn = "parent_id") //we don't need an entity
+    @Relation(parentColumn = "parent_id", entityColumn = "genre_id")
     val genres: List<GenreDB>,
 
-    @Relation(parentColumn = "parent_id", entityColumn = "parent_id")
+    @Relation(parentColumn = "parent_id", entityColumn = "actor_id")
     val actors: List<ActorDB>
     )

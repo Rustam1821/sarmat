@@ -16,7 +16,7 @@ import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MoviesDetailsViewModel(private val movieID: Int): ViewModel() {
+class MoviesDetailsViewModel(private val movieID: Int) : ViewModel() {
     private val _detailsLiveData = MutableLiveData<MovieDetails>()
     val detailsLiveData: LiveData<MovieDetails> = _detailsLiveData
 
@@ -29,13 +29,20 @@ class MoviesDetailsViewModel(private val movieID: Int): ViewModel() {
     }
 
     private fun pullMovie() = viewModelScope.launch(Dispatchers.IO) {
+        var shouldSaveMovieDetails = false
         var movie: MovieDetails
-        if(dao.exists(movieID)){
+        if (dao.exists(movieID)) {
             movie = localRepository.loadMovie(movieID)
+
+            Log.e("WWW", "actors: ${movie.actors.size}")
+
         } else {
             movie = remoteRepository.loadMovie(movieID)
-            launch(Dispatchers.IO) { localRepository.saveMovieDetails(movie) }
+            shouldSaveMovieDetails = true
         }
         _detailsLiveData.postValue(movie)
+        if (shouldSaveMovieDetails) {
+            localRepository.saveMovieDetails(movie)
+        }
     }
 }

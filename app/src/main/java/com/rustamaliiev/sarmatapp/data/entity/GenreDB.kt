@@ -4,14 +4,14 @@ import androidx.room.*
 
 @Entity(
     tableName = "Genre",
-    foreignKeys = [
-        ForeignKey(
-            entity = MovieDB::class,
-            parentColumns = ["movie_id"],
-            childColumns = ["parent_id"],
-            onDelete = ForeignKey.NO_ACTION
-        )
-    ]
+//    foreignKeys = [
+//        ForeignKey(
+//            entity = MovieDB::class,
+//            parentColumns = ["movie_id"],
+//            childColumns = ["genre_id"],
+//            onDelete = ForeignKey.NO_ACTION
+//        )
+//    ]
 )
 data class GenreDB(
     @PrimaryKey
@@ -21,6 +21,6 @@ data class GenreDB(
     @ColumnInfo(name = "genre_name")
     val name: String,
 
-    @ColumnInfo(name = "parent_id")
-    val parentId: Int
+//    @ColumnInfo(name = "parent_id")
+//    val parentId: Int
 )

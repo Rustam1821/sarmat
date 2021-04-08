@@ -2,6 +2,8 @@ package com.rustamaliiev.sarmatapp.domain.repository
 
 import android.util.Log
 import com.rustamaliiev.sarmatapp.data.AppDatabase
+import com.rustamaliiev.sarmatapp.data.entity.ActorDB
+import com.rustamaliiev.sarmatapp.data.entity.GenreDB
 import com.rustamaliiev.sarmatapp.data.entity.MovieDB
 import com.rustamaliiev.sarmatapp.data.entity.MovieDetailsDB
 import com.rustamaliiev.sarmatapp.domain.entity.Actor
@@ -33,7 +35,7 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
     }
 
     override suspend fun loadMovie(movieId: Int): MovieDetails =
-        with(db.getMovieDetailsDao().getMovieDetails()) {
+        with(db.getMovieDetailsDao().getMovieDetails(movieId)) {
             MovieDetails(
                 id = details.parentId,
                 title = details.title,
@@ -49,7 +51,6 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
                 actors = actors.map { actorDB ->
                     Actor(actorDB.id, actorDB.name, actorDB.imageUrl)
                 }
-
             )
         }
 
@@ -82,6 +83,26 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
             runTime = movieDetailsFromNet.runtime,
             overview = movieDetailsFromNet.storyLine
         )
-        db.getMovieDetailsDao().insertMovieDetails(detailsDB)
+        val actorsDB = movieDetailsFromNet.actors.map { actor ->
+            ActorDB(
+                id = actor.id,
+                name = actor.name,
+                imageUrl = actor.imageUrl,
+            )
+        }
+        val genresDB = movieDetailsFromNet.genres.map { genre ->
+            GenreDB(
+                id = genre.id,
+                name = genre.name,
+            )
+        }
+
+
+        db.getMovieDetailsDao().insertDetailsWithGenresAndActors(
+            detailsDB,
+            actorsDB,
+            genresDB
+        )
+//        db.getMovieDetailsDao().insertMovieDetails(detailsDB)
     }
 }

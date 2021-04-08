@@ -27,11 +27,11 @@ class MoviesListViewModel : ViewModel() {
             val localMovies = localRepository.loadMovies(selector)
             Log.e("QQQ", "The number of $selector is ${localMovies.size}")
 
-            if (localMovies.isEmpty()){
+            if (localMovies.isEmpty()) {
                 val fromWebMovies = remoteRepository.loadMovies(selector)
                 _moviesLiveData.postValue(fromWebMovies)
-                launch(Dispatchers.IO) { localRepository.saveMovies(fromWebMovies, selector) }
-            } else{
+                localRepository.saveMovies(fromWebMovies, selector)
+            } else {
                 _moviesLiveData.postValue(localMovies)
             }
         }
