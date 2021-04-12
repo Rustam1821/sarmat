@@ -23,7 +23,6 @@ interface MovieDao {
     suspend fun insertMovies(items: List<MovieDB>)
 
     @Transaction
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMoviesInDb(moviesFromNet: List<Movie>, filmGroup: String) {
         val genres: MutableList<GenreDB> = mutableListOf()
         val pairs: MutableList<MovieWithGenre> = mutableListOf()

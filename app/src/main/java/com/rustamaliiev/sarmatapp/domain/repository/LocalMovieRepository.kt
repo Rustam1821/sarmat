@@ -31,17 +31,18 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
         }
     }
 
-    override suspend fun loadMovie(movieId: Int): MovieDetails =
-        with(db.getMovieDetailsDao().getMovieDetails(movieId)) {
+    override suspend fun loadMovie(movieId: Int): MovieDetails {
+        return with(db.getMovieDetailsDao().getMovieDetails(movieId)) {
+            Log.e("QQQ1", "LocalMovieRepository, load movie details, actors size: ${actors.size}")
             MovieDetails(
-                id = details.parentId,
-                title = details.title,
-                storyLine = details.overview ?: "",
-                detailImageUrl = details.backdropPath,
-                rating = details.rating,
-                reviewCount = details.reviewCount,
-                ageLimit = details.ageLimit,
-                runtime = details.runTime ?: 0,
+                id = movieDetails.movieId,
+                title = movieDetails.title,
+                storyLine = movieDetails.storyLine ?: "",
+                detailImageUrl = movieDetails.detailImageUrl,
+                rating = movieDetails.rating,
+                reviewCount = movieDetails.reviewCount,
+                ageLimit = movieDetails.ageLimit,
+                runtime = movieDetails.runTime ?: 0,
                 genres = genres.map { genreDB ->
                     Genre(genreDB.id, genreDB.name)
                 },
@@ -50,57 +51,23 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
                 }
             )
         }
+    }
 
     override suspend fun saveMovies(moviesFromNet: List<Movie>, filmGroup: String) {
         db.getMovieDao().insertMoviesInDb(moviesFromNet, filmGroup)
-
-//        val movies = moviesFromNet.map { movie ->
-//            MovieDB(
-//                id = movie.id,
-//                title = movie.title,
-//                imageUrl = movie.imageUrl,
-//                rating = movie.rating,
-//                reviewCount = movie.reviewCount,
-//                ageLimit = movie.ageLimit,
-//                runningTime = movie.runningTime,
-//                isLiked = movie.isLiked,
-//                filmGroups = filmGroup
-//            )
-//        }
-//        val genres = moviesFromNet.flatMap { movie ->
-//            movie.genres.map {genre->
-//                GenreDB(
-//                    id = genre.id,
-//                    name = genre.name
-//                )
-//            }
-//        }
-//
-//        val moviesWithGenres = moviesFromNet.flatMap { movie ->
-//            movie.genres.map {genre->
-//                MovieWithGenre(
-//                    movieId = movie.id,
-//                    genreId = genre.id
-//                )
-//            }
-//        }
-//        val db = db.getMovieDao()
-//        db.insertGenres(genres)
-//        db.insertPairs(moviesWithGenres)
-//        db.insertMovies(movies)
     }
 
     override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
 
         val detailsDB = MovieDetailsDB(
-            parentId = movieDetailsFromNet.id,
+            movieId = movieDetailsFromNet.id,
             title = movieDetailsFromNet.title,
-            backdropPath = movieDetailsFromNet.detailImageUrl,
+            detailImageUrl = movieDetailsFromNet.detailImageUrl,
             rating = movieDetailsFromNet.rating,
             reviewCount = movieDetailsFromNet.reviewCount,
             ageLimit = movieDetailsFromNet.ageLimit,
             runTime = movieDetailsFromNet.runtime,
-            overview = movieDetailsFromNet.storyLine
+            storyLine = movieDetailsFromNet.storyLine
         )
         val actorsDB = movieDetailsFromNet.actors.map { actor ->
             ActorDB(
@@ -116,12 +83,19 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
             )
         }
 
+        val pair = movieDetailsFromNet.actors.map { actor ->
+            MovieWithActor(
+                movieDetailsFromNet.id,
+                actorId = actor.id
+            )
+        }
 
-        db.getMovieDetailsDao().insertDetailsWithGenresAndActors(
+
+        db.getMovieDetailsDao().insertMovieDetailsInDB(
             detailsDB,
             actorsDB,
-            genresDB
+            genresDB,
+            pair
         )
-//        db.getMovieDetailsDao().insertMovieDetails(detailsDB)
     }
 }

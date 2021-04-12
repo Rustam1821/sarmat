@@ -7,24 +7,19 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "movie_details",
-//    foreignKeys = [ForeignKey(
-//        entity = MovieDB::class,
-//        parentColumns = ["movie_id"],
-//        childColumns = ["parent_id"],
-//        onDelete = ForeignKey.CASCADE
-//    )]
+    primaryKeys = ["movie_id"]
 )
 
 data class MovieDetailsDB(
-    @PrimaryKey
-    @ColumnInfo(name = "parent_id")
-    val parentId: Int,
+
+    @ColumnInfo(name = "movie_id")
+    val movieId: Int,
 
     val title: String,
-    val backdropPath: String?,
+    val storyLine: String?,
+    val detailImageUrl: String?,
     val rating: Double,
     val reviewCount: Int,
     val ageLimit: Int,
     val runTime: Int?,
-    val overview: String?,
 )

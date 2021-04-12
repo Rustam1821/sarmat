@@ -1,16 +1,13 @@
 package com.rustamaliiev.sarmatapp.data.dao
 
 import androidx.room.*
-import com.rustamaliiev.sarmatapp.data.entity.ActorDB
-import com.rustamaliiev.sarmatapp.data.entity.GenreDB
-import com.rustamaliiev.sarmatapp.data.entity.MovieDetailsDB
-import com.rustamaliiev.sarmatapp.data.entity.MovieDetailsWithGenresAndActors
+import com.rustamaliiev.sarmatapp.data.entity.*
 
 @Dao
 interface MovieDetailsDao {
-    @Transaction
-    @Query("SELECT * FROM movie_details WHERE parent_id = :id")
-    suspend fun getMovieDetails(id: Int): MovieDetailsWithGenresAndActors
+
+    @Query("SELECT * FROM movie_details WHERE movie_id = :id")
+    suspend fun getMovieDetails(id: Int): MovieDetailsActorPair
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovieDetails(db: MovieDetailsDB)
@@ -18,22 +15,26 @@ interface MovieDetailsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertActors(actors: List<ActorDB>)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertPairs (movieWithActor: List<MovieWithActor>)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGenres(genres: List<GenreDB>)
 
     @Transaction
-    open suspend fun insertDetailsWithGenresAndActors(moviedb: MovieDetailsDB,
-                                              actorsDB: List<ActorDB>,
-                                              genresDB: List<GenreDB>)
+    suspend fun insertMovieDetailsInDB(
+        movieDB: MovieDetailsDB,
+        actorsDB: List<ActorDB>,
+        genresDB: List<GenreDB>,
+        pairs: List<MovieWithActor>
+    )
     {
-        insertMovieDetails(moviedb)
+        insertMovieDetails(movieDB)
+        insertPairs(pairs)
         insertActors(actorsDB)
         insertGenres(genresDB)
     }
 
-    @Query("SELECT EXISTS (SELECT 1 FROM movie_details WHERE parent_id = :id)")
+    @Query("SELECT EXISTS (SELECT 1 FROM movie_details WHERE movie_id = :id)")
     fun exists (id: Int): Boolean
-
-    //insert actors
-    //insert genres
 }

@@ -34,7 +34,7 @@ class MoviesDetailsViewModel(private val movieID: Int) : ViewModel() {
         if (dao.exists(movieID)) {
             movie = localRepository.loadMovie(movieID)
 
-            Log.e("WWW", "actors: ${movie.actors.size}")
+            Log.e("QQQ1", "actors: ${movie.actors.size}")
 
         } else {
             movie = remoteRepository.loadMovie(movieID)
