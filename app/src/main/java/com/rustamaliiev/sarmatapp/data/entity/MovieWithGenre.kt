@@ -4,11 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 
 @Entity(
-    tableName = "MovieGenreCrossRef",
+    tableName = "MovieWithGenre",
     primaryKeys = ["movie_id", "genre_id"]
 )
 
-data class MovieGenreCrossRef (
+data class MovieWithGenre (
     @ColumnInfo(name = "movie_id")
     val movieId: Int,
 

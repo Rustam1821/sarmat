@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "movies",
+    primaryKeys = ["movie_id", "movie_group"]
 )
 
 data class MovieDB(
-    @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "movie_id")
     val id: Int,
 

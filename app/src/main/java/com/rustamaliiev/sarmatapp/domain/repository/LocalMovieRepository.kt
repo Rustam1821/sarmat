@@ -2,10 +2,7 @@ package com.rustamaliiev.sarmatapp.domain.repository
 
 import android.util.Log
 import com.rustamaliiev.sarmatapp.data.AppDatabase
-import com.rustamaliiev.sarmatapp.data.entity.ActorDB
-import com.rustamaliiev.sarmatapp.data.entity.GenreDB
-import com.rustamaliiev.sarmatapp.data.entity.MovieDB
-import com.rustamaliiev.sarmatapp.data.entity.MovieDetailsDB
+import com.rustamaliiev.sarmatapp.data.entity.*
 import com.rustamaliiev.sarmatapp.domain.entity.Actor
 import com.rustamaliiev.sarmatapp.domain.entity.Genre
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
@@ -54,21 +51,43 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
             )
         }
 
-    override suspend fun saveMovies(moviesFromNet: List<Movie>, filmGroups: String) {
-        val movies = moviesFromNet.map { movie ->
-            MovieDB(
-                id = movie.id,
-                title = movie.title,
-                imageUrl = movie.imageUrl,
-                rating = movie.rating,
-                reviewCount = movie.reviewCount,
-                ageLimit = movie.ageLimit,
-                runningTime = movie.runningTime,
-                isLiked = movie.isLiked,
-                filmGroups = filmGroups
-            )
-        }
-        db.getMovieDao().insertMovies(movies)
+    override suspend fun saveMovies(moviesFromNet: List<Movie>, filmGroup: String) {
+        db.getMovieDao().insertMoviesInDb(moviesFromNet, filmGroup)
+
+//        val movies = moviesFromNet.map { movie ->
+//            MovieDB(
+//                id = movie.id,
+//                title = movie.title,
+//                imageUrl = movie.imageUrl,
+//                rating = movie.rating,
+//                reviewCount = movie.reviewCount,
+//                ageLimit = movie.ageLimit,
+//                runningTime = movie.runningTime,
+//                isLiked = movie.isLiked,
+//                filmGroups = filmGroup
+//            )
+//        }
+//        val genres = moviesFromNet.flatMap { movie ->
+//            movie.genres.map {genre->
+//                GenreDB(
+//                    id = genre.id,
+//                    name = genre.name
+//                )
+//            }
+//        }
+//
+//        val moviesWithGenres = moviesFromNet.flatMap { movie ->
+//            movie.genres.map {genre->
+//                MovieWithGenre(
+//                    movieId = movie.id,
+//                    genreId = genre.id
+//                )
+//            }
+//        }
+//        val db = db.getMovieDao()
+//        db.insertGenres(genres)
+//        db.insertPairs(moviesWithGenres)
+//        db.insertMovies(movies)
     }
 
     override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {

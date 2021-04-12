@@ -15,8 +15,8 @@ class MoviesNetworkRepository: MovieRepository {
     override suspend fun loadMovies(selector: String): List<Movie> {
         getConfigurations()
         val genres = NetworkModule.movieApi.getGenres().apiGenres
+        Log.e("QQQ", "NetworkMovieRepository, loadMovies")
         return NetworkModule.movieApi.getMoviesList(selector).results.map { movieResponse ->
-            Log.e("QQQ", "NetworkMovieRepository, loadMovies")
             Movie(
                 id = movieResponse.id,
                 title = movieResponse.title,

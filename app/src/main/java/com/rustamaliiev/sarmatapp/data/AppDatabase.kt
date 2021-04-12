@@ -11,7 +11,7 @@ import com.rustamaliiev.sarmatapp.data.entity.*
 @Database(
     entities = [ActorDB::class, GenreDB::class,
         MovieDB::class, MovieDetailsDB::class,
-        MovieGenreCrossRef::class], version = 8
+        MovieWithGenre::class], version = 8
 )
 
 abstract class AppDatabase : RoomDatabase() {
