@@ -17,7 +17,7 @@ interface MovieDao {
     suspend fun insertGenres(items: List<GenreDB>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertPairs(movieWithGenre: List<MovieWithGenre>)
+    suspend fun insertMovieGenrePairs(movieWithGenre: List<MovieWithGenre>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovies(items: List<MovieDB>)
@@ -43,23 +43,29 @@ interface MovieDao {
                 )
             )
             movie.genres.forEach { genre ->
+
+//      region collect genres
                 genres.add(
                     GenreDB(
                         id = genre.id,
                         name = genre.name
                     )
                 )
+//      endregion collect genres
+
+//      region collect pairs
                 pairs.add(
                     MovieWithGenre(
                         movieId = movie.id,
                         genreId = genre.id
                     )
                 )
+//      endregion collect pairs
             }
         }
 
         insertGenres(genres)
-        insertPairs(pairs)
+        insertMovieGenrePairs(pairs)
         insertMovies(movies)
     }
 }

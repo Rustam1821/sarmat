@@ -72,7 +72,7 @@ class FragmentMoviesList : Fragment() {
                     id: Long
                 ) {
                     val selectedItem = FilmGroups.values()[position].path
-                    viewModel.pullMovies(selectedItem)
+                    viewModel.loadMovies(selectedItem)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) = Unit

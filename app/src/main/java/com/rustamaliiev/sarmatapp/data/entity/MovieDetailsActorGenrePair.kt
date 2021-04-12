@@ -2,7 +2,7 @@ package com.rustamaliiev.sarmatapp.data.entity
 
 import androidx.room.*
 
-class MovieDetailsActorPair(
+class MovieDetailsActorGenrePair(
     @Embedded
     val movieDetails: MovieDetailsDB,
 

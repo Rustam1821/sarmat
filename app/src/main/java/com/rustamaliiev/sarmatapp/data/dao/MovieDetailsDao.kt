@@ -2,12 +2,13 @@ package com.rustamaliiev.sarmatapp.data.dao
 
 import androidx.room.*
 import com.rustamaliiev.sarmatapp.data.entity.*
+import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
 
 @Dao
 interface MovieDetailsDao {
 
     @Query("SELECT * FROM movie_details WHERE movie_id = :id")
-    suspend fun getMovieDetails(id: Int): MovieDetailsActorPair
+    suspend fun getMovieDetails(id: Int): MovieDetailsActorGenrePair
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovieDetails(db: MovieDetailsDB)
@@ -16,23 +17,39 @@ interface MovieDetailsDao {
     suspend fun insertActors(actors: List<ActorDB>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertPairs (movieWithActor: List<MovieWithActor>)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGenres(genres: List<GenreDB>)
+    suspend fun insertActorPairs (movieWithActor: List<MovieWithActor>)
 
     @Transaction
-    suspend fun insertMovieDetailsInDB(
-        movieDB: MovieDetailsDB,
-        actorsDB: List<ActorDB>,
-        genresDB: List<GenreDB>,
-        pairs: List<MovieWithActor>
-    )
+    suspend fun insertMovieDetailsInDB(movieDetails: MovieDetails)
     {
-        insertMovieDetails(movieDB)
-        insertPairs(pairs)
+        val movieDetailsDB = MovieDetailsDB(
+            movieId = movieDetails.id,
+            title = movieDetails.title,
+            detailImageUrl = movieDetails.detailImageUrl,
+            rating = movieDetails.rating,
+            reviewCount = movieDetails.reviewCount,
+            ageLimit = movieDetails.ageLimit,
+            runTime = movieDetails.runtime,
+            storyLine = movieDetails.storyLine,
+        )
+        val actorsDB = movieDetails.actors.map { actor ->
+            ActorDB(
+                id = actor.id,
+                name = actor.name,
+                imageUrl = actor.imageUrl,
+            )
+        }
+
+        val moviesWithActors = movieDetails.actors.map { actor ->
+            MovieWithActor(
+                movieDetails.id,
+                actorId = actor.id
+            )
+        }
+
+        insertMovieDetails(movieDetailsDB)
+        insertActorPairs(moviesWithActors)
         insertActors(actorsDB)
-        insertGenres(genresDB)
     }
 
     @Query("SELECT EXISTS (SELECT 1 FROM movie_details WHERE movie_id = :id)")

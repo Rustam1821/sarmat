@@ -22,10 +22,10 @@ class MoviesListViewModel : ViewModel() {
     private val localRepository: MovieRepository = LocalMovieRepository(SarmatApp.db)
     private val remoteRepository: MovieRepository = MoviesNetworkRepository()
 
-    fun pullMovies(selector: String = "top_rated") {
+    fun loadMovies(selector: String = "top_rated") {
         viewModelScope.launch(Dispatchers.IO) {
             val localMovies = localRepository.loadMovies(selector)
-            Log.e("QQQ", "The number of $selector is ${localMovies.size}")
+            Log.e("QQQ", "The number of saved $selector is ${localMovies.size}")
 
             if (localMovies.isEmpty()) {
                 val fromWebMovies = remoteRepository.loadMovies(selector)
