@@ -6,6 +6,9 @@ import com.rustamaliiev.sarmatapp.data.entity.MovieDB
 import com.rustamaliiev.sarmatapp.data.entity.MovieGenrePair
 import com.rustamaliiev.sarmatapp.data.entity.MovieWithGenre
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
+import com.rustamaliiev.sarmatapp.utils.getGenresDBs
+import com.rustamaliiev.sarmatapp.utils.getMovieDBs
+import com.rustamaliiev.sarmatapp.utils.getMovieGenrePairs
 
 @Dao
 interface MovieDao {
@@ -19,53 +22,37 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMovieGenrePairs(movieWithGenre: List<MovieWithGenre>)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertMovies(items: List<MovieDB>)
 
     @Transaction
     suspend fun insertMoviesInDb(moviesFromNet: List<Movie>, filmGroup: String) {
-        val genres: MutableList<GenreDB> = mutableListOf()
-        val pairs: MutableList<MovieWithGenre> = mutableListOf()
-        val movies: MutableList<MovieDB> = mutableListOf()
+        val movies = getMovieDBs(moviesFromNet, filmGroup)
+        val genres = getGenresDBs(moviesFromNet, filmGroup)
+        val pairs = getMovieGenrePairs(moviesFromNet, filmGroup)
 
-        moviesFromNet.forEach { movie ->
-            movies.add(
-                MovieDB(
-                    id = movie.id,
-                    title = movie.title,
-                    imageUrl = movie.imageUrl,
-                    rating = movie.rating,
-                    reviewCount = movie.reviewCount,
-                    ageLimit = movie.ageLimit,
-                    runningTime = movie.runningTime,
-                    isLiked = movie.isLiked,
-                    filmGroups = filmGroup
-                )
-            )
-            movie.genres.forEach { genre ->
-
-//      region collect genres
-                genres.add(
-                    GenreDB(
-                        id = genre.id,
-                        name = genre.name
-                    )
-                )
-//      endregion collect genres
-
-//      region collect pairs
-                pairs.add(
-                    MovieWithGenre(
-                        movieId = movie.id,
-                        genreId = genre.id
-                    )
-                )
-//      endregion collect pairs
-            }
-        }
-
+        insertMovies(movies)
         insertGenres(genres)
         insertMovieGenrePairs(pairs)
-        insertMovies(movies)
+    }
+
+    @Update(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun updateMovies(items: List<MovieDB>)
+
+    @Update(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun updateGenres(items: List<GenreDB>)
+
+    @Update(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun updateMovieGenrePairs(movieWithGenre: List<MovieWithGenre>)
+
+    @Transaction
+    suspend fun updateMoviesInDb(moviesFromNet: List<Movie>, filmGroup: String) {
+        val movies = getMovieDBs(moviesFromNet, filmGroup)
+        val genres = getGenresDBs(moviesFromNet, filmGroup)
+        val pairs = getMovieGenrePairs(moviesFromNet, filmGroup)
+
+        updateMovies(movies)
+        updateGenres(genres)
+        updateMovieGenrePairs(pairs)
     }
 }

@@ -11,7 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.WorkManager
 import com.rustamaliiev.sarmatapp.R
+import com.rustamaliiev.sarmatapp.domain.updater.getConstrainedRequest
 import com.rustamaliiev.sarmatapp.ui.entity.FilmGroups
 import com.rustamaliiev.sarmatapp.ui.movies.adapter.MovieListAdapter
 
@@ -51,8 +53,7 @@ class FragmentMoviesList : Fragment() {
         viewModel.movieIdLiveData.observe(viewLifecycleOwner) { id ->
             (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked(id)
         }
-
-    }
+        WorkManager.getInstance(requireContext()).enqueue(getConstrainedRequest())}
 
     private fun initSpinner() {
         var spinner: Spinner? = view?.findViewById(com.rustamaliiev.sarmatapp.R.id.spinner)
