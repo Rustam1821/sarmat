@@ -48,12 +48,17 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
     }
 
     override suspend fun saveMovies(moviesFromNet: List<Movie>, filmGroup: String) {
-        Log.e("QQQ", "Saving ${moviesFromNet.size} movies")
+        Log.i("QQQ", "Saving ${moviesFromNet.size} movies")
         db.getMovieDao().insertMoviesInDb(moviesFromNet, filmGroup)
     }
 
+    override suspend fun updateMovies(movies: List<Movie>, movieGroup: String) {
+        Log.i("UPD", "Updating ${movies.size} movies for the group $movieGroup")
+        db.getMovieDao().updateMoviesInDb(movies, movieGroup)
+    }
+
     override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
-        Log.e("QQQ", "Saving ${movieDetailsFromNet.title} with actors= ${movieDetailsFromNet.actors.size} and genres: ${movieDetailsFromNet.genres.map{it.name}.joinToString (", ")}")
+        Log.i("QQQ", "Saving ${movieDetailsFromNet.title} with actors= ${movieDetailsFromNet.actors.size} and genres: ${movieDetailsFromNet.genres.map{it.name}.joinToString (", ")}")
         db.getMovieDetailsDao().insertMovieDetailsInDB(movieDetailsFromNet)
     }
 }

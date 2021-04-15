@@ -6,15 +6,18 @@ import com.rustamaliiev.sarmatapp.data.entity.MovieDB
 import com.rustamaliiev.sarmatapp.data.entity.MovieGenrePair
 import com.rustamaliiev.sarmatapp.data.entity.MovieWithGenre
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
-import com.rustamaliiev.sarmatapp.utils.getGenresDBs
-import com.rustamaliiev.sarmatapp.utils.getMovieDBs
-import com.rustamaliiev.sarmatapp.utils.getMovieGenrePairs
+import com.rustamaliiev.sarmatapp.utils.mapGenreDomainToDB
+import com.rustamaliiev.sarmatapp.utils.mapMovieDomainToDB
+import com.rustamaliiev.sarmatapp.utils.mapToMovieGenrePairs
 
 @Dao
 interface MovieDao {
 
     @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup")
     suspend fun getMovies(movieGroup: String): List<MovieGenrePair>
+
+    @Query("SELECT movie_group FROM movies")
+    suspend fun getSavedGroupNames(): List<String>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertGenres(items: List<GenreDB>)
@@ -27,9 +30,9 @@ interface MovieDao {
 
     @Transaction
     suspend fun insertMoviesInDb(moviesFromNet: List<Movie>, filmGroup: String) {
-        val movies = getMovieDBs(moviesFromNet, filmGroup)
-        val genres = getGenresDBs(moviesFromNet, filmGroup)
-        val pairs = getMovieGenrePairs(moviesFromNet, filmGroup)
+        val movies = mapMovieDomainToDB(moviesFromNet, filmGroup)
+        val genres = mapGenreDomainToDB(moviesFromNet)
+        val pairs = mapToMovieGenrePairs(moviesFromNet)
 
         insertMovies(movies)
         insertGenres(genres)
@@ -47,9 +50,9 @@ interface MovieDao {
 
     @Transaction
     suspend fun updateMoviesInDb(moviesFromNet: List<Movie>, filmGroup: String) {
-        val movies = getMovieDBs(moviesFromNet, filmGroup)
-        val genres = getGenresDBs(moviesFromNet, filmGroup)
-        val pairs = getMovieGenrePairs(moviesFromNet, filmGroup)
+        val movies = mapMovieDomainToDB(moviesFromNet, filmGroup)
+        val genres = mapGenreDomainToDB(moviesFromNet)
+        val pairs = mapToMovieGenrePairs(moviesFromNet)
 
         updateMovies(movies)
         updateGenres(genres)

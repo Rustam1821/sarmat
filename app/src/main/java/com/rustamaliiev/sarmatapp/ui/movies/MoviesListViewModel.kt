@@ -25,7 +25,7 @@ class MoviesListViewModel : ViewModel() {
     fun loadMovies(selector: String = "top_rated") {
         viewModelScope.launch(Dispatchers.IO) {
             val localMovies = localRepository.loadMovies(selector)
-            Log.e("QQQ", "The number of saved $selector is ${localMovies.size}")
+            Log.i("QQQ", "The number of saved $selector is ${localMovies.size}")
 
             if (localMovies.isEmpty()) {
                 val fromWebMovies = remoteRepository.loadMovies(selector)

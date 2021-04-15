@@ -3,15 +3,21 @@ package com.rustamaliiev.sarmatapp.domain.updater
 import android.content.Context
 import android.util.Log
 import androidx.work.*
+import com.rustamaliiev.sarmatapp.data.entity.MovieDB
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
-class UpdateMoviesWork(context: Context, workerParameters: WorkerParameters): Worker(context, workerParameters) {
-    override fun doWork(): Result {
+class UpdateMoviesWork(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
+
+    override suspend fun doWork(): Result {
         return try {
-            Log.e("worker", "i've turned on at ${LocalDateTime.now()}")
+            MoviesUpdater().updateMovies()
             Result.success()
-        } catch (error: Throwable){
+        } catch (error: Throwable) {
             Result.failure()
         }
     }
@@ -23,6 +29,7 @@ fun getWorkerConstraints(): Constraints = Constraints
     .setRequiredNetworkType(NetworkType.UNMETERED)
     .build()
 
-fun getConstrainedRequest(): PeriodicWorkRequest = PeriodicWorkRequestBuilder<UpdateMoviesWork>(2, TimeUnit.HOURS)
-    .setConstraints(getWorkerConstraints())
-    .build()
+fun getConstrainedRequest(): PeriodicWorkRequest =
+    PeriodicWorkRequestBuilder<UpdateMoviesWork>(8, TimeUnit.HOURS)
+        .setConstraints(getWorkerConstraints())
+        .build()

@@ -5,7 +5,7 @@ import com.rustamaliiev.sarmatapp.data.entity.MovieDB
 import com.rustamaliiev.sarmatapp.data.entity.MovieWithGenre
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
 
-fun getMovieDBs(movies: List<Movie>, filmGroup: String): List<MovieDB> {
+fun mapMovieDomainToDB(movies: List<Movie>, filmGroup: String): List<MovieDB> {
     return movies.map { movie ->
         MovieDB(
             id = movie.id,
@@ -21,7 +21,7 @@ fun getMovieDBs(movies: List<Movie>, filmGroup: String): List<MovieDB> {
     }
 }
 
-fun getGenresDBs(movies: List<Movie>, filmGroup: String): List<GenreDB> {
+fun mapGenreDomainToDB(movies: List<Movie>): List<GenreDB> {
     return movies.flatMap { movie ->
         movie.genres.map { genre ->
             GenreDB(
@@ -32,7 +32,7 @@ fun getGenresDBs(movies: List<Movie>, filmGroup: String): List<GenreDB> {
     }
 }
 
-fun getMovieGenrePairs(movies: List<Movie>, filmGroup: String): List<MovieWithGenre> {
+fun mapToMovieGenrePairs(movies: List<Movie>): List<MovieWithGenre> {
     return movies.flatMap { movie ->
         movie.genres.map { genre ->
             MovieWithGenre(

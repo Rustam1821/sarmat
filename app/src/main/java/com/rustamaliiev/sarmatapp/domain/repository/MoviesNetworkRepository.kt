@@ -15,7 +15,7 @@ class MoviesNetworkRepository: MovieRepository {
     override suspend fun loadMovies(selector: String): List<Movie> {
         getConfigurations()
         val genres = NetworkModule.movieApi.getGenres().apiGenres
-        Log.e("QQQ", "NetworkMovieRepository, loadMovies")
+        Log.i("QQQ", "NetworkMovieRepository, loadMovies")
         return NetworkModule.movieApi.getMoviesList(selector).results.map { movieResponse ->
             Movie(
                 id = movieResponse.id,
@@ -42,6 +42,11 @@ class MoviesNetworkRepository: MovieRepository {
     }
 
     override suspend fun saveMovies(movies: List<Movie>, movieGroup: String) {
+//      networkrepo doesn't need it
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateMovies(movies: List<Movie>, movieGroup: String) {
 //      networkrepo doesn't need it
         TODO("Not yet implemented")
     }
