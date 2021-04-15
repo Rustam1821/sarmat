@@ -1,6 +1,5 @@
 package com.rustamaliiev.sarmatapp.domain.updater
 
-import android.util.Log
 import com.rustamaliiev.sarmatapp.SarmatApp
 import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository

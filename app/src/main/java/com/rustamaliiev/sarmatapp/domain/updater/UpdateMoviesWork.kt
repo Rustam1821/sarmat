@@ -30,6 +30,6 @@ fun getWorkerConstraints(): Constraints = Constraints
     .build()
 
 fun getConstrainedRequest(): PeriodicWorkRequest =
-    PeriodicWorkRequestBuilder<UpdateMoviesWork>(8, TimeUnit.HOURS)
+    PeriodicWorkRequestBuilder<UpdateMoviesWork>(15, TimeUnit.HOURS)
         .setConstraints(getWorkerConstraints())
         .build()
