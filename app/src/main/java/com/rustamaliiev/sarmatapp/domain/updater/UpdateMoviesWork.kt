@@ -11,11 +11,20 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 
-class UpdateMoviesWork(context: Context, params: WorkerParameters) : CoroutineWorker(context, params) {
+class UpdateMoviesWork(context: Context, params: WorkerParameters) :
+    CoroutineWorker(context, params) {
+    private val notifications = Notifications(context)
+    private val moviesUpdater: MoviesUpdater = MoviesUpdater()
 
     override suspend fun doWork(): Result {
         return try {
-            MoviesUpdater().updateMovies()
+            val newMovie = moviesUpdater.getNewMovieForNotification()
+            if (newMovie != null) {
+                notifications.initialize()
+                notifications.showNotification(newMovie)
+            }
+
+            moviesUpdater.updateMovies()
             Result.success()
         } catch (error: Throwable) {
             Result.failure()

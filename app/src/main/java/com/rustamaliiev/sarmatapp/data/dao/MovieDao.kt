@@ -13,7 +13,7 @@ import com.rustamaliiev.sarmatapp.utils.mapToMovieGenrePairs
 @Dao
 interface MovieDao {
 
-    @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup")
+    @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup ORDER BY movie_rating DESC")
     suspend fun getMovies(movieGroup: String): List<MovieGenrePair>
 
     @Query("SELECT movie_group FROM movies")

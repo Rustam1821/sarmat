@@ -15,6 +15,8 @@ data class MovieDB(
 
     val title: String,
     val imageUrl: String?,
+
+    @ColumnInfo(name = "movie_rating")
     val rating: Double,
     val reviewCount: Int,
     val ageLimit: Int,

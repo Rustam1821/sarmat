@@ -38,6 +38,8 @@ class MoviesNetworkRepository: MovieRepository {
                 },
                 isLiked = false
             )
+        }.sortedByDescending {movie->
+            movie.rating
         }
     }
 

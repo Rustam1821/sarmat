@@ -32,4 +32,7 @@
     <string name="popular">Popular</string>
     <string name="upcoming">Upcoming</string>
 
+    <string name="new_movie_notification">new movie:</string>
+    <string name="channel_new_movie_description">we have new movie in our database</string>
+
 </resources>

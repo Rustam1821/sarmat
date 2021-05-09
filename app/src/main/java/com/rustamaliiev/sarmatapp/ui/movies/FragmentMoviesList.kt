@@ -58,7 +58,6 @@ class FragmentMoviesList : Fragment() {
         val workManager = WorkManager.getInstance(requireContext())
         val request = getConstrainedRequest()
         workManager.enqueueUniquePeriodicWork("my_worker", ExistingPeriodicWorkPolicy.REPLACE, request)
-//        workManager.enqueue(request)
         WorkManager.getInstance(requireContext()).enqueue(getConstrainedRequest())
 
     }
