@@ -84,8 +84,6 @@ class MoviesNetworkRepository: MovieRepository {
         )
     }
 
-
-
     private suspend fun getConfigurations() {
         if (!isConfigReceived) {
             imagesBaseUrl = NetworkModule.movieApi.getConfiguration().images.baseUrl

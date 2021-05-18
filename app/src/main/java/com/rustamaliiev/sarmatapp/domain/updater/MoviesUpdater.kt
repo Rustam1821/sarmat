@@ -1,5 +1,6 @@
 package com.rustamaliiev.sarmatapp.domain.updater
 
+import android.util.Log
 import com.rustamaliiev.sarmatapp.SarmatApp
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
 import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
@@ -19,9 +20,13 @@ class MoviesUpdater {
         withContext(Dispatchers.IO) {
             db.getMovieDao().getSavedGroupNames().forEach { filmGroup ->
 
+
                 val savedMoviesList = localMovieRepository.loadMovies(filmGroup)
+
+
                 val updatedMoviesList = remoteMovieRepository.loadMovies(filmGroup)
                 newMovies += updatedMoviesList.minus(savedMoviesList)
+                Log.e("newMovies", "I'm about to add ${newMovies.first()}")
 
                 localMovieRepository.updateMovies(updatedMoviesList, filmGroup)
             }
