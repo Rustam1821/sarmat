@@ -4,6 +4,7 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
@@ -37,10 +38,13 @@ class SarmatApp : Application() {
     }
 
     private fun runWorkManager() {
+        Log.d("SarmatApp", "runWorkManager starts")
         val worker = MoviesWorker()
 //        WorkManager.getInstance(applicationContext).cancelAllWorkByTag(appTAG)
         WorkManager.getInstance(applicationContext)
-            .enqueueUniquePeriodicWork("my_worker", ExistingPeriodicWorkPolicy.REPLACE, worker.moviesTaskRequest)
+            .enqueueUniquePeriodicWork("my_worker", ExistingPeriodicWorkPolicy.KEEP, worker.moviesTaskRequest())
 //        WorkManager.getInstance(applicationContext).enqueue(worker.moviesTaskRequest)
+
+        Log.d("SarmatApp", "runWorkManager ends")
     }
 }

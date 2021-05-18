@@ -35,11 +35,11 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
     CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
-        //TODO: paste log here
+        Log.d(TAG, "do work starting")
         return try {
             val movieNotification = loadLastNotification()
             movieNotification?.let { showNotification(it) }
-            //TODO: paste log here
+            Log.d(TAG, "do work finished")
             Result.success()
         } catch (error: Throwable) {
             Log.e(TAG, "Error in $TAG = $error")
@@ -47,9 +47,9 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
         }
     }
 
-    private fun loadLastNotification(): MovieDetails? {
+    private suspend fun loadLastNotification(): MovieDetails? {
         var movieDetails: MovieDetails?
-        runBlocking(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             movieDetails = getMovieDetails()
         }
         return movieDetails

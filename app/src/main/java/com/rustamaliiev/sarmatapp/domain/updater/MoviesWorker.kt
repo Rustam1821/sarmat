@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkRequest
 import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.SarmatApp
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
@@ -25,10 +26,12 @@ class MoviesWorker {
         .setRequiredNetworkType(networkType)
         .build()
 
-    val moviesTaskRequest =
+    val moviesTaskRequest = {
+        Log.d("MoviesWorker.class", "getting moviesTaskRequest")
         PeriodicWorkRequest.Builder(UpdateMoviesWork::class.java, repeatInterval, TimeUnit.MINUTES)
             .setConstraints(constraint)
             .setInitialDelay(delay, TimeUnit.SECONDS)
             .addTag(TAG)
             .build()
+    }
 }
