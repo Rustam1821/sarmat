@@ -1,11 +1,11 @@
 package com.rustamaliiev.sarmatapp.domain.updater
 
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -35,11 +35,14 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
     CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
+        //TODO: paste log here
         return try {
             val movieNotification = loadLastNotification()
             movieNotification?.let { showNotification(it) }
+            //TODO: paste log here
             Result.success()
         } catch (error: Throwable) {
+            Log.e(TAG, "Error in $TAG = $error")
             Result.failure()
         }
     }
@@ -50,7 +53,6 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
             movieDetails = getMovieDetails()
         }
         return movieDetails
-
     }
 
     private suspend fun getMovieDetails(): MovieDetails? {
@@ -66,18 +68,24 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
                 localMovieRepository.updateMovies(updatedMoviesList, filmGroup)
             }
         }
-        val topRatedNewMovieId = newMovies.sortedByDescending { it?.rating }.getOrNull(0)?.id
-        return if (topRatedNewMovieId != null) {
-            remoteMovieRepository.loadMovie(topRatedNewMovieId)
-        } else null
+        return newMovies
+            .maxByOrNull { it?.rating!! }
+            ?.id
+            ?.let { topRatedMovieId ->
+                Log.d(TAG, "Loading topRated Movie with id = $topRatedMovieId")
+                remoteMovieRepository.loadMovie(topRatedMovieId)
+            }
     }
+
+    private fun createIntent(id: Int) =
+        Intent(context, MainActivity::class.java)
+            .setAction(Intent.ACTION_VIEW)
+            .putExtra(movieId, id)
 
     private fun buildNotification(movieDetails: MovieDetails): NotificationCompat.Builder {
         val time = System.currentTimeMillis()
         val genres = movieDetails.genres.map { it.name }.sorted().joinToString()
-        val intent = Intent(context, MainActivity::class.java)
-            .setAction(Intent.ACTION_VIEW)
-            .putExtra("id_movie", movieDetails.id)
+        val intent = createIntent(movieDetails.id)
         val pendingIntent = PendingIntent.getActivity(
             context,
             1,
@@ -91,6 +99,7 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
             .setContentTitle(movieDetails.title)
             .setContentText(genres)
             .setSmallIcon(R.drawable.movie_icon)
+            .setColor(Color.BLUE)
             .setWhen(time)
             .setOnlyAlertOnce(true)
             .setContentIntent(pendingIntent)
@@ -100,9 +109,7 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
     private fun showNotification(movieDetails: MovieDetails) {
         val notificationBuilder = buildNotification(movieDetails)
         val notificationManager = NotificationManagerCompat.from(context.applicationContext)
-        val urlImage = if (movieDetails.detailImageUrl != null) {
-            movieDetails.detailImageUrl
-        } else "null"
+        val urlImage = movieDetails.detailImageUrl ?: "null"
         if (urlImage != "null") {
             Glide.with(context)
                 .asBitmap()
@@ -169,6 +176,8 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
     }
 }
 
+private var movieId = "movie_id"
+
 fun getWorkerConstraints(): Constraints = Constraints
     .Builder()
 //    .setRequiresCharging(true)
@@ -179,4 +188,6 @@ fun getConstrainedRequest(): PeriodicWorkRequest =
     PeriodicWorkRequestBuilder<UpdateMoviesWork>(10, TimeUnit.MINUTES)
         .setConstraints(getWorkerConstraints())
         .build()
+
+fun getFromIntent(intent: Intent) = intent.getIntExtra(movieId, 0)
 
