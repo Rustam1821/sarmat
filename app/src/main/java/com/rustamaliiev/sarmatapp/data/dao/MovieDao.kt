@@ -13,10 +13,13 @@ import com.rustamaliiev.sarmatapp.utils.mapToMovieGenrePairs
 @Dao
 interface MovieDao {
 
+    @Query("DELETE FROM movies WHERE movie_id LIKE :movieId")
+    suspend fun deleteMovie(movieId: Int)
+
     @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup ORDER BY movie_rating DESC")
     suspend fun getMovies(movieGroup: String): List<MovieGenrePair>
 
-    @Query("SELECT movie_group FROM movies")
+    @Query("SELECT movie_group FROM movies GROUP BY movie_group")
     suspend fun getSavedGroupNames(): List<String>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

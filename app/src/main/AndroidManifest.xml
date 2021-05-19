@@ -3,6 +3,8 @@
     package="com.rustamaliiev.sarmatapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
 
     <application
         android:name=".SarmatApp"
@@ -22,17 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
-
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-
-<!--                <data-->
-<!--                    android:host="android.sarmat.com"-->
-<!--                    android:pathPattern="/updater/.*"-->
-<!--                    android:scheme="https" />-->
-<!--            </intent-filter>-->
         </activity>
     </application>
 </manifest>

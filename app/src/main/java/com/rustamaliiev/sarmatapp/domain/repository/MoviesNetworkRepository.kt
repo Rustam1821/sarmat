@@ -8,14 +8,13 @@ import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
 import com.rustamaliiev.sarmatapp.network.config.NetworkModule
 import com.rustamaliiev.sarmatapp.network.config.SystemConfig
 
-class MoviesNetworkRepository: MovieRepository {
+class MoviesNetworkRepository : MovieRepository {
     private lateinit var imagesBaseUrl: String
     private var isConfigReceived = false
 
     override suspend fun loadMovies(selector: String): List<Movie> {
         getConfigurations()
         val genres = NetworkModule.movieApi.getGenres().apiGenres
-        Log.i("QQQ", "NetworkMovieRepository, loadMovies")
         return NetworkModule.movieApi.getMoviesList(selector).results.map { movieResponse ->
             Movie(
                 id = movieResponse.id,
@@ -38,7 +37,7 @@ class MoviesNetworkRepository: MovieRepository {
                 },
                 isLiked = false
             )
-        }.sortedByDescending {movie->
+        }.sortedByDescending { movie ->
             movie.rating
         }
     }
@@ -54,6 +53,11 @@ class MoviesNetworkRepository: MovieRepository {
     }
 
     override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
+//      networkrepo doesn't need it
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteMovie(movieId: Int) {
 //      networkrepo doesn't need it
         TODO("Not yet implemented")
     }
@@ -92,7 +96,7 @@ class MoviesNetworkRepository: MovieRepository {
     }
 
     private fun buildImageUrl(url: String, path: String?): String? {
-        return path?.let{
+        return path?.let {
             "$url${SystemConfig.DEFAULT_SIZE}$path"
         }
     }

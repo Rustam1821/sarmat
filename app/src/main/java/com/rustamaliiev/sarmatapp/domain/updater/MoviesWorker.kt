@@ -26,12 +26,11 @@ class MoviesWorker {
         .setRequiredNetworkType(networkType)
         .build()
 
-    val moviesTaskRequest = {
-        Log.d("MoviesWorker.class", "getting moviesTaskRequest")
+    val moviesTaskRequest =
         PeriodicWorkRequest.Builder(UpdateMoviesWork::class.java, repeatInterval, TimeUnit.MINUTES)
             .setConstraints(constraint)
             .setInitialDelay(delay, TimeUnit.SECONDS)
             .addTag(TAG)
             .build()
-    }
+
 }

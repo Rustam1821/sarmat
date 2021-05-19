@@ -38,13 +38,8 @@ class SarmatApp : Application() {
     }
 
     private fun runWorkManager() {
-        Log.d("SarmatApp", "runWorkManager starts")
         val worker = MoviesWorker()
-//        WorkManager.getInstance(applicationContext).cancelAllWorkByTag(appTAG)
         WorkManager.getInstance(applicationContext)
-            .enqueueUniquePeriodicWork("my_worker", ExistingPeriodicWorkPolicy.KEEP, worker.moviesTaskRequest())
-//        WorkManager.getInstance(applicationContext).enqueue(worker.moviesTaskRequest)
-
-        Log.d("SarmatApp", "runWorkManager ends")
+            .enqueueUniquePeriodicWork("my_worker", ExistingPeriodicWorkPolicy.KEEP, worker.moviesTaskRequest)
     }
 }

@@ -11,7 +11,6 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
 
     override suspend fun loadMovies(selector: String): List<Movie> =
         db.getMovieDao().getMovies(selector).map { movieDB ->
-
             Movie(
                 id = movieDB.movie.id,
                 title = movieDB.movie.title,
@@ -26,6 +25,7 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
                 isLiked = movieDB.movie.isLiked
             )
         }
+
 
     override suspend fun loadMovie(movieId: Int): MovieDetails =
         with(db.getMovieDetailsDao().getMovieDetails(movieId)) {
@@ -45,7 +45,7 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
                     Actor(actorDB.id, actorDB.name, actorDB.imageUrl)
                 }
             )
-    }
+        }
 
     override suspend fun saveMovies(moviesFromNet: List<Movie>, filmGroup: String) {
         Log.i("QQQ", "Saving ${moviesFromNet.size} movies")
@@ -58,7 +58,16 @@ class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
     }
 
     override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
-        Log.i("QQQ", "Saving ${movieDetailsFromNet.title} with actors= ${movieDetailsFromNet.actors.size} and genres: ${movieDetailsFromNet.genres.map{it.name}.joinToString (", ")}")
+        Log.i(
+            "QQQ",
+            "Saving ${movieDetailsFromNet.title} with actors= ${movieDetailsFromNet.actors.size} and genres: ${
+                movieDetailsFromNet.genres.map { it.name }.joinToString(", ")
+            }"
+        )
         db.getMovieDetailsDao().insertMovieDetailsInDB(movieDetailsFromNet)
+    }
+
+    override suspend fun deleteMovie(movieId: Int) {
+        db.getMovieDao().deleteMovie(movieId)
     }
 }

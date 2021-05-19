@@ -26,20 +26,18 @@ import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
 import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
+import com.rustamaliiev.sarmatapp.utils.sd
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
-import java.util.concurrent.TimeUnit
 
 class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
     CoroutineWorker(context, params) {
 
+
     override suspend fun doWork(): Result {
-        Log.d(TAG, "do work starting")
         return try {
             val movieNotification = loadLastNotification()
             movieNotification?.let { showNotification(it) }
-            Log.d(TAG, "do work finished")
             Result.success()
         } catch (error: Throwable) {
             Log.e(TAG, "Error in $TAG = $error")
@@ -59,20 +57,28 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
         val db = SarmatApp.db
         val localMovieRepository: MovieRepository = LocalMovieRepository(db)
         val remoteMovieRepository: MovieRepository = MoviesNetworkRepository()
-        var newMovies = emptyList<Movie?>()
-        withContext(Dispatchers.IO) {
-            db.getMovieDao().getSavedGroupNames().forEach { filmGroup ->
-                val savedMoviesList = localMovieRepository.loadMovies(filmGroup)
-                val updatedMoviesList = remoteMovieRepository.loadMovies(filmGroup)
-                newMovies += updatedMoviesList.minus(savedMoviesList)
-                localMovieRepository.updateMovies(updatedMoviesList, filmGroup)
-            }
+        var newMovies = emptySet<Movie?>()
+        Log.d("QQQ", "saved group names size is ${db.getMovieDao().getSavedGroupNames().size}")
+        db.getMovieDao().getSavedGroupNames().forEach { filmGroup ->
+            val savedMoviesList = localMovieRepository.loadMovies(filmGroup)
+            val updatedMoviesList = remoteMovieRepository.loadMovies(filmGroup).toMutableList()
+            newMovies =
+                newMovies.union(updatedMoviesList.filter { it.id !in savedMoviesList.map { movie -> movie.id } })
+            Log.d("QQQ", "updated movies list size is ${updatedMoviesList.size}")
+            localMovieRepository.saveMovies(updatedMoviesList, filmGroup)
         }
+
+        if(sd.flagDeleteGodFather){
+            localMovieRepository.deleteMovie(238)
+            sd.flagDeleteGodFather = false
+        }
+
+
+        Log.d("QQQ", "newMovies are: ${newMovies.joinToString { it?.title ?: "" }}")
         return newMovies
-            .maxByOrNull { it?.rating!! }
+            .maxByOrNull { it?.rating ?: 0.0 }
             ?.id
             ?.let { topRatedMovieId ->
-                Log.d(TAG, "Loading topRated Movie with id = $topRatedMovieId")
                 remoteMovieRepository.loadMovie(topRatedMovieId)
             }
     }
@@ -177,17 +183,6 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
 }
 
 private var movieId = "movie_id"
-
-fun getWorkerConstraints(): Constraints = Constraints
-    .Builder()
-//    .setRequiresCharging(true)
-    .setRequiredNetworkType(NetworkType.UNMETERED)
-    .build()
-
-fun getConstrainedRequest(): PeriodicWorkRequest =
-    PeriodicWorkRequestBuilder<UpdateMoviesWork>(10, TimeUnit.MINUTES)
-        .setConstraints(getWorkerConstraints())
-        .build()
 
 fun getFromIntent(intent: Intent) = intent.getIntExtra(movieId, 0)
 

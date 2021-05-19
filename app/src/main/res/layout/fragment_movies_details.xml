@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/movies_details"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,11 +17,11 @@
             android:id="@+id/poster_image_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            tools:src="@drawable/avengers_poster"
             app:layout_constraintDimensionRatio="1.26"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/avengers_poster" />
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -83,13 +83,13 @@
             android:layout_marginHorizontal="16dp"
 
             android:fontFamily="@font/roboto_black"
-            tools:text="@tools:sample/last_names"
             android:textColor="@color/whisper"
             android:textSize="40sp"
-
             app:layout_constraintBottom_toBottomOf="@id/guideline_under_poster"
+
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline_under_poster" />
+            app:layout_constraintTop_toBottomOf="@+id/guideline_under_poster"
+            tools:text="@tools:sample/last_names" />
 
         <TextView
             android:id="@+id/age_limit"
@@ -118,8 +118,8 @@
             android:textColor="@color/radical_red"
             android:textSize="14sp"
 
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/film_name" />
 
         <RatingBar
@@ -182,7 +182,7 @@
             android:letterSpacing="0.04"
             android:lineHeight="20dp"
             android:paddingVertical="6dp"
-            android:text="@string/story_text"
+            android:text="text"
             android:textColor="@color/white"
             android:textSize="14sp"
 
@@ -201,6 +201,24 @@
 
             app:layout_constraintStart_toStartOf="@id/story_text"
             app:layout_constraintTop_toBottomOf="@id/story_text" />
+
+        <Button
+            android:id="@+id/addToCalendar"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:backgroundTint="@color/light_grayish_navy"
+
+            android:fontFamily="@font/roboto_black"
+            android:text="@string/add_to_calendar"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:textColor="@color/whisper"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="@id/cast"
+            app:layout_constraintStart_toEndOf="@id/cast" />
 
 
         <androidx.constraintlayout.widget.Barrier
