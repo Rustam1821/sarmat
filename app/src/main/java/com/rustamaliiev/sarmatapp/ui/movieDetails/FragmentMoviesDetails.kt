@@ -1,9 +1,14 @@
 package com.rustamaliiev.sarmatapp.ui.movieDetails
 
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.provider.CalendarContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +22,7 @@ import com.rustamaliiev.sarmatapp.ui.movieDetails.adapter.ActorListAdapter
 class FragmentMoviesDetails : Fragment() {
     private val actorAdapter: ActorListAdapter = ActorListAdapter()
     private lateinit var actorRecyclerView: RecyclerView
+    private lateinit var addEvent: Button
 
     private val viewModel: MoviesDetailsViewModel by viewModels {
         MoviesDetailsViewModelFactory(arguments?.getInt(MOVIE_ID))
@@ -39,11 +45,42 @@ class FragmentMoviesDetails : Fragment() {
             LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
         actorRecyclerView.adapter = actorAdapter
 
+        addEvent = view.findViewById(R.id.addToCalendar)
+        addEvent.setOnClickListener {
+            addEventToCalendar(view)
+        }
+    }
+
+    private fun addEventToCalendar(view: View) {
+        val intent = getCalendarIntent()
+
+        if (context?.packageManager?.let { intent.resolveActivity(it) } != null) { //resolve is there an app for handling this Action
+            startActivity(intent)
+        } else {
+            Toast.makeText(context, "There is no app can support this action", Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+
+    private fun getCalendarIntent() = with(Intent(Intent.ACTION_INSERT)) {
+        val movieDetails = viewModel.detailsLiveData.value
+
+        data = CalendarContract.Events.CONTENT_URI
+        putExtra(CalendarContract.Events.TITLE, "Let's watch movie: \"${movieDetails?.title}\"")
+        putExtra(
+            CalendarContract.Events.DESCRIPTION,
+            "What the movie's about:\n${movieDetails?.storyLine}"
+        )
+        putExtra(CalendarContract.Events.ALL_DAY, false)
+        putExtra(
+            Intent.EXTRA_EMAIL,
+            "guest1@google.com, guest2@google.com, guest3@google.com"
+        )
     }
 
     private fun fillInfo(movie: MovieDetails) {
         actorAdapter.actors = movie.actors
-        with(FragmentMoviesDetailsBinding.bind(requireView())){
+        with(FragmentMoviesDetailsBinding.bind(requireView())) {
             Glide
                 .with(posterImageView)
                 .load(movie.detailImageUrl)
@@ -57,7 +94,6 @@ class FragmentMoviesDetails : Fragment() {
             reviews.text = "${movie.reviewCount} Reviews"
             storyText.text = movie.storyLine
         }
-
     }
 
     companion object {
