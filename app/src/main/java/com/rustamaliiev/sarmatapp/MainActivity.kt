@@ -1,11 +1,12 @@
 package com.rustamaliiev.sarmatapp
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.transition.*
 import com.rustamaliiev.sarmatapp.domain.updater.getFromIntent
 import com.rustamaliiev.sarmatapp.ui.movieDetails.FragmentMoviesDetails
 import com.rustamaliiev.sarmatapp.ui.movies.FragmentMoviesList
@@ -26,11 +27,28 @@ class MainActivity : AppCompatActivity(), FragmentMoviesListClickListener {
     }
 
     override fun onMovieCardClicked(movieID: Int) {
+        val movieDetailsFragment = FragmentMoviesDetails.newInstance(movieID)
+        setSmoothShifting(movieDetailsFragment)
         supportFragmentManager.beginTransaction()
-            .add(R.id.main_container, FragmentMoviesDetails.newInstance(movieID))
+            .add(R.id.main_container, movieDetailsFragment)
             .addToBackStack(null)
             .commit()
     }
+
+    private fun setSmoothShifting(movieDetailsFragment: FragmentMoviesDetails) {
+        val transitionSet = TransitionSet().apply {
+            addTransition(Fade().apply { duration = 500 })
+            addTransition(Slide().apply {
+                slideEdge = Gravity.LEFT
+                duration = 600
+            })
+        }
+        with(movieDetailsFragment) {
+            enterTransition = transitionSet
+            exitTransition = transitionSet
+        }
+    }
+
 
     private fun startIntent(intent: Intent) {
         val movieId = getFromIntent(intent)
