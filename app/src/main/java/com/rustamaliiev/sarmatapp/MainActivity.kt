@@ -3,6 +3,7 @@ package com.rustamaliiev.sarmatapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
+import android.view.Gravity.apply
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
