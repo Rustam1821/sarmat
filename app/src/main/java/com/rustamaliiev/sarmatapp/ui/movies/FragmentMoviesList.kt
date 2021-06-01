@@ -11,11 +11,13 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.ui.entity.FilmGroups
 import com.rustamaliiev.sarmatapp.ui.movies.adapter.MovieListAdapter
+import kotlinx.coroutines.launch
 
 class FragmentMoviesList : Fragment() {
 
@@ -38,7 +40,6 @@ class FragmentMoviesList : Fragment() {
 
         initSpinner()
 
-
         view.findViewById<RecyclerView>(R.id.moviesRecyclerView).apply {
             layoutManager = GridLayoutManager(view.context, 2)
             adapter = movieAdapter
@@ -57,7 +58,7 @@ class FragmentMoviesList : Fragment() {
     }
 
     private fun initSpinner() {
-        val spinner: Spinner? = view?.findViewById(com.rustamaliiev.sarmatapp.R.id.spinner)
+        val spinner: Spinner? = view?.findViewById(R.id.spinner)
         ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,

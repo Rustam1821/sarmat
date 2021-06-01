@@ -11,6 +11,6 @@ interface MovieRepository {
     suspend fun loadMovie(movieId: Int): MovieDetails
     suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails)
     suspend fun deleteMovie(movieId: Int)
-    suspend fun loadMoviesFlow(selector: String): Flow<List<Movie>>
+    suspend fun observeMovies(selector: String): Flow<List<Movie>>
 }
 

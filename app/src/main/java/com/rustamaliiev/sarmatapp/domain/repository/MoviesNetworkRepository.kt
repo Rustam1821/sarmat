@@ -63,7 +63,7 @@ class MoviesNetworkRepository : MovieRepository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun loadMoviesFlow(selector: String): Flow<List<Movie>> {
+    override suspend fun observeMovies(selector: String): Flow<List<Movie>> {
 //      networkrepo doesn't need it
         TODO("Not yet implemented")
     }

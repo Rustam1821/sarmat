@@ -22,9 +22,7 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup ORDER BY movie_rating DESC")
     fun getMoviesFlow(movieGroup: String): Flow<List<MovieGenrePair>>
 
-    // TODO: do I need this? think about it!
-    fun getMoviesFlowDistinctUntilChanged(movieGroup: String) = getMoviesFlow(movieGroup).distinctUntilChanged()
-
+    //instead of this use getMoviesFlow.first
     @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup ORDER BY movie_rating DESC")
     suspend fun getMovies(movieGroup: String): List<MovieGenrePair>
 
