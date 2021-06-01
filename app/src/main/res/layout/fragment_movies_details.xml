@@ -45,7 +45,7 @@
             app:tintMode="screen" />
 
         <TextView
-            android:id="@+id/back_button"
+            android:id="@+id/back_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -68,12 +68,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:src="@drawable/back_arrow"
+            app:tint="@color/white"
 
 
-            app:layout_constraintBottom_toBottomOf="@id/back_button"
-            app:layout_constraintEnd_toStartOf="@id/back_button"
+            app:layout_constraintBottom_toBottomOf="@id/back_text_view"
+            app:layout_constraintEnd_toStartOf="@id/back_text_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/back_button" />
+            app:layout_constraintTop_toTopOf="@id/back_text_view" />
 
         <TextView
             android:id="@+id/film_name"
@@ -207,15 +208,15 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
             android:backgroundTint="@color/light_grayish_navy"
-
             android:fontFamily="@font/roboto_black"
+            android:minWidth="0dp"
+
+            android:minHeight="0dp"
             android:text="@string/add_to_calendar"
-            android:textSize="14sp"
             android:textAllCaps="false"
             android:textColor="@color/whisper"
+            android:textSize="14sp"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@id/cast"
             app:layout_constraintStart_toEndOf="@id/cast" />

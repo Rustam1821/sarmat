@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,7 +23,6 @@ import com.rustamaliiev.sarmatapp.ui.movieDetails.adapter.ActorListAdapter
 class FragmentMoviesDetails : Fragment() {
     private val actorAdapter: ActorListAdapter = ActorListAdapter()
     private lateinit var actorRecyclerView: RecyclerView
-    private lateinit var addEvent: Button
 
     private val viewModel: MoviesDetailsViewModel by viewModels {
         MoviesDetailsViewModelFactory(arguments?.getInt(MOVIE_ID))
@@ -45,13 +45,20 @@ class FragmentMoviesDetails : Fragment() {
             LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
         actorRecyclerView.adapter = actorAdapter
 
-        addEvent = view.findViewById(R.id.addToCalendar)
-        addEvent.setOnClickListener {
-            addEventToCalendar(view)
+        view.findViewById<TextView>(R.id.back_text_view).apply{
+            setOnClickListener {
+                activity?.onBackPressed()
+            }
+        }
+
+        view.findViewById<Button>(R.id.addToCalendar).apply{
+            setOnClickListener {
+                addEventToCalendar()
+            }
         }
     }
 
-    private fun addEventToCalendar(view: View) {
+    private fun addEventToCalendar() {
         val intent = getCalendarIntent()
 
         if (context?.packageManager?.let { intent.resolveActivity(it) } != null) { //resolve is there an app for handling this Action
