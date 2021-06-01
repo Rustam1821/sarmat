@@ -1,9 +1,12 @@
 package com.rustamaliiev.sarmatapp.utils
 
-import com.rustamaliiev.sarmatapp.data.entity.GenreDB
-import com.rustamaliiev.sarmatapp.data.entity.MovieDB
-import com.rustamaliiev.sarmatapp.data.entity.MovieWithGenre
+import com.rustamaliiev.sarmatapp.data.entity.*
+import com.rustamaliiev.sarmatapp.domain.entity.Actor
+import com.rustamaliiev.sarmatapp.domain.entity.Genre
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
+import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.network.config.SystemConfig
+import com.rustamaliiev.sarmatapp.network.entity.ApiMovieResponse
 
 fun mapMovieDomainToDB(movies: List<Movie>, filmGroup: String): List<MovieDB> {
     return movies.map { movie ->
@@ -42,3 +45,47 @@ fun mapToMovieGenrePairs(movies: List<Movie>): List<MovieWithGenre> {
         }
     }
 }
+
+fun mapMovieGenrePairToMovie(mgPair: MovieGenrePair): Movie =
+    Movie(
+        id = mgPair.movie.id,
+        title = mgPair.movie.title,
+        imageUrl = mgPair.movie.imageUrl,
+        rating = mgPair.movie.rating,
+        reviewCount = mgPair.movie.reviewCount,
+        ageLimit = mgPair.movie.ageLimit,
+        runningTime = mgPair.movie.runningTime,
+        genres = mgPair.genres.map { genreDB ->
+            Genre(genreDB.id, genreDB.name)
+        },
+        isLiked = mgPair.movie.isLiked
+    )
+
+fun mapMovieDetailsActorGenrePairToMovieDetails(movieDetailsAGPair: MovieDetailsActorGenrePair): MovieDetails =
+    with(movieDetailsAGPair) {
+        MovieDetails(
+            id = movieDetails.movieId,
+            title = movieDetails.title,
+            storyLine = movieDetails.storyLine ?: "",
+            detailImageUrl = movieDetails.detailImageUrl,
+            rating = movieDetails.rating,
+            reviewCount = movieDetails.reviewCount,
+            ageLimit = movieDetails.ageLimit,
+            runtime = movieDetails.runTime ?: 0,
+            genres = genres.map { genreDB ->
+                Genre(genreDB.id, genreDB.name)
+            },
+            actors = actors.map { actorDB ->
+                Actor(actorDB.id, actorDB.name, actorDB.imageUrl)
+            }
+        )
+    }
+
+private fun buildImageUrl(url: String, path: String?): String? {
+    return path?.let {
+        "$url${SystemConfig.DEFAULT_SIZE}$path"
+    }
+}
+
+
+

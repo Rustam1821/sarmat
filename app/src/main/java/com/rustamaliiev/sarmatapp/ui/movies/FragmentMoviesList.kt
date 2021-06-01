@@ -45,6 +45,7 @@ class FragmentMoviesList : Fragment() {
         movieAdapter.itemClickListener = { movie ->
             viewModel.handleMovieId(movie.id)
         }
+
         viewModel.moviesLiveData.observe(viewLifecycleOwner) { movies ->
             movieAdapter.movies = movies
         }
@@ -54,7 +55,7 @@ class FragmentMoviesList : Fragment() {
     }
 
     private fun initSpinner() {
-        var spinner: Spinner? = view?.findViewById(com.rustamaliiev.sarmatapp.R.id.spinner)
+        val spinner: Spinner? = view?.findViewById(com.rustamaliiev.sarmatapp.R.id.spinner)
         ArrayAdapter(
             requireContext(),
             android.R.layout.simple_spinner_item,

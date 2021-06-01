@@ -7,6 +7,7 @@ import com.rustamaliiev.sarmatapp.domain.entity.Movie
 import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
 import com.rustamaliiev.sarmatapp.network.config.NetworkModule
 import com.rustamaliiev.sarmatapp.network.config.SystemConfig
+import kotlinx.coroutines.flow.Flow
 
 class MoviesNetworkRepository : MovieRepository {
     private lateinit var imagesBaseUrl: String
@@ -58,6 +59,11 @@ class MoviesNetworkRepository : MovieRepository {
     }
 
     override suspend fun deleteMovie(movieId: Int) {
+//      networkrepo doesn't need it
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun loadMoviesFlow(selector: String): Flow<List<Movie>> {
 //      networkrepo doesn't need it
         TODO("Not yet implemented")
     }

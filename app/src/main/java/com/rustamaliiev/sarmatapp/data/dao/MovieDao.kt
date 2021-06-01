@@ -9,12 +9,21 @@ import com.rustamaliiev.sarmatapp.domain.entity.Movie
 import com.rustamaliiev.sarmatapp.utils.mapGenreDomainToDB
 import com.rustamaliiev.sarmatapp.utils.mapMovieDomainToDB
 import com.rustamaliiev.sarmatapp.utils.mapToMovieGenrePairs
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Dao
 interface MovieDao {
 
     @Query("DELETE FROM movies WHERE movie_id LIKE :movieId")
     suspend fun deleteMovie(movieId: Int)
+
+    //if suspend -> "error: Not sure how to convert a Cursor to this method's return type"
+    @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup ORDER BY movie_rating DESC")
+    fun getMoviesFlow(movieGroup: String): Flow<List<MovieGenrePair>>
+
+    // TODO: do I need this? think about it!
+    fun getMoviesFlowDistinctUntilChanged(movieGroup: String) = getMoviesFlow(movieGroup).distinctUntilChanged()
 
     @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup ORDER BY movie_rating DESC")
     suspend fun getMovies(movieGroup: String): List<MovieGenrePair>

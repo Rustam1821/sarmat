@@ -2,6 +2,7 @@ package com.rustamaliiev.sarmatapp.domain.repository
 
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
 import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
     suspend fun loadMovies(selector: String): List<Movie>
@@ -10,5 +11,6 @@ interface MovieRepository {
     suspend fun loadMovie(movieId: Int): MovieDetails
     suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails)
     suspend fun deleteMovie(movieId: Int)
+    suspend fun loadMoviesFlow(selector: String): Flow<List<Movie>>
 }
 

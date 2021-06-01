@@ -1,6 +1,8 @@
 package com.rustamaliiev.sarmatapp.ui.movies
 
+import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,7 +13,10 @@ import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 class MoviesListViewModel : ViewModel() {
     private val _moviesLiveData = MutableLiveData<List<Movie>>()
@@ -32,8 +37,16 @@ class MoviesListViewModel : ViewModel() {
                 _moviesLiveData.postValue(fromWebMovies)
                 localRepository.saveMovies(fromWebMovies, selector)
             } else {
-                _moviesLiveData.postValue(localMovies)
+                observeMoviesListChanged(selector)
+//                _moviesLiveData.postValue(localMovies)
             }
+        }
+    }
+
+    suspend fun observeMoviesListChanged(selector: String) {
+        localRepository.loadMoviesFlow(selector).collect {listMovie ->
+            _moviesLiveData.postValue(listMovie)
+            Log.d("QQQ", "Let me show updated screen")
         }
     }
 
