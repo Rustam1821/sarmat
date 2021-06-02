@@ -1,10 +1,10 @@
 package com.rustamaliiev.sarmatapp.ui.movieDetails.adapter
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rustamaliiev.sarmatapp.R
+import com.rustamaliiev.sarmatapp.databinding.ViewHolderActorBinding
 import com.rustamaliiev.sarmatapp.domain.entity.Actor
-import com.rustamaliiev.sarmatapp.utils.inflate
 
 class ActorListAdapter : RecyclerView.Adapter<VhActor>() {
 
@@ -14,18 +14,19 @@ class ActorListAdapter : RecyclerView.Adapter<VhActor>() {
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VhActor {
-        return VhActor(
-            parent.inflate(R.layout.view_holder_actor)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VhActor =
+        VhActor(
+            ViewHolderActorBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
-    }
 
     override fun onBindViewHolder(holder: VhActor, position: Int) {
         val actor = actors[position]
         holder.bind(actor)
     }
 
-    override fun getItemCount(): Int {
-        return actors.size
-    }
+    override fun getItemCount() = actors.size
 }
