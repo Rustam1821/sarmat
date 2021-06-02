@@ -9,6 +9,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
 import com.rustamaliiev.sarmatapp.data.AppDatabase
 import com.rustamaliiev.sarmatapp.domain.updater.MoviesWorker
+import com.rustamaliiev.sarmatapp.utils.notificationChannelId
 
 class SarmatApp : Application() {
 
@@ -26,7 +27,7 @@ class SarmatApp : Application() {
     private fun createChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
-                getString(R.string.notification_channel_id),
+                notificationChannelId,
                 getString(R.string.new_movie_notification),
                 NotificationManager.IMPORTANCE_LOW
             )

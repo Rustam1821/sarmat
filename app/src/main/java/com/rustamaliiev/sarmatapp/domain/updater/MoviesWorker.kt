@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 class MoviesWorker {
 
-    private val TAG = appTAG
+    private val tag = appTAG
     private val repeatInterval = 15L
     private val delay = 10L
     private val networkType = NetworkType.CONNECTED
@@ -20,7 +20,7 @@ class MoviesWorker {
         PeriodicWorkRequest.Builder(UpdateMoviesWork::class.java, repeatInterval, TimeUnit.MINUTES)
             .setConstraints(constraint)
             .setInitialDelay(delay, TimeUnit.SECONDS)
-            .addTag(TAG)
+            .addTag(tag)
             .build()
 
 }

@@ -27,6 +27,7 @@ import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
 import com.rustamaliiev.sarmatapp.utils.GodFather
+import com.rustamaliiev.sarmatapp.utils.notificationChannelId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -96,7 +97,7 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
         )
         return NotificationCompat.Builder(
             context.applicationContext,
-            context.getString(R.string.notification_channel_id)
+            notificationChannelId
         )
             .setContentTitle(movieDetails.title)
             .setContentText(genres)
@@ -135,7 +136,7 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
                         isFirstResource: Boolean
                     ): Boolean {
                         notificationManager.notify(
-                            context.getString(R.string.notification_channel_id),
+                            notificationChannelId,
                             1,
                             notificationBuilder.setStyle(
                                 NotificationCompat.BigPictureStyle().bigPicture(resource)
@@ -149,12 +150,13 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
                         transition: Transition<in Bitmap>?
                     ) {
                     }
+
                     override fun onLoadCleared(placeholder: Drawable?) {
                     }
                 })
         } else {
             notificationManager.notify(
-                context.getString(R.string.notification_channel_id),
+                "notification_channel_id",
                 1,
                 notificationBuilder.setStyle(
                     NotificationCompat.BigTextStyle().bigText(movieDetails.storyLine)

@@ -26,8 +26,7 @@ class MoviesNetworkRepository : MovieRepository {
                 rating = movieResponse.voteAverage / 2,
                 reviewCount = movieResponse.votesCount,
                 ageLimit = if (movieResponse.adult) SystemConfig.ADULT_AGE else SystemConfig.CHILD_AGE,
-
-                // where can I get running time? only in movie details
+                //TODO: add it later
                 runningTime = 999,
 
                 genres = genres.filter { genreResponse ->

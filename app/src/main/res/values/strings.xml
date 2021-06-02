@@ -38,7 +38,6 @@
     <string name="lets_watch_movie">Let\'s watch movie:</string>
     <string name="what_the_movie_about">What the movie\'s about:</string>
     <string name="name_intent">idMovie:</string>
-    <string name="notification_channel_id">MovieView</string>
     <string name="channel_new_movie_description">we have new movie in our database</string>
 
 </resources>
