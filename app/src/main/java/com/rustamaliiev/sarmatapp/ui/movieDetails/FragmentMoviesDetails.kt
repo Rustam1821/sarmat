@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.databinding.FragmentMoviesDetailsBinding
 import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
 import com.rustamaliiev.sarmatapp.ui.movieDetails.adapter.ActorListAdapter
@@ -43,7 +44,8 @@ class FragmentMoviesDetails : Fragment() {
 
             //TODO 04: setting up actorRecyclerView (
             actorsRecyclerView.apply {
-                layoutManager = LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
+                layoutManager =
+                    LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = actorAdapter
             }
 
@@ -73,7 +75,7 @@ class FragmentMoviesDetails : Fragment() {
         } else {
             Toast.makeText(
                 context,
-                "There is no app can support this action",
+                getString(R.string.there_is_no_app),
                 Toast.LENGTH_SHORT
             )
                 .show()
@@ -84,10 +86,13 @@ class FragmentMoviesDetails : Fragment() {
         val movieDetails = viewModel.detailsLiveData.value
 
         data = CalendarContract.Events.CONTENT_URI
-        putExtra(CalendarContract.Events.TITLE, "Let's watch movie: \"${movieDetails?.title}\"")
+        putExtra(
+            CalendarContract.Events.TITLE,
+            "${getString(R.string.lets_watch_movie)}\n\"${movieDetails?.title}\""
+        )
         putExtra(
             CalendarContract.Events.DESCRIPTION,
-            "What the movie's about:\n${movieDetails?.storyLine}"
+            "${getString(R.string.what_the_movie_about)}\n${movieDetails?.storyLine}"
         )
         putExtra(CalendarContract.Events.ALL_DAY, false)
     }

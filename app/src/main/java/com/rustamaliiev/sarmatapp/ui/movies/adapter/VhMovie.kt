@@ -1,42 +1,35 @@
 package com.rustamaliiev.sarmatapp.ui.movies.adapter
 
-import android.view.View
-import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.rustamaliiev.sarmatapp.R
+import com.rustamaliiev.sarmatapp.databinding.ViewHolderMovieBinding
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
 
 
-class VhMovie(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val tvMovieName: TextView = itemView.findViewById(R.id.film_name)
-    private val tvGenre: TextView = itemView.findViewById(R.id.genre)
-    private val tvReviews: TextView = itemView.findViewById(R.id.reviews)
-    private val tvAudienceLimit: TextView = itemView.findViewById(R.id.audience_limit)
-    private val tvDuration: TextView = itemView.findViewById(R.id.duration)
-    private val ivPoster: ImageView = itemView.findViewById(R.id.poster_color_image_view)
-    private val rtRatingBar: RatingBar = itemView.findViewById(R.id.rating_bar)
+class VhMovie(vhMovieBinding: ViewHolderMovieBinding) :
+    RecyclerView.ViewHolder(vhMovieBinding.root) {
+    private val binding = vhMovieBinding
 
     fun bind(movie: Movie, itemClickListener: (Movie) -> Unit) {
         itemView.setOnClickListener {
             itemClickListener(movie)
         }
-        tvMovieName.text = movie.title
-        tvGenre.text = movie.genres.joinToString(", ") { it.name }
-        tvReviews.text = "${movie.reviewCount} reviews"
-        tvAudienceLimit.text = "+${movie.ageLimit}"
-        tvDuration.text = "${movie.runningTime} min"
-        tvDuration.isVisible = false
+        with(binding) {
+            filmName.text = movie.title
+            genre.text = movie.genres.joinToString(", ") { it.name }
+            reviews.text = "${movie.reviewCount} reviews"
+            audienceLimit.text = "+${movie.ageLimit}"
+            duration.text = "${movie.runningTime} min"
+            duration.isVisible = false
 
-        Glide
-            .with(ivPoster)
-            .load(movie.imageUrl)
-            .centerCrop()
-            .into(ivPoster)
+            Glide
+                .with(binding.posterColorImageView)
+                .load(movie.imageUrl)
+                .centerCrop()
+                .into(binding.posterColorImageView)
 
-        rtRatingBar.rating = movie.rating.toFloat()
+            ratingBar.rating = movie.rating.toFloat()
+        }
     }
 }
