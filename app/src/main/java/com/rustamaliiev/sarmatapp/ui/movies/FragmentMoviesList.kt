@@ -10,7 +10,6 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.databinding.FragmentMoviesListBinding
 import com.rustamaliiev.sarmatapp.ui.entity.FilmGroups
 import com.rustamaliiev.sarmatapp.ui.movies.adapter.MovieListAdapter

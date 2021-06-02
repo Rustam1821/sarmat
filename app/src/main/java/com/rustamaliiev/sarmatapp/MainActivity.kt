@@ -27,7 +27,10 @@ class MainActivity : AppCompatActivity(), FragmentMoviesListClickListener {
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
 //                .add(R.id.main_container, FragmentMoviesList.newInstance())
-                .add(binding.mainContainer.id, FragmentMoviesList.newInstance()) //TODO 01: is it ok?
+                .add(
+                    binding.mainContainer.id,
+                    FragmentMoviesList.newInstance()
+                ) //TODO 01: is it ok?
                 .commit()
             intent?.let(::startIntent)
         }
@@ -36,11 +39,11 @@ class MainActivity : AppCompatActivity(), FragmentMoviesListClickListener {
     override fun onMovieCardClicked(movieID: Int) {
         val movieDetailsFragment = FragmentMoviesDetails.newInstance(movieID)
         setSmoothShifting(movieDetailsFragment)
-            supportFragmentManager.beginTransaction()
-    //            .add(R.id.main_container, movieDetailsFragment)
-                .add(binding.mainContainer.id, movieDetailsFragment) //TODO 02: is it ok?
-                .addToBackStack(null)
-                .commit()
+        supportFragmentManager.beginTransaction()
+            //            .add(R.id.main_container, movieDetailsFragment)
+            .add(binding.mainContainer.id, movieDetailsFragment) //TODO 02: is it ok?
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun setSmoothShifting(movieDetailsFragment: FragmentMoviesDetails) {

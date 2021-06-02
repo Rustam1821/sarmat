@@ -156,7 +156,7 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
                 })
         } else {
             notificationManager.notify(
-                "notification_channel_id",
+                notificationChannelId,
                 1,
                 notificationBuilder.setStyle(
                     NotificationCompat.BigTextStyle().bigText(movieDetails.storyLine)

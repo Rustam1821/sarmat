@@ -10,6 +10,7 @@ import androidx.work.WorkManager
 import com.rustamaliiev.sarmatapp.data.AppDatabase
 import com.rustamaliiev.sarmatapp.domain.updater.MoviesWorker
 import com.rustamaliiev.sarmatapp.utils.notificationChannelId
+import com.rustamaliiev.sarmatapp.utils.notificationName
 
 class SarmatApp : Application() {
 
@@ -28,7 +29,7 @@ class SarmatApp : Application() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 notificationChannelId,
-                getString(R.string.new_movie_notification),
+                notificationName,
                 NotificationManager.IMPORTANCE_LOW
             )
             NotificationManagerCompat.from(applicationContext)
@@ -39,6 +40,10 @@ class SarmatApp : Application() {
     private fun runWorkManager() {
         val worker = MoviesWorker()
         WorkManager.getInstance(applicationContext)
-            .enqueueUniquePeriodicWork("my_worker", ExistingPeriodicWorkPolicy.KEEP, worker.moviesTaskRequest)
+            .enqueueUniquePeriodicWork(
+                "my_worker",
+                ExistingPeriodicWorkPolicy.KEEP,
+                worker.moviesTaskRequest
+            )
     }
 }

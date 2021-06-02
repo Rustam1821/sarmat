@@ -1,10 +1,7 @@
 package com.rustamaliiev.sarmatapp.ui.movieDetails.adapter
 
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.databinding.ViewHolderActorBinding
 import com.rustamaliiev.sarmatapp.domain.entity.Actor
 

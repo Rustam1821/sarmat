@@ -6,5 +6,5 @@ import androidx.lifecycle.ViewModelProvider
 class MoviesDetailsViewModelFactory(private val movieID: Int?) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-        MoviesDetailsViewModel(movieID?:0) as T
+        MoviesDetailsViewModel(movieID ?: 0) as T
 }
