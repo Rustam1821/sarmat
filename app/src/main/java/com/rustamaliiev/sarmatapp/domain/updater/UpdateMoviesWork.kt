@@ -7,10 +7,10 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.work.*
+import androidx.work.CoroutineWorker
+import androidx.work.WorkerParameters
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -26,7 +26,7 @@ import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
 import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
-import com.rustamaliiev.sarmatapp.utils.sd
+import com.rustamaliiev.sarmatapp.utils.GodFather
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -40,7 +40,6 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
             movieNotification?.let { showNotification(it) }
             Result.success()
         } catch (error: Throwable) {
-            Log.e(TAG, "Error in $TAG = $error")
             Result.failure()
         }
     }
@@ -58,23 +57,20 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
         val localMovieRepository: MovieRepository = LocalMovieRepository(db)
         val remoteMovieRepository: MovieRepository = MoviesNetworkRepository()
         var newMovies = emptySet<Movie?>()
-        Log.d("QQQ", "saved group names size is ${db.getMovieDao().getSavedGroupNames().size}")
         db.getMovieDao().getSavedGroupNames().forEach { filmGroup ->
             val savedMoviesList = localMovieRepository.loadMovies(filmGroup)
             val updatedMoviesList = remoteMovieRepository.loadMovies(filmGroup).toMutableList()
             newMovies =
                 newMovies.union(updatedMoviesList.filter { it.id !in savedMoviesList.map { movie -> movie.id } })
-            Log.d("QQQ", "updated movies list size is ${updatedMoviesList.size}")
             localMovieRepository.saveMovies(updatedMoviesList, filmGroup)
         }
 
-        if(sd.flagDeleteGodFather){
+        if (GodFather.flagDeleteGodFather) {
             localMovieRepository.deleteMovie(238)
-            sd.flagDeleteGodFather = false
+            GodFather.flagDeleteGodFather = false
         }
 
 
-        Log.d("QQQ", "newMovies are: ${newMovies.joinToString { it?.title ?: "" }}")
         return newMovies
             .maxByOrNull { it?.rating ?: 0.0 }
             ?.id
@@ -128,7 +124,6 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
                         target: Target<Bitmap>?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        Log.d(TAG, "notification error glide")
                         return false
                     }
 
@@ -153,9 +148,7 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
                         resource: Bitmap,
                         transition: Transition<in Bitmap>?
                     ) {
-                        Log.d(TAG, "notification completed")
                     }
-
                     override fun onLoadCleared(placeholder: Drawable?) {
                     }
                 })

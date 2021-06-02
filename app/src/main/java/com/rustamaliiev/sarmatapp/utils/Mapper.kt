@@ -6,7 +6,6 @@ import com.rustamaliiev.sarmatapp.domain.entity.Genre
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
 import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
 import com.rustamaliiev.sarmatapp.network.config.SystemConfig
-import com.rustamaliiev.sarmatapp.network.entity.ApiMovieResponse
 
 fun mapMovieDomainToDB(movies: List<Movie>, filmGroup: String): List<MovieDB> {
     return movies.map { movie ->
@@ -80,6 +79,18 @@ fun mapMovieDetailsActorGenrePairToMovieDetails(movieDetailsAGPair: MovieDetails
             }
         )
     }
+
+fun mapMovieDetailsToMovieDetailsBD(md: MovieDetails): MovieDetailsDB =
+    MovieDetailsDB(
+        movieId = md.id,
+        title = md.title,
+        detailImageUrl = md.detailImageUrl,
+        rating = md.rating,
+        reviewCount = md.reviewCount,
+        ageLimit = md.ageLimit,
+        runTime = md.runtime,
+        storyLine = md.storyLine,
+    )
 
 private fun buildImageUrl(url: String, path: String?): String? {
     return path?.let {

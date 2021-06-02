@@ -1,6 +1,7 @@
 package com.rustamaliiev.sarmatapp.utils
 
-val appTAG = "com.aliiev.satmat"
-object sd {
+const val appTAG = "com.aliiev.satmat"
+
+object GodFather {
     var flagDeleteGodFather = true
 }

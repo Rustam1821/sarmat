@@ -1,19 +1,9 @@
 package com.rustamaliiev.sarmatapp.domain.updater
 
-import android.util.Log
 import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkRequest
-import com.rustamaliiev.sarmatapp.R
-import com.rustamaliiev.sarmatapp.SarmatApp
-import com.rustamaliiev.sarmatapp.domain.entity.Movie
-import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
-import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository
-import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
 import com.rustamaliiev.sarmatapp.utils.appTAG
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 
 class MoviesWorker {

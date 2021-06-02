@@ -1,6 +1,5 @@
 package com.rustamaliiev.sarmatapp.domain.repository
 
-import android.util.Log
 import com.rustamaliiev.sarmatapp.domain.entity.Actor
 import com.rustamaliiev.sarmatapp.domain.entity.Genre
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
@@ -43,31 +42,6 @@ class MoviesNetworkRepository : MovieRepository {
         }
     }
 
-    override suspend fun saveMovies(movies: List<Movie>, movieGroup: String) {
-//      networkrepo doesn't need it
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun updateMovies(movies: List<Movie>, movieGroup: String) {
-//      networkrepo doesn't need it
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
-//      networkrepo doesn't need it
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun deleteMovie(movieId: Int) {
-//      networkrepo doesn't need it
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun observeMovies(selector: String): Flow<List<Movie>> {
-//      networkrepo doesn't need it
-        TODO("Not yet implemented")
-    }
-
     override suspend fun loadMovie(movieId: Int): MovieDetails {
         getConfigurations()
         val movieDetails = NetworkModule.movieApi.getMovieDetails(movieId)
@@ -93,6 +67,28 @@ class MoviesNetworkRepository : MovieRepository {
             }
         )
     }
+
+    // region  networkrepo doesn't need all this funs
+    override suspend fun saveMovies(movies: List<Movie>, movieGroup: String) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateMovies(movies: List<Movie>, movieGroup: String) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteMovie(movieId: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun observeMovies(selector: String): Flow<List<Movie>> {
+        TODO("Not yet implemented")
+    }
+    // endregion  networkrepo doesn't need all this funs
 
     private suspend fun getConfigurations() {
         if (!isConfigReceived) {

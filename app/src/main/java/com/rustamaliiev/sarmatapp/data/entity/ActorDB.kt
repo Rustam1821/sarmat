@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "actors",
 )
-
 data class ActorDB(
     @PrimaryKey
     @ColumnInfo(name = "actor_id")
@@ -16,4 +15,4 @@ data class ActorDB(
     val name: String,
     val imageUrl: String?,
 
-)
+    )

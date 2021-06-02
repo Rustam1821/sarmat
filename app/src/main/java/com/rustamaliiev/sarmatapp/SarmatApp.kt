@@ -4,13 +4,11 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.WorkManager
 import com.rustamaliiev.sarmatapp.data.AppDatabase
 import com.rustamaliiev.sarmatapp.domain.updater.MoviesWorker
-import com.rustamaliiev.sarmatapp.utils.appTAG
 
 class SarmatApp : Application() {
 

@@ -10,7 +10,6 @@ import com.rustamaliiev.sarmatapp.utils.mapGenreDomainToDB
 import com.rustamaliiev.sarmatapp.utils.mapMovieDomainToDB
 import com.rustamaliiev.sarmatapp.utils.mapToMovieGenrePairs
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Dao
 interface MovieDao {
@@ -21,10 +20,6 @@ interface MovieDao {
     //if suspend -> "error: Not sure how to convert a Cursor to this method's return type"
     @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup ORDER BY movie_rating DESC")
     fun getMoviesFlow(movieGroup: String): Flow<List<MovieGenrePair>>
-
-    //instead of this use getMoviesFlow.first
-    @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup ORDER BY movie_rating DESC")
-    suspend fun getMovies(movieGroup: String): List<MovieGenrePair>
 
     @Query("SELECT movie_group FROM movies GROUP BY movie_group")
     suspend fun getSavedGroupNames(): List<String>

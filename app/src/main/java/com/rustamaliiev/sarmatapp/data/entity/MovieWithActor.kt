@@ -8,7 +8,7 @@ import androidx.room.Entity
     primaryKeys = ["movie_id", "actor_id"]
 )
 
-data class MovieWithActor (
+data class MovieWithActor(
     @ColumnInfo(name = "movie_id")
     val movieId: Int,
 
