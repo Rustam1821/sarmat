@@ -10,7 +10,6 @@ import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.databinding.FragmentMoviesListBinding
 import com.rustamaliiev.sarmatapp.ui.entity.FilmGroups
@@ -37,25 +36,34 @@ class FragmentMoviesList : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val movieAdapter = MovieListAdapter()
-
         initSpinner()
 
-        view.findViewById<RecyclerView>(R.id.moviesRecyclerView).apply {
+        val movieAdapter = MovieListAdapter().apply {
+            itemClickListener = { movie ->
+                viewModel.handleMovieId(movie.id)
+            }
+        }
+
+        binding.moviesRecyclerView.apply {
             layoutManager = GridLayoutManager(view.context, 2)
             adapter = movieAdapter
         }
 
-        movieAdapter.itemClickListener = { movie ->
-            viewModel.handleMovieId(movie.id)
-        }
+        with(viewModel) {
+            moviesLiveData.observe(viewLifecycleOwner) { movies ->
+                movieAdapter.movies = movies
+            }
 
-        viewModel.moviesLiveData.observe(viewLifecycleOwner) { movies ->
-            movieAdapter.movies = movies
+            movieIdLiveData.observe(viewLifecycleOwner) { id ->
+                (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked(id)
+
+            }
         }
-        viewModel.movieIdLiveData.observe(viewLifecycleOwner) { id ->
-            (activity as? FragmentMoviesListClickListener)?.onMovieCardClicked(id)
-        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun initSpinner() {
