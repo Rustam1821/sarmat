@@ -2,22 +2,19 @@ package com.rustamaliiev.sarmatapp.ui.movies
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.R
+import com.rustamaliiev.sarmatapp.databinding.FragmentMoviesListBinding
 import com.rustamaliiev.sarmatapp.ui.entity.FilmGroups
 import com.rustamaliiev.sarmatapp.ui.movies.adapter.MovieListAdapter
-import kotlinx.coroutines.launch
 
 class FragmentMoviesList : Fragment() {
 
@@ -25,12 +22,16 @@ class FragmentMoviesList : Fragment() {
         MoviesListViewModelFactory()
     }
 
+    private var _binding: FragmentMoviesListBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_movies_list, container, false)
+        _binding = FragmentMoviesListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
