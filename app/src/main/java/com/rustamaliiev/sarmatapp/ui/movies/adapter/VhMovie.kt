@@ -7,15 +7,14 @@ import com.rustamaliiev.sarmatapp.databinding.ViewHolderMovieBinding
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
 
 
-class VhMovie(vhMovieBinding: ViewHolderMovieBinding) :
+class VhMovie(private val vhMovieBinding: ViewHolderMovieBinding) :
     RecyclerView.ViewHolder(vhMovieBinding.root) {
-    private val binding = vhMovieBinding
 
     fun bind(movie: Movie, itemClickListener: (Movie) -> Unit) {
         itemView.setOnClickListener {
             itemClickListener(movie)
         }
-        with(binding) {
+        with(vhMovieBinding) {
             filmName.text = movie.title
             genre.text = movie.genres.joinToString(", ") { it.name }
             reviews.text = "${movie.reviewCount} reviews"
@@ -24,10 +23,10 @@ class VhMovie(vhMovieBinding: ViewHolderMovieBinding) :
             duration.isVisible = false
 
             Glide
-                .with(binding.posterColorImageView)
+                .with(vhMovieBinding.posterColorImageView)
                 .load(movie.imageUrl)
                 .centerCrop()
-                .into(binding.posterColorImageView)
+                .into(vhMovieBinding.posterColorImageView)
 
             ratingBar.rating = movie.rating.toFloat()
         }
