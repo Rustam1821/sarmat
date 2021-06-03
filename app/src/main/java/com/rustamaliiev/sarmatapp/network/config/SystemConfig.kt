@@ -6,4 +6,3 @@ object SystemConfig {
     const val CHILD_AGE = 13
     const val ADULT_AGE = 16
 }
-

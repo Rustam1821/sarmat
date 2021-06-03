@@ -26,7 +26,7 @@ class MoviesNetworkRepository : MovieRepository {
                 rating = movieResponse.voteAverage / 2,
                 reviewCount = movieResponse.votesCount,
                 ageLimit = if (movieResponse.adult) SystemConfig.ADULT_AGE else SystemConfig.CHILD_AGE,
-                //TODO: add it later
+
                 runningTime = 999,
 
                 genres = genres.filter { genreResponse ->
@@ -69,23 +69,23 @@ class MoviesNetworkRepository : MovieRepository {
 
     // region  networkrepo doesn't need all this funs
     override suspend fun saveMovies(movies: List<Movie>, movieGroup: String) {
-        TODO("Not yet implemented")
+        TODO()
     }
 
     override suspend fun updateMovies(movies: List<Movie>, movieGroup: String) {
-        TODO("Not yet implemented")
+        TODO()
     }
 
     override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
-        TODO("Not yet implemented")
+        TODO()
     }
 
     override suspend fun deleteMovie(movieId: Int) {
-        TODO("Not yet implemented")
+        TODO()
     }
 
     override suspend fun observeMovies(selector: String): Flow<List<Movie>> {
-        TODO("Not yet implemented")
+        TODO()
     }
     // endregion  networkrepo doesn't need all this funs
 

@@ -17,7 +17,6 @@ interface MovieDao {
     @Query("DELETE FROM movies WHERE movie_id LIKE :movieId")
     suspend fun deleteMovie(movieId: Int)
 
-    //if suspend -> "error: Not sure how to convert a Cursor to this method's return type"
     @Query("SELECT * FROM movies WHERE movie_group LIKE :movieGroup ORDER BY movie_rating DESC")
     fun getMoviesFlow(movieGroup: String): Flow<List<MovieGenrePair>>
 

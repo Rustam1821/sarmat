@@ -171,10 +171,6 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
             )
         }
     }
-
-    companion object {
-        private const val TAG = "MoviesWorker"
-    }
 }
 
 private var movieId = "movie_id"
