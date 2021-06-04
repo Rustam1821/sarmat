@@ -16,7 +16,8 @@ class ActorListAdapter : RecyclerView.Adapter<VhActor>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VhActor =
         VhActor(
-            ViewHolderActorBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ViewHolderActorBinding
+                .inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
     override fun onBindViewHolder(holder: VhActor, position: Int) {

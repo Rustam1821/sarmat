@@ -14,12 +14,12 @@ import com.bumptech.glide.Glide
 import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.databinding.FragmentMoviesDetailsBinding
 import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.ui.entity.IntentCheckedResult
 import com.rustamaliiev.sarmatapp.ui.movieDetails.adapter.ActorListAdapter
 
 class FragmentMoviesDetails : Fragment() {
     private val actorAdapter: ActorListAdapter = ActorListAdapter()
 
-    //TODO 07 : "The documentation recommends you do the following in your Fragments:", is it ok?
     private var _binding: FragmentMoviesDetailsBinding? = null
     private val binding get() = _binding!!
 
@@ -42,19 +42,17 @@ class FragmentMoviesDetails : Fragment() {
 
         with(binding) {
 
-            //TODO 04: setting up actorRecyclerView (
             actorsRecyclerView.apply {
                 layoutManager =
                     LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = actorAdapter
             }
 
-            //TODO 05: setting up backTextView
             backTextView.setOnClickListener {
                 activity?.onBackPressed()
             }
 
-            //TODO 06: setting up addToCalendarButton
+            viewModel.calendarIntendLiveData.observe(viewLifecycleOwner,::onIntentCheckedResult)
             addToCalendar.setOnClickListener {
                 addEventToCalendar()
             }
@@ -68,18 +66,28 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     private fun addEventToCalendar() {
-        val intent = getCalendarIntent()
+         viewModel.onCalendarIntentChecked(checkCalendarIntent())
+//        val intent = getCalendarIntent()
+//
+//        if (context?.packageManager?.let { intent.resolveActivity(it) } != null) { //resolve is there an app for handling this Action
+//            startActivity(intent)
+//        } else {
+//            //TODO: extract into separate fun
+//            Toast.makeText(
+//                context,
+//                getString(R.string.there_is_no_app),
+//                Toast.LENGTH_SHORT
+//            )
+//                .show()
+//        }
+    }
 
-        if (context?.packageManager?.let { intent.resolveActivity(it) } != null) { //resolve is there an app for handling this Action
-            startActivity(intent)
-        } else {
-            Toast.makeText(
-                context,
-                getString(R.string.there_is_no_app),
-                Toast.LENGTH_SHORT
-            )
-                .show()
-        }
+    private fun checkCalendarIntent(): Boolean {
+        return true
+    }
+
+    private fun onIntentCheckedResult(intentCheckedResult: IntentCheckedResult) {
+
     }
 
     private fun getCalendarIntent() = with(Intent(Intent.ACTION_INSERT)) {

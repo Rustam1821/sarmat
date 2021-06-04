@@ -10,6 +10,7 @@ import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
 import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
+import com.rustamaliiev.sarmatapp.ui.entity.IntentCheckedResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -17,7 +18,11 @@ class MoviesDetailsViewModel(private val movieID: Int) : ViewModel() {
     private val _detailsLiveData = MutableLiveData<MovieDetails>()
     val detailsLiveData: LiveData<MovieDetails> = _detailsLiveData
 
+    private val _calendarIntendLiveData = MutableLiveData<IntentCheckedResult>()
+    val calendarIntendLiveData: LiveData<IntentCheckedResult> = _calendarIntendLiveData
+
     private val localRepository: MovieRepository = LocalMovieRepository(SarmatApp.db)
+
     private val dao: MovieDetailsDao = SarmatApp.db.getMovieDetailsDao()
     private val remoteRepository: MovieRepository = MoviesNetworkRepository()
 
@@ -38,5 +43,11 @@ class MoviesDetailsViewModel(private val movieID: Int) : ViewModel() {
         if (shouldSaveMovieDetails) {
             localRepository.saveMovieDetails(movie)
         }
+    }
+
+    fun onCalendarIntentChecked(isChecked: Boolean) {
+        _calendarIntendLiveData.postValue(
+            if (isChecked) IntentCheckedResult.Success else IntentCheckedResult.Error
+        )
     }
 }
