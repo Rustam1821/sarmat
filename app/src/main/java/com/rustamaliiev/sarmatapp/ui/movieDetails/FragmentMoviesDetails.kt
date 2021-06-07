@@ -1,5 +1,6 @@
 package com.rustamaliiev.sarmatapp.ui.movieDetails
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.CalendarContract
@@ -51,7 +52,7 @@ class FragmentMoviesDetails : Fragment() {
                 activity?.onBackPressed()
             }
 
-            viewModel.calendarIntendLiveData.observe(viewLifecycleOwner,::onIntentCheckedResult)
+            viewModel.calendarIntendLiveData.observe(viewLifecycleOwner, ::onIntentCheckedResult)
             addToCalendar.setOnClickListener {
                 addEventToCalendar()
             }
@@ -65,31 +66,27 @@ class FragmentMoviesDetails : Fragment() {
     }
 
     private fun addEventToCalendar() {
-         viewModel.onCalendarIntentChecked(checkCalendarIntent())
-//        val intent = getCalendarIntent()
-//
-//        if (context?.packageManager?.let { intent.resolveActivity(it) } != null) { //resolve is there an app for handling this Action
-//            startActivity(intent)
-//        } else {
-//            //TODO: extract into separate fun
-//            Toast.makeText(
-//                context,
-//                getString(R.string.there_is_no_app),
-//                Toast.LENGTH_SHORT
-//            )
-//                .show()
-//        }
+        viewModel.onCalendarIntentChecked(checkCalendarIntent())
     }
 
+    private fun onIntentCheckedResult(result: IntentCheckedResult) {
+        when (result) {
+            IntentCheckedResult.Success -> startActivity(createCalendarIntent())
+            IntentCheckedResult.Error -> Toast.makeText(
+                context,
+                getString(R.string.there_is_no_app),
+                Toast.LENGTH_SHORT
+            )
+                .show()
+        }
+    }
+
+    @SuppressLint("QueryPermissionsNeeded")
     private fun checkCalendarIntent(): Boolean {
-        return true
+        return context?.packageManager?.let { createCalendarIntent().resolveActivity(it) } != null
     }
 
-    private fun onIntentCheckedResult(intentCheckedResult: IntentCheckedResult) {
-
-    }
-
-    private fun getCalendarIntent() = with(Intent(Intent.ACTION_INSERT)) {
+    private fun createCalendarIntent() = with(Intent(Intent.ACTION_INSERT)) {
         val movieDetails = viewModel.detailsLiveData.value
 
         data = CalendarContract.Events.CONTENT_URI
@@ -128,7 +125,7 @@ class FragmentMoviesDetails : Fragment() {
 
         fun newInstance(id: Int): FragmentMoviesDetails {
             val fragment = FragmentMoviesDetails()
-            var bundle = Bundle()
+            val bundle = Bundle()
             bundle.putInt(MOVIE_ID, id)
             fragment.arguments = bundle
             return fragment
