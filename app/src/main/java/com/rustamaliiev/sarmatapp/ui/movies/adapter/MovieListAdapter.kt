@@ -3,13 +3,10 @@ package com.rustamaliiev.sarmatapp.ui.movies.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.databinding.ViewHolderMovieBinding
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
-import com.rustamaliiev.sarmatapp.ui.movies.adapter.VhMovie
-import com.rustamaliiev.sarmatapp.utils.inflate
 
-class MovieListAdapter : RecyclerView.Adapter<VhMovie>() {
+class MovieListAdapter : RecyclerView.Adapter<ViewHolderMovie>() {
 
     var movies: List<Movie> = emptyList()
         set(value) {
@@ -19,13 +16,13 @@ class MovieListAdapter : RecyclerView.Adapter<VhMovie>() {
 
     var itemClickListener: (Movie) -> Unit = {}
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VhMovie =
-        VhMovie(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderMovie =
+        ViewHolderMovie(
             ViewHolderMovieBinding
                 .inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
-    override fun onBindViewHolder(holder: VhMovie, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderMovie, position: Int) {
         val movie = movies[position]
         holder.bind(movie, itemClickListener)
     }

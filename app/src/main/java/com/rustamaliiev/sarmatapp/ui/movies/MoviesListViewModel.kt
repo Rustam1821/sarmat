@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rustamaliiev.sarmatapp.SarmatApp
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
+import com.rustamaliiev.sarmatapp.domain.repository.BaseMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
-import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository
+import com.rustamaliiev.sarmatapp.domain.repository.CrudMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -19,8 +20,8 @@ class MoviesListViewModel : ViewModel() {
     private val _movieIdLiveData = MutableLiveData<Int>()
     val movieIdLiveData = _movieIdLiveData
 
-    private val localRepository: MovieRepository = LocalMovieRepository(SarmatApp.db)
-    private val remoteRepository: MovieRepository = MoviesNetworkRepository()
+    private val localRepository: CrudMovieRepository = LocalMovieRepository(SarmatApp.db)
+    private val remoteRepository: BaseMovieRepository = MoviesNetworkRepository()
 
     fun loadMovies(selector: String = "top_rated") {
         viewModelScope.launch(Dispatchers.IO) {

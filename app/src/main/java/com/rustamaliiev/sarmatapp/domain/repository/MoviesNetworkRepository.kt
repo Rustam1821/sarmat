@@ -8,7 +8,7 @@ import com.rustamaliiev.sarmatapp.network.config.NetworkModule
 import com.rustamaliiev.sarmatapp.network.config.SystemConfig
 import kotlinx.coroutines.flow.Flow
 
-class MoviesNetworkRepository : MovieRepository {
+class MoviesNetworkRepository : BaseMovieRepository {
     private lateinit var imagesBaseUrl: String
     private var isConfigReceived = false
 
@@ -66,28 +66,6 @@ class MoviesNetworkRepository : MovieRepository {
             }
         )
     }
-
-    // region  networkrepo doesn't need all this funs
-    override suspend fun saveMovies(movies: List<Movie>, movieGroup: String) {
-        TODO()
-    }
-
-    override suspend fun updateMovies(movies: List<Movie>, movieGroup: String) {
-        TODO()
-    }
-
-    override suspend fun saveMovieDetails(movieDetailsFromNet: MovieDetails) {
-        TODO()
-    }
-
-    override suspend fun deleteMovie(movieId: Int) {
-        TODO()
-    }
-
-    override suspend fun observeMovies(selector: String): Flow<List<Movie>> {
-        TODO()
-    }
-    // endregion  networkrepo doesn't need all this funs
 
     private suspend fun getConfigurations() {
         if (!isConfigReceived) {

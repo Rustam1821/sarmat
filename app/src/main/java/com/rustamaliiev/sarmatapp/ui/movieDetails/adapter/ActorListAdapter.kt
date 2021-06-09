@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rustamaliiev.sarmatapp.databinding.ViewHolderActorBinding
 import com.rustamaliiev.sarmatapp.domain.entity.Actor
 
-class ActorListAdapter : RecyclerView.Adapter<VhActor>() {
+class ActorListAdapter : RecyclerView.Adapter<ViewHolderActor>() {
 
     var actors: List<Actor> = emptyList()
         set(value) {
@@ -14,13 +14,13 @@ class ActorListAdapter : RecyclerView.Adapter<VhActor>() {
             notifyDataSetChanged()
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VhActor =
-        VhActor(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderActor =
+        ViewHolderActor(
             ViewHolderActorBinding
                 .inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
-    override fun onBindViewHolder(holder: VhActor, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolderActor, position: Int) {
         val actor = actors[position]
         holder.bind(actor)
     }

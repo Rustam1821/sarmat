@@ -7,8 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.rustamaliiev.sarmatapp.SarmatApp
 import com.rustamaliiev.sarmatapp.data.dao.MovieDetailsDao
 import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.domain.repository.BaseMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
-import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository
+import com.rustamaliiev.sarmatapp.domain.repository.CrudMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
 import com.rustamaliiev.sarmatapp.ui.entity.IntentCheckedResult
 import kotlinx.coroutines.Dispatchers
@@ -21,10 +22,10 @@ class MoviesDetailsViewModel(private val movieID: Int) : ViewModel() {
     private val _calendarIntendLiveData = MutableLiveData<IntentCheckedResult>()
     val calendarIntendLiveData: LiveData<IntentCheckedResult> = _calendarIntendLiveData
 
-    private val localRepository: MovieRepository = LocalMovieRepository(SarmatApp.db)
+    private val localRepository: CrudMovieRepository = LocalMovieRepository(SarmatApp.db)
 
     private val dao: MovieDetailsDao = SarmatApp.db.getMovieDetailsDao()
-    private val remoteRepository: MovieRepository = MoviesNetworkRepository()
+    private val remoteRepository: BaseMovieRepository = MoviesNetworkRepository()
 
     init {
         loadMovie()

@@ -6,7 +6,7 @@ import com.rustamaliiev.sarmatapp.databinding.ViewHolderActorBinding
 import com.rustamaliiev.sarmatapp.domain.entity.Actor
 
 
-class VhActor(private val vhActorBinding: ViewHolderActorBinding) :
+class ViewHolderActor(private val vhActorBinding: ViewHolderActorBinding) :
     RecyclerView.ViewHolder(vhActorBinding.root) {
 
     fun bind(actor: Actor) {

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
-class LocalMovieRepository(private val db: AppDatabase) : MovieRepository {
+class LocalMovieRepository(private val db: AppDatabase) : CrudMovieRepository {
     private val movieDao by lazy { db.getMovieDao() }
     private val movieDetailsDao by lazy { db.getMovieDetailsDao() }
 

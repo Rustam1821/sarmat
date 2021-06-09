@@ -7,7 +7,7 @@ import com.rustamaliiev.sarmatapp.databinding.ViewHolderMovieBinding
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
 
 
-class VhMovie(private val vhMovieBinding: ViewHolderMovieBinding) :
+class ViewHolderMovie(private val vhMovieBinding: ViewHolderMovieBinding) :
     RecyclerView.ViewHolder(vhMovieBinding.root) {
 
     fun bind(movie: Movie, itemClickListener: (Movie) -> Unit) {

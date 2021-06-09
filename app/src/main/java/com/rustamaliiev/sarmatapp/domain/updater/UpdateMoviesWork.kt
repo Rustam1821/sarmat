@@ -23,8 +23,9 @@ import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.SarmatApp
 import com.rustamaliiev.sarmatapp.domain.entity.Movie
 import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.domain.repository.BaseMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
-import com.rustamaliiev.sarmatapp.domain.repository.MovieRepository
+import com.rustamaliiev.sarmatapp.domain.repository.CrudMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
 import com.rustamaliiev.sarmatapp.utils.GodFather
 import com.rustamaliiev.sarmatapp.utils.notificationChannelId
@@ -55,8 +56,8 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
 
     private suspend fun getMovieDetails(): MovieDetails? {
         val db = SarmatApp.db
-        val localMovieRepository: MovieRepository = LocalMovieRepository(db)
-        val remoteMovieRepository: MovieRepository = MoviesNetworkRepository()
+        val localMovieRepository: CrudMovieRepository = LocalMovieRepository(db)
+        val remoteMovieRepository: BaseMovieRepository = MoviesNetworkRepository()
         var newMovies = emptySet<Movie?>()
         db.getMovieDao().getSavedGroupNames().forEach { filmGroup ->
             val savedMoviesList = localMovieRepository.loadMovies(filmGroup)
