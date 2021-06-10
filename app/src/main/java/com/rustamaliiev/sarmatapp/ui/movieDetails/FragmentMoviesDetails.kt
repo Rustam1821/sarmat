@@ -10,11 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.databinding.FragmentMoviesDetailsBinding
-import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.domain.entities.MovieDetails
 import com.rustamaliiev.sarmatapp.ui.entity.IntentCheckedResult
 import com.rustamaliiev.sarmatapp.ui.movieDetails.adapter.ActorListAdapter
 
@@ -44,8 +43,6 @@ class FragmentMoviesDetails : Fragment() {
         with(binding) {
 
             actorsRecyclerView.apply {
-                layoutManager =
-                    LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
                 adapter = actorAdapter
             }
 
@@ -93,11 +90,11 @@ class FragmentMoviesDetails : Fragment() {
         data = CalendarContract.Events.CONTENT_URI
         putExtra(
             CalendarContract.Events.TITLE,
-            "${getString(R.string.lets_watch_movie)}\n\"${movieDetails?.title}\""
+            getString(R.string.lets_watch_movie, movieDetails?.title)
         )
         putExtra(
             CalendarContract.Events.DESCRIPTION,
-            "${getString(R.string.what_the_movie_about)}\n${movieDetails?.storyLine}"
+            getString(R.string.what_the_movie_about, movieDetails?.storyLine)
         )
         putExtra(CalendarContract.Events.ALL_DAY, false)
     }
@@ -115,7 +112,7 @@ class FragmentMoviesDetails : Fragment() {
             ageLimit.text = "${movie.ageLimit}+"
             genre.text = movie.genres.joinToString(", ") { it.name }
             ratingBar.rating = movie.rating.toFloat()
-            reviews.text = "${movie.reviewCount} Reviews"
+            reviews.text = getString(R.string.reviews, movie.reviewCount)
             storyText.text = movie.storyLine
         }
     }

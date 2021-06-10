@@ -5,7 +5,7 @@ import com.rustamaliiev.sarmatapp.data.entity.GenreDB
 import com.rustamaliiev.sarmatapp.data.entity.MovieDB
 import com.rustamaliiev.sarmatapp.data.entity.MovieGenrePair
 import com.rustamaliiev.sarmatapp.data.entity.MovieWithGenre
-import com.rustamaliiev.sarmatapp.domain.entity.Movie
+import com.rustamaliiev.sarmatapp.domain.entities.Movie
 import com.rustamaliiev.sarmatapp.utils.mapGenreDomainToDB
 import com.rustamaliiev.sarmatapp.utils.mapMovieDomainToDB
 import com.rustamaliiev.sarmatapp.utils.mapToMovieGenrePairs

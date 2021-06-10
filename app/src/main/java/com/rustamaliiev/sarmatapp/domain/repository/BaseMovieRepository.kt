@@ -1,8 +1,7 @@
 package com.rustamaliiev.sarmatapp.domain.repository
 
-import com.rustamaliiev.sarmatapp.domain.entity.Movie
-import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
-import kotlinx.coroutines.flow.Flow
+import com.rustamaliiev.sarmatapp.domain.entities.Movie
+import com.rustamaliiev.sarmatapp.domain.entities.MovieDetails
 
 interface BaseMovieRepository {
     suspend fun loadMovies(selector: String): List<Movie>

@@ -1,7 +1,7 @@
 package com.rustamaliiev.sarmatapp.domain.repository
 
-import com.rustamaliiev.sarmatapp.domain.entity.Movie
-import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.domain.entities.Movie
+import com.rustamaliiev.sarmatapp.domain.entities.MovieDetails
 import kotlinx.coroutines.flow.Flow
 
 interface CrudMovieRepository: BaseMovieRepository {

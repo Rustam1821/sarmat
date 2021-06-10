@@ -7,5 +7,5 @@ data class ApiMovieCastResponse(
     val id: Int,
 
     @SerializedName("cast")
-    val apiCasts: List<ApiCastResponse>
+    val casts: List<ApiCastResponse>
 )

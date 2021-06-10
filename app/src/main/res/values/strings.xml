@@ -35,7 +35,8 @@
     <string name="upcoming">Upcoming</string>
 
     <string name="there_is_no_app">There is no app can support this action:</string>
-    <string name="lets_watch_movie">Let\'s watch movie:</string>
-    <string name="what_the_movie_about">What the movie\'s about:</string>
+    <string name="lets_watch_movie">Let\'s watch movie: \n\"%1$s\"</string>
+    <string name="what_the_movie_about">What the movie\'s about:\n\"%1$s\"</string>
+    <string name="reviews">%1$d  Reviews</string>
 
 </resources>

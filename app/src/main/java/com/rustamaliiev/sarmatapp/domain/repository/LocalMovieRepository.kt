@@ -1,8 +1,8 @@
 package com.rustamaliiev.sarmatapp.domain.repository
 
 import com.rustamaliiev.sarmatapp.data.AppDatabase
-import com.rustamaliiev.sarmatapp.domain.entity.Movie
-import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.domain.entities.Movie
+import com.rustamaliiev.sarmatapp.domain.entities.MovieDetails
 import com.rustamaliiev.sarmatapp.utils.mapMovieDetailsActorGenrePairToMovieDetails
 import com.rustamaliiev.sarmatapp.utils.mapMovieGenrePairToMovie
 import kotlinx.coroutines.flow.Flow

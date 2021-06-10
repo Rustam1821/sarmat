@@ -1,4 +1,4 @@
-package com.rustamaliiev.sarmatapp.domain.entity
+package com.rustamaliiev.sarmatapp.domain.entities
 
 import java.io.Serializable
 

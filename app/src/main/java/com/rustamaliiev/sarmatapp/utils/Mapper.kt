@@ -1,10 +1,10 @@
 package com.rustamaliiev.sarmatapp.utils
 
 import com.rustamaliiev.sarmatapp.data.entity.*
-import com.rustamaliiev.sarmatapp.domain.entity.Actor
-import com.rustamaliiev.sarmatapp.domain.entity.Genre
-import com.rustamaliiev.sarmatapp.domain.entity.Movie
-import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.domain.entities.Actor
+import com.rustamaliiev.sarmatapp.domain.entities.Genre
+import com.rustamaliiev.sarmatapp.domain.entities.Movie
+import com.rustamaliiev.sarmatapp.domain.entities.MovieDetails
 import com.rustamaliiev.sarmatapp.network.config.SystemConfig
 
 fun mapMovieDomainToDB(movies: List<Movie>, filmGroup: String): List<MovieDB> {
@@ -45,23 +45,23 @@ fun mapToMovieGenrePairs(movies: List<Movie>): List<MovieWithGenre> {
     }
 }
 
-fun mapMovieGenrePairToMovie(mgPair: MovieGenrePair): Movie =
+fun mapMovieGenrePairToMovie(pair: MovieGenrePair): Movie =
     Movie(
-        id = mgPair.movie.id,
-        title = mgPair.movie.title,
-        imageUrl = mgPair.movie.imageUrl,
-        rating = mgPair.movie.rating,
-        reviewCount = mgPair.movie.reviewCount,
-        ageLimit = mgPair.movie.ageLimit,
-        runningTime = mgPair.movie.runningTime,
-        genres = mgPair.genres.map { genreDB ->
+        id = pair.movie.id,
+        title = pair.movie.title,
+        imageUrl = pair.movie.imageUrl,
+        rating = pair.movie.rating,
+        reviewCount = pair.movie.reviewCount,
+        ageLimit = pair.movie.ageLimit,
+        runningTime = pair.movie.runningTime,
+        genres = pair.genres.map { genreDB ->
             Genre(genreDB.id, genreDB.name)
         },
-        isLiked = mgPair.movie.isLiked
+        isLiked = pair.movie.isLiked
     )
 
-fun mapMovieDetailsActorGenrePairToMovieDetails(movieDetailsAGPair: MovieDetailsActorGenrePair): MovieDetails =
-    with(movieDetailsAGPair) {
+fun mapMovieDetailsActorGenrePairToMovieDetails(pair: MovieDetailsActorGenrePair): MovieDetails =
+    with(pair) {
         MovieDetails(
             id = movieDetails.movieId,
             title = movieDetails.title,
@@ -94,7 +94,7 @@ fun mapMovieDetailsToMovieDetailsBD(md: MovieDetails): MovieDetailsDB =
 
 private fun buildImageUrl(url: String, path: String?): String? {
     return path?.let {
-        "$url${SystemConfig.DEFAULT_SIZE}$path"
+        "$url${SystemConfig.DEFAULT_IMAGE_SIZE}$path"
     }
 }
 

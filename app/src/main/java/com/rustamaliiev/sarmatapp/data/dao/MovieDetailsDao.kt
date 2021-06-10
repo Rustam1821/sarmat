@@ -2,7 +2,7 @@ package com.rustamaliiev.sarmatapp.data.dao
 
 import androidx.room.*
 import com.rustamaliiev.sarmatapp.data.entity.*
-import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.domain.entities.MovieDetails
 import com.rustamaliiev.sarmatapp.utils.mapMovieDetailsToMovieDetailsBD
 
 @Dao

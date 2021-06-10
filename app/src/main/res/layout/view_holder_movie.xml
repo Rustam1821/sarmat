@@ -22,15 +22,15 @@
         android:layout_width="166dp"
         android:layout_height="248dp"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="14dp"
         android:padding="3dp"
         tools:src="@drawable/avengers_poster_color"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/listTitle" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/posterGradientImageView"
+        android:id="@+id/poster_gradient_image_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/mask_for_fragment"
@@ -46,7 +46,7 @@
         android:id="@+id/age_limit_rectangle"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginLeft="6dp"
+        android:layout_marginStart="6dp"
         android:layout_marginTop="8dp"
         tools:src="@drawable/age_limit_rectangle"
 
@@ -60,7 +60,7 @@
         android:fontFamily="@font/roboto_black"
         tools:text="@string/avengers_audience"
         android:textColor="@color/whisper"
-        android:textSize="12sp"
+        android:textSize="@dimen/medium_text_size"
 
         app:layout_constraintBottom_toBottomOf="@id/age_limit_rectangle"
         app:layout_constraintEnd_toEndOf="@id/age_limit_rectangle"
@@ -89,7 +89,7 @@
         android:gravity="start"
         tools:text="@string/avengers_genre"
         android:textColor="@color/radical_red"
-        android:textSize="8sp"
+        android:textSize="@dimen/small_text_size"
 
         app:layout_constraintBottom_toBottomOf="@id/poster_color_image_view"
         app:layout_constraintStart_toStartOf="@id/poster_color_image_view"
@@ -131,7 +131,7 @@
         android:textAllCaps="true"
         tools:text="@string/avengers_reviews"
         android:textColor="@color/light_grayish_navy"
-        android:textSize="8sp"
+        android:textSize="@dimen/small_text_size"
 
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="@id/poster_color_image_view"
@@ -147,7 +147,7 @@
         android:fontFamily="@font/roboto_black"
         tools:text="@string/avengers_end_game_in_one_line"
         android:textColor="@color/whisper"
-        android:textSize="14sp"
+        android:textSize="@dimen/large_text_size"
 
         app:layout_constraintStart_toStartOf="@id/rating_bar"
         app:layout_constraintTop_toBottomOf="@id/poster_color_image_view"
@@ -161,7 +161,7 @@
         android:textAllCaps="true"
         tools:text="@string/avengers_duration"
         android:textColor="@color/smoky"
-        android:textSize="8sp"
+        android:textSize="@dimen/small_text_size"
 
         app:layout_constraintStart_toStartOf="@id/film_name"
         app:layout_constraintTop_toBottomOf="@id/film_name" />

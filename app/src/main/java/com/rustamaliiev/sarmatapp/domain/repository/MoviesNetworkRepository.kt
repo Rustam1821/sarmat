@@ -1,12 +1,11 @@
 package com.rustamaliiev.sarmatapp.domain.repository
 
-import com.rustamaliiev.sarmatapp.domain.entity.Actor
-import com.rustamaliiev.sarmatapp.domain.entity.Genre
-import com.rustamaliiev.sarmatapp.domain.entity.Movie
-import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.domain.entities.Actor
+import com.rustamaliiev.sarmatapp.domain.entities.Genre
+import com.rustamaliiev.sarmatapp.domain.entities.Movie
+import com.rustamaliiev.sarmatapp.domain.entities.MovieDetails
 import com.rustamaliiev.sarmatapp.network.config.NetworkModule
 import com.rustamaliiev.sarmatapp.network.config.SystemConfig
-import kotlinx.coroutines.flow.Flow
 
 class MoviesNetworkRepository : BaseMovieRepository {
     private lateinit var imagesBaseUrl: String
@@ -14,7 +13,7 @@ class MoviesNetworkRepository : BaseMovieRepository {
 
     override suspend fun loadMovies(selector: String): List<Movie> {
         getConfigurations()
-        val genres = NetworkModule.movieApi.getGenres().apiGenres
+        val genres = NetworkModule.movieApi.getGenres().genres
         return NetworkModule.movieApi.getMoviesList(selector).results.map { movieResponse ->
             Movie(
                 id = movieResponse.id,
@@ -57,7 +56,7 @@ class MoviesNetworkRepository : BaseMovieRepository {
             ageLimit = if (movieDetails.isAdult) SystemConfig.ADULT_AGE else SystemConfig.CHILD_AGE,
             runtime = movieDetails.runtime ?: 0,
             genres = movieDetails.apiGenres.map { Genre(it.id, it.name) },
-            actors = NetworkModule.movieApi.getCast(movieId).apiCasts.map { castResponse ->
+            actors = NetworkModule.movieApi.getCast(movieId).casts.map { castResponse ->
                 Actor(
                     id = castResponse.id,
                     name = castResponse.name,
@@ -76,7 +75,7 @@ class MoviesNetworkRepository : BaseMovieRepository {
 
     private fun buildImageUrl(url: String, path: String?): String? {
         return path?.let {
-            "$url${SystemConfig.DEFAULT_SIZE}$path"
+            "$url${SystemConfig.DEFAULT_IMAGE_SIZE}$path"
         }
     }
 }

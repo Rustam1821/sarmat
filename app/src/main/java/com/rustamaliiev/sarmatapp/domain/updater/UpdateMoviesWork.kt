@@ -21,14 +21,14 @@ import com.bumptech.glide.request.transition.Transition
 import com.rustamaliiev.sarmatapp.MainActivity
 import com.rustamaliiev.sarmatapp.R
 import com.rustamaliiev.sarmatapp.SarmatApp
-import com.rustamaliiev.sarmatapp.domain.entity.Movie
-import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.domain.entities.Movie
+import com.rustamaliiev.sarmatapp.domain.entities.MovieDetails
 import com.rustamaliiev.sarmatapp.domain.repository.BaseMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.CrudMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.MoviesNetworkRepository
 import com.rustamaliiev.sarmatapp.utils.GodFather
-import com.rustamaliiev.sarmatapp.utils.notificationChannelId
+import com.rustamaliiev.sarmatapp.utils.NOTIFICATION_CHANNEL_ID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -98,7 +98,7 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
         )
         return NotificationCompat.Builder(
             context.applicationContext,
-            notificationChannelId
+            NOTIFICATION_CHANNEL_ID
         )
             .setContentTitle(movieDetails.title)
             .setContentText(genres)
@@ -113,11 +113,10 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
     private fun showNotification(movieDetails: MovieDetails) {
         val notificationBuilder = buildNotification(movieDetails)
         val notificationManager = NotificationManagerCompat.from(context.applicationContext)
-        val urlImage = movieDetails.detailImageUrl ?: "null"
-        if (urlImage != "null") {
+        if (movieDetails.detailImageUrl != null) {
             Glide.with(context)
                 .asBitmap()
-                .load(urlImage)
+                .load(movieDetails.detailImageUrl)
                 .placeholder(R.drawable.ic_no_photography_24)
                 .listener(object : RequestListener<Bitmap> {
                     override fun onLoadFailed(
@@ -137,7 +136,7 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
                         isFirstResource: Boolean
                     ): Boolean {
                         notificationManager.notify(
-                            notificationChannelId,
+                            NOTIFICATION_CHANNEL_ID,
                             1,
                             notificationBuilder.setStyle(
                                 NotificationCompat.BigPictureStyle().bigPicture(resource)
@@ -157,7 +156,7 @@ class UpdateMoviesWork(private val context: Context, params: WorkerParameters) :
                 })
         } else {
             notificationManager.notify(
-                notificationChannelId,
+                NOTIFICATION_CHANNEL_ID,
                 1,
                 notificationBuilder.setStyle(
                     NotificationCompat.BigTextStyle().bigText(movieDetails.storyLine)

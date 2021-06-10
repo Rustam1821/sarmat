@@ -3,12 +3,12 @@ package com.rustamaliiev.sarmatapp.domain.updater
 import androidx.work.Constraints
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequest
-import com.rustamaliiev.sarmatapp.utils.appTAG
+import com.rustamaliiev.sarmatapp.utils.APP_TAG
 import java.util.concurrent.TimeUnit
 
 class MoviesWorker {
 
-    private val tag = appTAG
+    private val tag = APP_TAG
     private val repeatInterval = 15L
     private val delay = 10L
     private val networkType = NetworkType.CONNECTED

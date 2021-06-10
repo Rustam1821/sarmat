@@ -16,7 +16,7 @@
         android:fontFamily="@font/roboto_black"
         tools:text="@string/first_actor_name"
         android:textColor="@color/whisper"
-        android:textSize="12sp" />
+        android:textSize="@dimen/medium_text_size" />
 
     <ImageView
         android:id="@+id/actor_photo"

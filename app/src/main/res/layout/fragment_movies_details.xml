@@ -34,7 +34,7 @@
 
 
         <ImageView
-            android:id="@+id/posterGradientImageView"
+            android:id="@+id/poster_gradient_image_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:src="@drawable/mask"
@@ -49,13 +49,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
 
             android:alpha="0.5"
             android:fontFamily="@font/roboto"
             android:text="@string/back"
             android:textColor="@color/white"
-            android:textSize="12sp"
+            android:textSize="@dimen/medium_text_size"
 
             app:layout_constraintBottom_toTopOf="@id/film_name"
             app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +65,6 @@
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:src="@drawable/back_arrow"
             app:tint="@color/white"
 
@@ -85,7 +83,7 @@
 
             android:fontFamily="@font/roboto_black"
             android:textColor="@color/whisper"
-            android:textSize="40sp"
+            android:textSize="@dimen/extra_large_text_size"
             app:layout_constraintBottom_toBottomOf="@id/guideline_under_poster"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +99,7 @@
             android:fontFamily="@font/roboto_black"
             android:text="@string/avengers_audience"
             android:textColor="@color/whisper"
-            android:textSize="14sp"
+            android:textSize="@dimen/large_text_size"
 
             app:layout_constraintBottom_toTopOf="@id/film_name"
             app:layout_constraintStart_toStartOf="@id/film_name" />
@@ -117,7 +115,7 @@
             android:gravity="start"
             android:text="@string/avengers_genre"
             android:textColor="@color/radical_red"
-            android:textSize="14sp"
+            android:textSize="@dimen/large_text_size"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +149,7 @@
             android:gravity="top"
             android:text="@string/avengers_reviews"
             android:textColor="@color/light_grayish_navy"
-            android:textSize="14sp"
+            android:textSize="@dimen/large_text_size"
 
             app:layout_constraintStart_toEndOf="@id/rating_bar"
             app:layout_constraintTop_toTopOf="@id/rating_bar" />
@@ -165,7 +163,7 @@
             android:fontFamily="@font/roboto_black"
             android:text="@string/storyline"
             android:textColor="@color/whisper"
-            android:textSize="14sp"
+            android:textSize="@dimen/large_text_size"
 
             app:layout_constraintStart_toStartOf="@id/rating_bar"
             app:layout_constraintTop_toBottomOf="@id/reviews" />
@@ -185,7 +183,7 @@
             android:paddingVertical="6dp"
             android:text="text"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="@dimen/large_text_size"
 
             app:layout_constraintTop_toBottomOf="@id/story_line" />
 
@@ -198,13 +196,13 @@
             android:fontFamily="@font/roboto_black"
             android:text="@string/cast"
             android:textColor="@color/whisper"
-            android:textSize="14sp"
+            android:textSize="@dimen/large_text_size"
 
             app:layout_constraintStart_toStartOf="@id/story_text"
             app:layout_constraintTop_toBottomOf="@id/story_text" />
 
         <Button
-            android:id="@+id/addToCalendar"
+            android:id="@+id/add_to_calendar"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="38dp"
@@ -216,7 +214,7 @@
             android:text="@string/add_to_calendar"
             android:textAllCaps="false"
             android:textColor="@color/whisper"
-            android:textSize="14sp"
+            android:textSize="@dimen/large_text_size"
             android:textStyle="normal"
             app:layout_constraintBottom_toBottomOf="@id/cast"
             app:layout_constraintStart_toEndOf="@id/cast" />
@@ -230,9 +228,11 @@
             app:constraint_referenced_ids="cast" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/actors_RecyclerView"
+            android:id="@+id/actors_recyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/story_text"
             app:layout_constraintStart_toStartOf="@id/story_text"
@@ -245,7 +245,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="actors_RecyclerView" />
+            app:constraint_referenced_ids="actors_recyclerView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

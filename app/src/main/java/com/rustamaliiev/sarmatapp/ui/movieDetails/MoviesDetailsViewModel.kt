@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rustamaliiev.sarmatapp.SarmatApp
 import com.rustamaliiev.sarmatapp.data.dao.MovieDetailsDao
-import com.rustamaliiev.sarmatapp.domain.entity.MovieDetails
+import com.rustamaliiev.sarmatapp.domain.entities.MovieDetails
 import com.rustamaliiev.sarmatapp.domain.repository.BaseMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.LocalMovieRepository
 import com.rustamaliiev.sarmatapp.domain.repository.CrudMovieRepository
